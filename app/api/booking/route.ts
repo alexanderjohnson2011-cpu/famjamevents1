@@ -3,40 +3,32 @@ import { NextRequest, NextResponse } from 'next/server';
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
+    const { contact } = body;
 
-    const { service, eventDate, timeWindow, guestCount, name, email, phone, notes } = body;
-
-    if (!service || !eventDate || !name || !email) {
-      return NextResponse.json(
-        { error: 'Missing required fields' },
-        { status: 400 }
-      );
+    if (!contact?.name || !contact?.phone || !contact?.email) {
+      return NextResponse.json({ ok: true });
     }
 
-    console.log('Booking submission received:', {
-      service,
-      eventDate,
-      timeWindow,
-      guestCount,
-      name,
-      email,
-      phone,
-      notes,
-      timestamp: new Date().toISOString(),
-    });
+    console.log('Booking lead received:', body);
 
-    return NextResponse.json(
-      {
-        success: true,
-        message: 'Booking request received successfully'
-      },
-      { status: 200 }
-    );
+    const webhookUrl = process.env.HONEYBOOK_WEBHOOK_URL;
+    if (webhookUrl) {
+      try {
+        await fetch(webhookUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body),
+        });
+      } catch (error) {
+        console.error('HoneyBook webhook post failed:', error);
+      }
+    } else {
+      console.log('HONEYBOOK_WEBHOOK_URL not set. Skipping HoneyBook routing.');
+    }
+
+    return NextResponse.json({ ok: true });
   } catch (error) {
     console.error('Booking submission error:', error);
-    return NextResponse.json(
-      { error: 'Failed to process booking request' },
-      { status: 500 }
-    );
+    return NextResponse.json({ ok: true });
   }
 }

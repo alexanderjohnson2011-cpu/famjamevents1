@@ -1,4 +1,3 @@
-import React from 'react';
 import Link from 'next/link';
 import PricingEstimator from '@/components/PricingEstimator';
 
@@ -10,14 +9,9 @@ export default function PricingPage() {
           <div className="absolute top-20 right-20 w-80 h-80 bg-vice-gold rounded-full blur-3xl animate-neon-pulse" />
           <div className="absolute bottom-10 left-10 w-96 h-96 bg-vice-cyan rounded-full blur-3xl animate-neon-pulse delay-1000" />
         </div>
-
         <div className="relative z-10 max-w-4xl mx-auto text-center">
-          <h1 className="font-display text-5xl md:text-7xl font-black text-vice-ink mb-4 leading-tight tracking-tight">
-            Build Your Quote
-          </h1>
-          <p className="text-xl md:text-2xl text-vice-muted max-w-2xl mx-auto leading-relaxed font-medium">
-            Customize your event and see pricing update instantly
-          </p>
+          <h1 className="font-display text-5xl md:text-7xl font-black text-vice-ink mb-4">Offsite Pricing Estimator</h1>
+          <p className="text-xl md:text-2xl text-vice-muted">DJ + DSLR Photo Booth only for offsite events.</p>
         </div>
       </section>
 
@@ -25,21 +19,8 @@ export default function PricingPage() {
         <PricingEstimator />
       </section>
 
-      <section className="bg-vice-night star-speckle py-20 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="font-display text-4xl md:text-5xl font-black text-white text-glow-cyan mb-6">
-            Ready to Book?
-          </h2>
-          <p className="text-xl text-white/80 mb-10 leading-relaxed">
-            Get in touch and let us plan your celebration.
-          </p>
-          <Link
-            href="/book"
-            className="glow-plate glow-plate-gold neon-hover px-10 py-5 rounded-xl text-xl font-bold inline-block"
-          >
-            Book Your Event
-          </Link>
-        </div>
+      <section className="bg-vice-night star-speckle py-20 px-4 text-center">
+        <Link href="/book" className="glow-plate glow-plate-gold neon-hover px-10 py-5 rounded-xl text-xl font-bold inline-block">Book Now</Link>
       </section>
     </>
   );

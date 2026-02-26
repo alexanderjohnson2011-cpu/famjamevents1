@@ -1,12 +1,12 @@
 export const siteConfig = {
   name: 'Fam Jam Events',
-  description: 'Premium pool-venue parties and DJ + Photo Booth bundles serving Thousand Oaks and surrounding areas',
+  description:
+    'Backyard Parties. Done Right. Offsite DJ + DSLR Photo Booth experiences for birthdays, pool parties, and milestone nights.',
   phone: '312-414-9698',
-  serviceArea: 'Thousand Oaks & surrounding areas',
+  serviceArea: 'Greater Los Angeles & surrounding areas',
   nav: [
     { label: 'Home', href: '/' },
-    { label: 'Host Here', href: '/host-here' },
-    { label: 'We Come To You', href: '/we-come-to-you' },
+    { label: 'Services', href: '/services' },
     { label: 'Pricing', href: '/pricing' },
     { label: 'Book', href: '/book' },
   ],
@@ -16,6 +16,3 @@ export const siteConfig = {
     { name: 'TikTok', url: 'https://tiktok.com', icon: 'Music' },
   ],
 };
-
-export type NavItem = typeof siteConfig.nav[0];
-export type Social = typeof siteConfig.socials[0];

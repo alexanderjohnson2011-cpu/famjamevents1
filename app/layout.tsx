@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Fam Jam Events - Elevated Celebrations. Festival-Level Fun.',
-  description: 'Premium pool-venue parties and DJ + Photo Booth bundles serving Thousand Oaks and surrounding areas',
+  description: 'Backyard Parties. Done Right. Offsite DJ + DSLR Photo Booth experiences for birthdays, pool parties, and milestone nights.',
   openGraph: {
     images: [
       {
