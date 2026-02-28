@@ -89,7 +89,7 @@ export const BookingForm: React.FC<BookingFormProps> = ({ initialService }) => {
           </div>
           <h2 className="text-3xl font-bold text-gray-900 mb-4">Booking Request Received!</h2>
           <p className="text-gray-700 mb-6 leading-relaxed">
-            Thank you for your interest! We'll review your request and contact you within 24 hours
+            Thank you for your interest! We&apos;ll review your request and contact you within 24 hours
             to confirm availability and discuss details.
           </p>
           <NeonButton variant="primary" asLink href="/">

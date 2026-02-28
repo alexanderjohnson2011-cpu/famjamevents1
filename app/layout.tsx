@@ -7,8 +7,8 @@ import { Footer } from '@/components/Footer';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Fam Jam Events - Elevated Celebrations. Festival-Level Fun.',
-  description: 'Premium pool-venue parties and DJ + Photo Booth bundles serving Thousand Oaks and surrounding areas',
+  title: 'Fam Jam Events - Backyard Parties. Done Right.',
+  description: 'Offsite-only DJ + DSLR Photo Booth experiences for backyard celebrations in Thousand Oaks and surrounding areas',
   openGraph: {
     images: [
       {
