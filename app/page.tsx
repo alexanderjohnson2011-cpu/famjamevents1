@@ -4,26 +4,51 @@ import Image from 'next/image';
 import { Music, Camera, Sparkles, Award } from 'lucide-react';
 import { taglines, djs } from '@/config/content';
 import { HighlightCarousel } from '@/components/HighlightCarousel';
+import { GalleryCarousel } from '@/components/GalleryCarousel';
 
 const heroSlides = [
   {
-    src: '/photos/hero-1.png',
+    src: '/hero-1.jpg',
     alt: 'Fam Jam pool party celebration',
     caption: 'Elevated Celebrations',
     subcaption: 'Premium pool venue in Thousand Oaks — up to 60 guests',
   },
   {
-    src: '/photos/hero-2.png',
+    src: '/hero-2.jpg',
     alt: 'DJ performance at a Fam Jam event',
     caption: 'Music That Moves You',
     subcaption: 'Professional DJs curated for every vibe and every age',
   },
   {
-    src: '/photos/hero-3.png',
+    src: '/hero-3.jpg',
     alt: 'Guests having fun at a Fam Jam event',
     caption: 'Festival-Level Fun',
     subcaption: 'One booking. Two vendors. Zero stress.',
   },
+];
+
+const djSlides = [
+  {
+    src: '/dj-action-1.png',
+    alt: 'DJ performing at a Fam Jam Event',
+    caption: 'The Sound. The Energy. The Vibe.',
+  },
+  {
+    src: '/dj-action-2.jpg',
+    alt: 'DJ performing at a Fam Jam Event',
+  },
+  {
+    src: '/dj-action-3.jpg',
+    alt: 'DJ performing at a Fam Jam Event',
+  },
+];
+
+const photoboothItems = [
+  { src: '/photobooth-3.jpg', alt: 'Guests at the Fam Jam Photo Booth', label: 'Photo Booth Fun' },
+  { src: '/Photobooth-4.jpg', alt: 'Guests at the Fam Jam Photo Booth', label: 'Photo Booth Fun' },
+  { src: '/photobooth-5.jpg', alt: 'Guests at the Fam Jam Photo Booth', label: 'Photo Booth Fun' },
+  { src: '/photobooth-6.jpg', alt: 'Guests at the Fam Jam Photo Booth', label: 'Photo Booth Fun' },
+  { src: '/photobooth-7.jpg', alt: 'Guests at the Fam Jam Photo Booth', label: 'Photo Booth Fun' },
 ];
 
 export default function Home() {
@@ -150,21 +175,9 @@ export default function Home() {
             </p>
           </div>
 
-          {/* DJ Feature Photo */}
-          <div className="relative w-full rounded-2xl overflow-hidden mb-12 shadow-xl" style={{ aspectRatio: '21/7' }}>
-            <Image
-              src="/photos/dj-action.png"
-              alt="DJ performing at a Fam Jam Event"
-              fill
-              className="object-cover object-center"
-              sizes="(max-width: 768px) 100vw, 1152px"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-vice-midnight/80 via-vice-midnight/20 to-vice-midnight/80" />
-            <div className="absolute inset-0 flex items-center justify-center px-4">
-              <p className="text-vice-cyan text-glow-cyan font-display text-3xl md:text-5xl font-black text-center drop-shadow-lg">
-                The Sound. The Energy. The Vibe.
-              </p>
-            </div>
+          {/* DJ Feature Carousel */}
+          <div className="mb-12">
+            <HighlightCarousel slides={djSlides} />
           </div>
 
           {/* DJ Cards */}
@@ -271,19 +284,9 @@ export default function Home() {
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 
-            {/* Photo */}
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl ring-2 ring-vice-pink/30">
-              <div className="relative" style={{ aspectRatio: '4/3' }}>
-                <Image
-                  src="/photos/photobooth.png"
-                  alt="Guests at the Fam Jam Photo Booth"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 576px"
-                />
-                {/* Subtle neon glow overlay at bottom */}
-                <div className="absolute inset-0 bg-gradient-to-t from-vice-pink/20 via-transparent to-transparent" />
-              </div>
+            {/* Photo Booth Carousel */}
+            <div className="rounded-2xl overflow-hidden shadow-2xl ring-2 ring-vice-pink/30">
+              <GalleryCarousel items={photoboothItems} />
             </div>
 
             {/* Text */}
