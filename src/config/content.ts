@@ -1,6 +1,6 @@
 export const taglines = {
   main: 'Elevated Celebrations. Festival-Level Fun.',
-  supporting: 'We host premium pool-venue parties — or we bring the party to you with a turnkey DJ + Photo Booth bundle.',
+  supporting: 'Premium offsite DJ + DSLR Photo Booth experiences for backyards, pools, and milestones.',
   collective: 'Three DJs, rotating styles, one vibe tailored to your crowd (kid-appropriate cool).',
   offsite: 'Two vendors. One booking. One setup plan.',
 };

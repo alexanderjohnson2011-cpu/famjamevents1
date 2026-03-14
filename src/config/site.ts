@@ -1,12 +1,12 @@
 export const siteConfig = {
   name: 'Fam Jam Events',
-  description: 'Premium pool-venue parties and DJ + Photo Booth bundles serving Thousand Oaks and surrounding areas',
+  description: 'Offsite-only DJ + DSLR Photo Booth experiences serving Thousand Oaks and surrounding areas',
   phone: '312-414-9698',
   serviceArea: 'Thousand Oaks & surrounding areas',
   nav: [
     { label: 'Home', href: '/' },
-    { label: 'Host Here', href: '/host-here' },
-    { label: 'We Come To You', href: '/we-come-to-you' },
+    { label: 'Services', href: '/services' },
+    { label: 'Vibe Lab', href: '/vibe-lab' },
     { label: 'Pricing', href: '/pricing' },
     { label: 'Book', href: '/book' },
   ],
