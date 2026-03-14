@@ -18,7 +18,7 @@ export default function StickyEstimatePanel({ result, isReady }: StickyEstimateP
       {isReady && result ? (
         <>
           <div className="glow-plate glow-plate-gold px-5 py-4 rounded-xl text-center mb-4">
-            <div className="text-3xl font-black">${result.totalPrice.toLocaleString()}</div>
+            <div className="text-3xl font-black">${result.total.toLocaleString()}</div>
           </div>
 
           {result.savings && (
