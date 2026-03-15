@@ -1,0 +1,119 @@
+---
+const slides = [
+  {
+    img: '/images/photobooth-6.jpg',
+    alt: 'Fam Jam party group photo',
+    caption: 'Festival-Level Fun',
+    sub: 'Mixed ages, zero awkward pauses',
+    cls: 'slide-1',
+  },
+  {
+    img: '/images/photobooth-3.jpg',
+    alt: 'Photo booth fun at Fam Jam',
+    caption: 'The Fam Jam Booth',
+    sub: 'Real DSLR · custom prints · digital gallery',
+    cls: 'slide-2',
+  },
+  {
+    img: '/images/dj-action-2.jpg',
+    alt: 'Fam Jam DJs at the decks',
+    caption: 'Fam Jam Collective',
+    sub: '3 DJs · rotating styles · kid-appropriate cool',
+    cls: 'slide-3',
+  },
+  {
+    img: '/images/photobooth-7.jpg',
+    alt: 'Party crowd at Fam Jam event',
+    caption: '"The ABBA Lift"',
+    sub: 'When the whole backyard sings together',
+    cls: 'slide-4',
+  },
+];
+---
+
+<section class="hero" id="home">
+  <!-- LEFT: Copy -->
+  <div class="hero-left">
+    <div class="hero-eyebrow">✦ Thousand Oaks &amp; Surrounding Areas</div>
+    <h1>Family Parties.<br/><em>Done Right.</em></h1>
+    <p class="hero-sub">DJ + DSLR Photo Booth for birthdays, pool parties, milestones, and everything in between.</p>
+    <div class="manifesto">
+      <p>The best family parties are a little chaotic — and that's exactly the point. There are kids running around. Parents catching up. Someone jumping in the pool. Someone discovering they still know every word to a 2000s anthem. That's the party we're here for.</p>
+    </div>
+    <div class="hero-actions">
+      <a href="/vibe-lab" class="btn btn-pink">Build Your Vibe ✦</a>
+      <a href="/book" class="btn btn-outline">Book Your Date →</a>
+    </div>
+  </div>
+
+  <!-- RIGHT: Carousel -->
+  <div class="hero-right">
+    <div class="carousel" id="heroCarousel">
+      <div class="carousel-track" id="carouselTrack">
+        {slides.map((slide) => (
+          <div class={`carousel-slide ${slide.cls}`}>
+            <img
+              src={slide.img}
+              alt={slide.alt}
+              style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;"
+            />
+            <div class="slide-caption">
+              <strong>{slide.caption}</strong>
+              <span>{slide.sub}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <button class="carousel-arrow carousel-prev" id="carouselPrev" aria-label="Previous slide">&#8592;</button>
+      <button class="carousel-arrow carousel-next" id="carouselNext" aria-label="Next slide">&#8594;</button>
+      <div class="carousel-dots" id="carouselDots"></div>
+    </div>
+  </div>
+</section>
+
+<script>
+  let carouselIndex = 0;
+  const carouselTotal = 4;
+  let carouselTimer: ReturnType<typeof setInterval>;
+
+  function carouselRender() {
+    const track = document.getElementById('carouselTrack') as HTMLElement;
+    track.style.transform = `translateX(-${carouselIndex * 100}%)`;
+    document.querySelectorAll('.dot').forEach((d, i) =>
+      d.classList.toggle('active', i === carouselIndex)
+    );
+  }
+
+  function carouselMove(dir: number) {
+    carouselIndex = (carouselIndex + dir + carouselTotal) % carouselTotal;
+    carouselRender();
+    resetCarouselTimer();
+  }
+
+  function carouselGoTo(i: number) {
+    carouselIndex = i;
+    carouselRender();
+    resetCarouselTimer();
+  }
+
+  function resetCarouselTimer() {
+    clearInterval(carouselTimer);
+    carouselTimer = setInterval(() => carouselMove(1), 4500);
+  }
+
+  // Build dots + wire up arrows
+  const dotsEl = document.getElementById('carouselDots') as HTMLElement;
+  for (let i = 0; i < carouselTotal; i++) {
+    const d = document.createElement('button');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('aria-label', `Go to slide ${i + 1}`);
+    d.addEventListener('click', () => carouselGoTo(i));
+    dotsEl.appendChild(d);
+  }
+
+  document.getElementById('carouselPrev')?.addEventListener('click', () => carouselMove(-1));
+  document.getElementById('carouselNext')?.addEventListener('click', () => carouselMove(1));
+
+  resetCarouselTimer();
+</script>

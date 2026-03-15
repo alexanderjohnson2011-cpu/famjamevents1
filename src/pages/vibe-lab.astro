@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import VibeLabTool from '../components/VibeLabTool.astro';
+import CTABand from '../components/CTABand.astro';
+import Footer from '../components/Footer.astro';
+---
+<BaseLayout
+  title="Vibe Lab — Build Your Party Vibe · Fam Jam Events"
+  description="Answer four questions and get a personalized DJ rotation, signature moment, and package recommendation for your event."
+>
+  <Nav currentPage="/vibe-lab" />
+
+  <!-- Vibe Lab hero intro -->
+  <section class="vl-hero">
+    <div class="section-label">Interactive Tool</div>
+    <h2><span class="grad">Vibe Lab</span></h2>
+    <p class="sub">
+      Tell us about your party and we'll build a custom vibe profile — DJ rotation, signature
+      moment, and package recommendation included.
+    </p>
+  </section>
+
+  <VibeLabTool />
+  <CTABand />
+  <Footer />
+</BaseLayout>

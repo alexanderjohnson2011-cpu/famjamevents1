@@ -1,0 +1,113 @@
+---
+import DJCard from './DJCard.astro';
+---
+<section class="section collective-section" id="collective">
+  <div class="section-inner">
+    <div class="centered">
+      <div class="section-label">Meet the Crew</div>
+      <h2><span class="grad">Fam Jam Collective</span></h2>
+      <p class="sub" style="margin:0 auto;">
+        Three DJs. Rotating styles. One vibe tailored to your crowd (kid-appropriate cool).
+      </p>
+    </div>
+
+    <div class="collective-origin">
+      <p>
+        We're <strong>three parents of kids under 5</strong> who all met at Lightning in a Bottle
+        music festival. Since then, we've spent our weekends hosting family-friendly parties in
+        backyards and DJing in living rooms — keeping the good times going while still being home
+        for bedtime. We love music, we love a good party, and we've gotten very good at reading a
+        room that has both a grandma and a toddler in it.
+      </p>
+    </div>
+
+    <div class="dj-grid">
+      <!-- King Daddy Disco -->
+      <DJCard
+        cardClass="card-kdd"
+        imgClass="card-img-kdd"
+        name="King Daddy<br/>Disco"
+        rarity="LEGENDARY"
+        image="KingDaddyDisco_Logo.png"
+        imageAlt="King Daddy Disco"
+        types={[
+          { label: 'Disco House', pill: 'pill-gold' },
+          { label: 'Throwback',   pill: 'pill-gold' },
+          { label: 'Peak Energy', pill: 'pill-gold' },
+        ]}
+        energyStars="★★★★★"
+        energyFill="fill-energy-kdd"
+        kidsStars="★★★★☆"
+        kidsFill="fill-kids-kdd"
+        starColor="var(--gold)"
+        skills={[
+          'Disco-house edits',
+          'Golden hour lift-offs',
+          'Rapid fire request transitions',
+        ]}
+        sigLabel="✦ Signature Moment"
+        sigTitle='"The ABBA Lift"'
+        sigDesc="Golden hour drops and suddenly the whole backyard is singing. Every word. Even the people who weren't dancing."
+        tags={['Sunset Pool Throwback', 'Disco House Groovin\'']}
+      />
+
+      <!-- The Mixtress -->
+      <DJCard
+        cardClass="card-mixtress"
+        imgClass="card-img-mix"
+        name="The<br/>Mixtress"
+        rarity="EPIC"
+        image="the_mixtress.png"
+        imageAlt="The Mixtress"
+        types={[
+          { label: 'Indie',         pill: 'pill-pink'   },
+          { label: '2000s',         pill: 'pill-pink'   },
+          { label: 'Pop Crossover', pill: 'pill-purple' },
+          { label: 'Kids Friendly', pill: 'pill-green'  },
+        ]}
+        energyStars="★★★☆☆"
+        energyFill="fill-energy-mix"
+        kidsStars="★★★★★"
+        kidsFill="fill-kids-mix"
+        starColor="var(--pink)"
+        skills={[
+          'Seamless crossover transitions',
+          'Clean edits without losing edge',
+          'Request-driven momentum',
+        ]}
+        sigLabel="✦ Signature Moment"
+        sigTitle='"The Sunset Switch"'
+        sigDesc="The groove shifts and people who were just watching are suddenly on the floor. They didn't plan to dance. They just did."
+        tags={['2000s Backyard Set', 'Clean Club Mix']}
+      />
+
+      <!-- Samplur -->
+      <DJCard
+        cardClass="card-samplur"
+        imgClass="card-img-smp"
+        name="Samplur"
+        rarity="LEGENDARY"
+        image="dj-action-3.jpg"
+        imageAlt="Samplur"
+        types={[
+          { label: 'Tech House',     pill: 'pill-cyan' },
+          { label: 'LA Club Energy', pill: 'pill-cyan' },
+        ]}
+        energyStars="★★★★★"
+        energyFill="fill-energy-smp"
+        kidsStars="★★★☆☆"
+        kidsFill="fill-kids-smp"
+        starColor="var(--cyan)"
+        skills={[
+          'Rolling tech house, built for late nights',
+          'Silky transitions, no hard cuts',
+          'King of cool',
+        ]}
+        sigLabel="✦ Signature Moment"
+        sigTitle='"Glow Mode Drop"'
+        sigDesc="Tempo climbs. Lights shift. The backyard stops being a backyard."
+        tags={['After Dark Backyard Set', 'Modern House Live Mix']}
+      />
+    </div>
+  </div>
+</section>

@@ -1,0 +1,305 @@
+---
+---
+<div id="vibe-lab">
+  <section class="section vl-tool-section" id="vl-builder">
+    <div class="section-inner">
+      <div class="centered">
+        <div class="section-label">Vibe Builder</div>
+        <h2><span class="grad">Build Your Vibe</span></h2>
+        <p class="sub">Answer four quick questions. We'll do the rest.</p>
+      </div>
+
+      <div class="vl-tool">
+        <!-- INPUTS -->
+        <div class="vl-inputs">
+          <h3>Tell Us About Your Party</h3>
+
+          <div class="vl-field">
+            <label for="partyType">Party Type</label>
+            <select class="vl-select" id="partyType">
+              <option value="">Select a type...</option>
+              <option value="birthday">Birthday Party</option>
+              <option value="pool">Pool Party</option>
+              <option value="graduation">Graduation</option>
+              <option value="family">Family Reunion</option>
+              <option value="celebration">General Celebration</option>
+            </select>
+          </div>
+
+          <div class="vl-field">
+            <label for="crowdMix">Crowd Mix</label>
+            <select class="vl-select" id="crowdMix">
+              <option value="">Who's coming?</option>
+              <option value="mixed">Mixed Ages (kids + adults)</option>
+              <option value="adults">Mostly Adults</option>
+              <option value="teens">Teen-Heavy</option>
+              <option value="kids">Mostly Kids</option>
+            </select>
+          </div>
+
+          <div class="vl-field">
+            <label>Energy Level</label>
+            <div class="energy-display">
+              <button class="e-btn" data-level="1" id="eBtn1">🌊 Chill</button>
+              <button class="e-btn" data-level="2" id="eBtn2">🌅 Groovy</button>
+              <button class="e-btn" data-level="3" id="eBtn3">🔥 High</button>
+              <button class="e-btn" data-level="4" id="eBtn4">⚡ Festival</button>
+            </div>
+          </div>
+
+          <div class="vl-field">
+            <label for="eraBias">Era Bias</label>
+            <select class="vl-select" id="eraBias">
+              <option value="">Any era works</option>
+              <option value="80s90s">80s / 90s Throwback</option>
+              <option value="2000s">2000s Nostalgia</option>
+              <option value="modern">Modern / Current Hits</option>
+              <option value="disco">Disco / House</option>
+            </select>
+          </div>
+
+          <div class="vl-field">
+            <label>Clean Mode</label>
+            <div class="toggle-row">
+              <div>
+                <div class="toggle-label">Kid-Safe Edits Only</div>
+                <div class="toggle-sub">All tracks clean and age-appropriate</div>
+              </div>
+              <div class="toggle" id="cleanToggle"></div>
+            </div>
+          </div>
+
+          <button class="btn btn-pink vl-generate" id="generateBtn">Generate My Vibe ✦</button>
+        </div>
+
+        <!-- OUTPUT -->
+        <div class="vl-output">
+          <div class="vl-output-placeholder" id="outputPlaceholder">
+            <span class="big">✦</span>
+            <strong>Your vibe card will appear here</strong>
+            <p>
+              Fill in your party details and hit Generate to get your personalized vibe profile,
+              DJ rotation, and package recommendation.
+            </p>
+          </div>
+
+          <div class="vibe-card" id="vibeCard">
+            <div class="vc-header">
+              <div class="vc-eyebrow">🎉 Your Vibe Is Ready</div>
+              <div class="vc-name" id="vcName">—</div>
+              <div class="vc-stars" id="vcStars">—</div>
+              <div class="vc-tags" id="vcTags"></div>
+            </div>
+            <div class="vc-body">
+              <div class="vc-sig-banner">
+                <div class="vc-sig-label">✦ Signature Moment</div>
+                <div class="vc-sig-title" id="vcSigTitle">—</div>
+                <div class="vc-sig-desc" id="vcSigDesc">—</div>
+              </div>
+              <div class="vc-meta" id="vcMeta"></div>
+              <div class="vc-rotation">
+                <div class="vc-rot-label">DJ Rotation</div>
+                <div id="vcRotation"></div>
+              </div>
+              <div class="vc-pkg">
+                <div>
+                  <div class="vc-pkg-label">Recommended Package</div>
+                  <div class="vc-pkg-name" id="vcPkg">—</div>
+                </div>
+                <div class="vc-pkg-price" id="vcPrice">—</div>
+              </div>
+              <div class="vc-actions">
+                <a href="#" class="btn btn-pink" style="font-size:.78rem;padding:10px 14px;">⬇ Download Vibe Card</a>
+                <a href="/book" class="btn btn-outline" style="font-size:.78rem;padding:10px 14px;">Send to Booking →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><!-- /vl-tool -->
+    </div>
+  </section>
+</div>
+
+<script>
+  /* ── VIBE LAB LOGIC ─────────────────────────────────── */
+  let energyLevel = 0;
+  let cleanMode = false;
+
+  function setEnergy(n: number) {
+    energyLevel = n;
+    document.querySelectorAll<HTMLElement>('.e-btn').forEach(b =>
+      b.classList.remove('active')
+    );
+    document.querySelector<HTMLElement>(`.e-btn[data-level="${n}"]`)?.classList.add('active');
+  }
+
+  function toggleClean() {
+    cleanMode = !cleanMode;
+    document.getElementById('cleanToggle')?.classList.toggle('on', cleanMode);
+  }
+
+  const vibeProfiles: Record<string, {
+    name: string;
+    stars: string;
+    positioning: string;
+    musicDNA: string;
+    signatureMoment: { title: string; description: string };
+    rotation: string[];
+    package: string;
+    price: string;
+    tags: [string, string][];
+  }> = {
+    sunsetThrowback: {
+      name: 'Sunset Throwback™',
+      stars: '★★★☆☆',
+      positioning: 'Nostalgia-fueled sing-alongs that build from poolside groove to peak joy.',
+      musicDNA: '80s rock & disco → 90s pop → 2000s bangers',
+      signatureMoment: {
+        title: '"The ABBA Lift"',
+        description: 'Golden hour hits, the chorus drops, and the entire backyard — kids and adults — is singing together.',
+      },
+      rotation: [
+        'King Daddy Disco — 80s groove open',
+        'The Mixtress — 90s/2000s crossover build',
+        'King Daddy Disco — nostalgic peak',
+      ],
+      package: 'DJ + Photo Booth Bundle',
+      price: '$800',
+      tags: [['Nostalgic','pill-gold'],['Mixed Ages','pill-purple'],['Singalong','pill-pink']],
+    },
+    backyardDiscoRevival: {
+      name: 'Backyard Disco Revival™',
+      stars: '★★★★☆',
+      positioning: 'Cool, groovy, accessible. Disco-house that feels elevated but inclusive.',
+      musicDNA: 'Purple Disco Machine energy · 80s edits · 2000s flips',
+      signatureMoment: {
+        title: '"The Sunset Switch"',
+        description: 'Seamless transition from disco-house groove into a recognizable 2000s sing-along that pulls non-dancers onto the floor.',
+      },
+      rotation: [
+        'King Daddy Disco — disco foundation',
+        'Samplur — house momentum',
+        'The Mixtress — crossover + requests',
+      ],
+      package: 'DJ + Photo Booth Bundle',
+      price: '$800',
+      tags: [['Disco House','pill-gold'],['Most Popular','pill-pink'],['All Ages','pill-purple']],
+    },
+    afterDarkBackyard: {
+      name: 'After Dark Backyard™',
+      stars: '★★★★★',
+      positioning: 'Backyard festival simulation. Progressive energy into late-night glow mode.',
+      musicDNA: 'Fred Again → Fisher → higher BPM → bass accents',
+      signatureMoment: {
+        title: '"Glow Mode Drop"',
+        description: 'Lights dim, tempo rises, and the backyard transforms into a mini festival moment with a controlled late-night surge.',
+      },
+      rotation: [
+        'Samplur — progressive build',
+        'King Daddy Disco — groove lift',
+        'Samplur — tempo escalation',
+        'The Mixtress — polished close',
+      ],
+      package: 'DJ Only',
+      price: '$500',
+      tags: [['Tech House','pill-cyan'],['High Energy','pill-pink'],['Adults','pill-purple']],
+    },
+    cleanClubEnergy: {
+      name: 'Clean Club Energy™',
+      stars: '★★★★☆',
+      positioning: 'Modern and edgy, fully clean. Fast-paced request-driven energy.',
+      musicDNA: 'Current hits · clean hip hop edits · TikTok remixes',
+      signatureMoment: {
+        title: '"The Singalong Swarm"',
+        description: 'A clean remix drop where the entire crowd floods the dance floor and sings every word — zero cringe, zero awkward pauses.',
+      },
+      rotation: [
+        'The Mixtress — modern pop open',
+        'Samplur — clean hip hop flow',
+        'King Daddy Disco — remix throwback pop-in',
+      ],
+      package: 'DJ + Photo Booth Bundle',
+      price: '$800',
+      tags: [['Clean Mode','pill-green'],['Modern Hits','pill-cyan'],['All Ages','pill-purple']],
+    },
+  };
+
+  function pickVibe(): string {
+    const crowd = (document.getElementById('crowdMix') as HTMLSelectElement).value;
+    const era   = (document.getElementById('eraBias')  as HTMLSelectElement).value;
+
+    if (cleanMode || crowd === 'kids') return 'cleanClubEnergy';
+    if (crowd === 'teens') return 'cleanClubEnergy';
+    if (era === '80s90s' || era === 'disco') return energyLevel >= 4 ? 'backyardDiscoRevival' : 'sunsetThrowback';
+    if (era === 'modern') return energyLevel >= 4 ? 'afterDarkBackyard' : 'cleanClubEnergy';
+    if (energyLevel >= 4 && crowd === 'adults') return 'afterDarkBackyard';
+    if (energyLevel >= 3) return 'backyardDiscoRevival';
+    return 'sunsetThrowback';
+  }
+
+  function generateVibe() {
+    const partyType = (document.getElementById('partyType') as HTMLSelectElement).value;
+    const crowd     = (document.getElementById('crowdMix')  as HTMLSelectElement).value;
+
+    if (!partyType || !crowd || energyLevel === 0) {
+      alert('Please fill in all fields before generating your vibe!');
+      return;
+    }
+
+    const key = pickVibe();
+    const v   = vibeProfiles[key];
+
+    (document.getElementById('vcName')  as HTMLElement).textContent = v.name;
+    (document.getElementById('vcStars') as HTMLElement).textContent = 'Energy: ' + v.stars;
+
+    const tagsEl = document.getElementById('vcTags') as HTMLElement;
+    tagsEl.innerHTML = v.tags.map(([t, c]) => `<span class="type-pill ${c}">${t}</span>`).join('');
+
+    (document.getElementById('vcSigTitle') as HTMLElement).textContent = v.signatureMoment.title;
+    (document.getElementById('vcSigDesc')  as HTMLElement).textContent = v.signatureMoment.description;
+
+    const crowdLabels: Record<string, string> = {
+      mixed: 'Mixed Ages', adults: 'Mostly Adults', teens: 'Teen-Heavy', kids: 'Mostly Kids',
+    };
+    const eraLabels: Record<string, string> = {
+      '80s90s': '80s / 90s', '2000s': '2000s', modern: 'Modern', disco: 'Disco / House', '': 'No Preference',
+    };
+    const era = (document.getElementById('eraBias') as HTMLSelectElement).value;
+    const eLbls = ['','🌊 Chill','🌅 Groovy','🔥 High','⚡ Festival'];
+
+    (document.getElementById('vcMeta') as HTMLElement).innerHTML = `
+      <div class="vc-meta-row"><span class="vc-meta-key">Crowd</span><span class="vc-meta-val">${crowdLabels[crowd] || '—'}</span></div>
+      <div class="vc-meta-row"><span class="vc-meta-key">Energy Level</span><span class="vc-meta-val">${eLbls[energyLevel]}</span></div>
+      <div class="vc-meta-row"><span class="vc-meta-key">Music DNA</span><span class="vc-meta-val">${v.musicDNA}</span></div>
+      <div class="vc-meta-row"><span class="vc-meta-key">Vibe</span><span class="vc-meta-val">${v.positioning}</span></div>
+    `;
+
+    (document.getElementById('vcRotation') as HTMLElement).innerHTML =
+      v.rotation.map(r => `<div class="vc-rot-dj">${r}</div>`).join('');
+
+    (document.getElementById('vcPkg')   as HTMLElement).textContent = v.package;
+    (document.getElementById('vcPrice') as HTMLElement).textContent = v.price;
+
+    const placeholder = document.getElementById('outputPlaceholder') as HTMLElement;
+    const card        = document.getElementById('vibeCard')          as HTMLElement;
+
+    placeholder.style.display = 'none';
+    card.classList.remove('visible');
+    void card.offsetWidth; // reflow to re-trigger animation
+    card.classList.add('visible');
+    card.style.display = 'block';
+
+    card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  // Wire up energy buttons
+  document.querySelectorAll<HTMLElement>('.e-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const level = parseInt(btn.getAttribute('data-level') || '0');
+      setEnergy(level);
+    });
+  });
+
+  document.getElementById('cleanToggle')?.addEventListener('click', toggleClean);
+  document.getElementById('generateBtn')?.addEventListener('click', generateVibe);
+</script>

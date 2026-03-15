@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Collective from '../components/Collective.astro';
+import CTABand from '../components/CTABand.astro';
+import Footer from '../components/Footer.astro';
+---
+<BaseLayout
+  title="The Collective — Fam Jam Events"
+  description="Meet King Daddy Disco, The Mixtress, and Samplur — three DJs, rotating styles, one vibe tailored to your crowd."
+>
+  <Nav currentPage="/collective" />
+  <Collective />
+  <CTABand />
+  <Footer />
+</BaseLayout>
