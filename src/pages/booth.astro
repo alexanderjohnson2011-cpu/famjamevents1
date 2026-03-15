@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import FamJamBooth from '../components/FamJamBooth.astro';
+import CTABand from '../components/CTABand.astro';
+import Footer from '../components/Footer.astro';
+---
+<BaseLayout
+  title="Fam Jam Booth — DSLR Photo Booth · Thousand Oaks"
+  description="Real DSLR camera, flattering lighting, custom print templates, and 400+ digital images per event. Not just silly photos."
+>
+  <Nav currentPage="/booth" />
+  <FamJamBooth />
+  <CTABand />
+  <Footer />
+</BaseLayout>

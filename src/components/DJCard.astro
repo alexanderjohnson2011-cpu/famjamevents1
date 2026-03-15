@@ -1,0 +1,79 @@
+---
+export interface Props {
+  cardClass: string;        // e.g. 'card-kdd'
+  imgClass: string;         // e.g. 'card-img-kdd'
+  name: string;             // Can contain <br/>
+  rarity: 'LEGENDARY' | 'EPIC';
+  image: string;            // path relative to /images/
+  imageAlt: string;
+  types: Array<{ label: string; pill: string }>;
+  energyStars: string;
+  energyFill: string;
+  kidsStars: string;
+  kidsFill: string;
+  starColor: string;
+  skills: string[];
+  sigLabel: string;
+  sigTitle: string;
+  sigDesc: string;
+  tags: string[];
+}
+
+const {
+  cardClass, imgClass, name, rarity, image, imageAlt,
+  types, energyStars, energyFill, kidsStars, kidsFill, starColor,
+  skills, sigLabel, sigTitle, sigDesc, tags,
+} = Astro.props;
+
+const rarityClass = rarity === 'LEGENDARY' ? 'rarity-legendary' : 'rarity-epic';
+---
+
+<div class={`dj-card ${cardClass}`}>
+  <div class="card-header">
+    <div class="card-name" set:html={name} />
+    <span class={`rarity-badge ${rarityClass}`}>{rarity}</span>
+  </div>
+
+  <div class={`card-image ${imgClass}`}>
+    <img src={`/images/${image}`} alt={imageAlt} />
+  </div>
+
+  <div class="card-body">
+    <div class="card-types">
+      {types.map((t) => (
+        <span class={`type-pill ${t.pill}`}>{t.label}</span>
+      ))}
+    </div>
+
+    <div class="card-stats">
+      <div class="stat">
+        <div class="stat-header">
+          <span class="stat-label">Energy</span>
+          <span class="stat-stars" style={`color:${starColor}`}>{energyStars}</span>
+        </div>
+        <div class="stat-bar"><div class={`stat-fill ${energyFill}`}></div></div>
+      </div>
+      <div class="stat">
+        <div class="stat-header">
+          <span class="stat-label">Kid-Friendly</span>
+          <span class="stat-stars" style={`color:${starColor}`}>{kidsStars}</span>
+        </div>
+        <div class="stat-bar"><div class={`stat-fill ${kidsFill}`}></div></div>
+      </div>
+    </div>
+
+    <ul class="card-skills">
+      {skills.map((s) => <li>{s}</li>)}
+    </ul>
+
+    <div class="sig-moment">
+      <div class="sig-label">{sigLabel}</div>
+      <div class="sig-title">{sigTitle}</div>
+      <div class="sig-desc">{sigDesc}</div>
+    </div>
+  </div>
+
+  <div class="card-footer">
+    {tags.map((t) => <span class="set-tag">{t}</span>)}
+  </div>
+</div>

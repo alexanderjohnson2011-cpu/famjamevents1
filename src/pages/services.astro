@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import ServicesGrid from '../components/ServicesGrid.astro';
+import CTABand from '../components/CTABand.astro';
+import Footer from '../components/Footer.astro';
+---
+<BaseLayout
+  title="Services & Pricing — Fam Jam Events"
+  description="DJ Only, Photo Booth Only, or the full DJ + Photo Booth Bundle. Serving Thousand Oaks & surrounding areas."
+>
+  <Nav currentPage="/services" />
+  <ServicesGrid />
+  <CTABand />
+  <Footer />
+</BaseLayout>
