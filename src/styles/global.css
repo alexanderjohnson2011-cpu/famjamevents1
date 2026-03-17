@@ -686,3 +686,88 @@ footer {
 .form-field select option { background: #10152a; }
 .form-field textarea { resize: vertical; min-height: 120px; }
 .form-submit { width: 100%; margin-top: 8px; justify-content: center; font-size: 1rem; padding: 15px; border-radius: 12px; }
+
+/* ── HAMBURGER ───────────────────────────────────────── */
+.nav-hamburger {
+  display: none;
+  flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer; padding: 4px;
+  flex-shrink: 0;
+}
+.nav-hamburger span {
+  display: block; width: 24px; height: 2px;
+  background: var(--body); border-radius: 2px;
+  transition: transform .3s, opacity .3s;
+}
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.nav-mobile-cta { display: none; }
+
+/* ── MOBILE ──────────────────────────────────────────── */
+@media (max-width: 768px) {
+
+  /* Section shells */
+  .section { padding: 64px 20px; }
+  .brand-band { padding: 56px 20px 64px; }
+  .cta-band { padding: 72px 20px; }
+  .vl-hero { padding: 72px 20px 64px; }
+
+  /* Nav */
+  nav { padding: 0 20px; height: 60px; }
+  .nav-hamburger { display: flex; }
+  .nav-cta-desktop { display: none; }
+  .nav-mobile-cta { display: block; padding: 12px 20px 4px; list-style: none; }
+  .nav-mobile-cta .nav-cta { display: inline-block; }
+  .nav-links {
+    display: none;
+    flex-direction: column; gap: 0;
+    position: absolute; top: 60px; left: 0; right: 0; z-index: 199;
+    background: rgba(11,15,30,0.97); backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--border);
+    padding: 8px 0 16px;
+  }
+  .nav-links.open { display: flex; }
+  .nav-links li { border-bottom: 1px solid var(--border); }
+  .nav-links li:last-child { border-bottom: none; }
+  .nav-links a {
+    display: block; padding: 14px 24px;
+    font-size: 1rem; border-bottom: none;
+  }
+
+  /* Hero */
+  .hero { grid-template-columns: 1fr; height: auto; }
+  .hero-right { display: none; }
+  .hero-left { padding: 48px 24px 56px; }
+
+  /* Brand */
+  .brand-cards { grid-template-columns: 1fr; }
+
+  /* Services */
+  .services-grid { grid-template-columns: 1fr; }
+  .addon-card { grid-template-columns: 1fr; gap: 12px; }
+  .addon-price { text-align: left; }
+
+  /* DJ Collective */
+  .dj-grid { grid-template-columns: 1fr; gap: 20px; }
+
+  /* Booth */
+  .memory-inner { grid-template-columns: 1fr; gap: 40px; }
+
+  /* Vibe Lab */
+  .vl-tool { grid-template-columns: 1fr; }
+
+  /* Footer */
+  footer {
+    grid-template-columns: 1fr; gap: 32px;
+    padding: 48px 20px 32px;
+  }
+  .foot-bottom {
+    padding: 18px 20px;
+    flex-direction: column; gap: 6px; text-align: center;
+  }
+
+  /* Form */
+  .form-row { grid-template-columns: 1fr; }
+  .book-form-wrap { padding: 28px 20px; }
+}
