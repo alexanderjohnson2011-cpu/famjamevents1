@@ -356,7 +356,7 @@ nav {
 .card-samplur:hover { box-shadow: 0 20px 60px rgba(0,231,255,.18), 0 0 0 1px rgba(0,231,255,.25); border-color: rgba(0,231,255,.3); }
 .card-header {
   display: flex; justify-content: space-between; align-items: flex-start;
-  padding: 18px 20px 14px;
+  padding: 18px 20px 14px; min-height: 72px;
 }
 .card-name { font-family: 'Montserrat',sans-serif; font-weight: 900; font-size: 1.1rem; line-height: 1.1; }
 .rarity-badge { font-size: .6rem; font-weight: 800; letter-spacing: .12em; padding: 4px 10px; border-radius: 100px; flex-shrink: 0; }

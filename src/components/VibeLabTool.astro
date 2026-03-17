@@ -109,8 +109,7 @@
                 <div class="vc-pkg-price" id="vcPrice">—</div>
               </div>
               <div class="vc-actions">
-                <a href="#" class="btn btn-pink" style="font-size:.78rem;padding:10px 14px;">⬇ Download Vibe Card</a>
-                <a href="/book" class="btn btn-outline" style="font-size:.78rem;padding:10px 14px;">Send to Booking →</a>
+                <button id="downloadBtn" class="btn btn-pink" style="font-size:.78rem;padding:10px 14px;">⬇ Download Vibe Card</button>
               </div>
             </div>
           </div>
@@ -201,7 +200,7 @@
         'The Mixtress — polished close',
       ],
       package: 'DJ Only',
-      price: '$500',
+      price: '$600',
       tags: [['Tech House','pill-cyan'],['High Energy','pill-pink'],['Adults','pill-purple']],
     },
     cleanClubEnergy: {
@@ -302,4 +301,221 @@
 
   document.getElementById('cleanToggle')?.addEventListener('click', toggleClean);
   document.getElementById('generateBtn')?.addEventListener('click', generateVibe);
+  document.getElementById('downloadBtn')?.addEventListener('click', downloadVibeCard);
+
+  function downloadVibeCard() {
+    const card = document.getElementById('vibeCard') as HTMLElement;
+    if (!card || !card.classList.contains('visible')) return;
+
+    const name      = (document.getElementById('vcName')     as HTMLElement).textContent || 'Your Vibe';
+    const stars     = (document.getElementById('vcStars')    as HTMLElement).textContent || '';
+    const sigTitle  = (document.getElementById('vcSigTitle') as HTMLElement).textContent || '';
+    const sigDesc   = (document.getElementById('vcSigDesc')  as HTMLElement).textContent || '';
+    const pkg       = (document.getElementById('vcPkg')      as HTMLElement).textContent || '';
+    const price     = (document.getElementById('vcPrice')    as HTMLElement).textContent || '';
+    const tags      = Array.from((document.getElementById('vcTags') as HTMLElement).querySelectorAll('.type-pill')).map(el => el.textContent || '');
+    const metaRows  = Array.from((document.getElementById('vcMeta') as HTMLElement).querySelectorAll('.vc-meta-row')).map(row => ({
+      key: (row.querySelector('.vc-meta-key') as HTMLElement)?.textContent || '',
+      val: (row.querySelector('.vc-meta-val') as HTMLElement)?.textContent || '',
+    }));
+    const rotation  = Array.from((document.getElementById('vcRotation') as HTMLElement).querySelectorAll('.vc-rot-dj')).map(el => el.textContent || '');
+
+    const W = 640, pad = 40;
+    // Estimate height dynamically
+    const H = 780 + metaRows.length * 28 + rotation.length * 24 + wrapLines(sigDesc, W - pad * 2 - 32, 15).length * 22;
+
+    const canvas = document.createElement('canvas');
+    const scale = 2;
+    canvas.width  = W * scale;
+    canvas.height = H * scale;
+    const ctx = canvas.getContext('2d')!;
+    ctx.scale(scale, scale);
+
+    // Background
+    const bg = ctx.createLinearGradient(0, 0, W, H);
+    bg.addColorStop(0, '#12162a');
+    bg.addColorStop(1, '#1a0d2e');
+    ctx.fillStyle = bg;
+    roundRect(ctx, 0, 0, W, H, 20);
+    ctx.fill();
+
+    // Top accent bar
+    const accent = ctx.createLinearGradient(0, 0, W, 0);
+    accent.addColorStop(0, '#ff3bd4');
+    accent.addColorStop(1, '#00e7ff');
+    ctx.fillStyle = accent;
+    roundRect(ctx, 0, 0, W, 6, { tl: 20, tr: 20, bl: 0, br: 0 });
+    ctx.fill();
+
+    let y = 40;
+
+    // Eyebrow
+    ctx.fillStyle = '#a0a8c8';
+    ctx.font = '600 12px system-ui, sans-serif';
+    ctx.fillText('🎉 FAM JAM EVENTS — VIBE CARD', pad, y);
+    y += 36;
+
+    // Name
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 28px system-ui, sans-serif';
+    ctx.fillText(name, pad, y);
+    y += 10;
+
+    // Stars
+    ctx.fillStyle = '#ff3bd4';
+    ctx.font = '14px system-ui, sans-serif';
+    ctx.fillText(stars, pad, y + 20);
+    y += 38;
+
+    // Tags
+    let tx = pad;
+    ctx.font = '600 11px system-ui, sans-serif';
+    tags.forEach(tag => {
+      const tw = ctx.measureText(tag).width + 20;
+      ctx.fillStyle = 'rgba(255,59,212,0.15)';
+      roundRect(ctx, tx, y, tw, 24, 12);
+      ctx.fill();
+      ctx.fillStyle = '#ff3bd4';
+      ctx.fillText(tag, tx + 10, y + 16);
+      tx += tw + 8;
+    });
+    y += 44;
+
+    // Divider
+    ctx.strokeStyle = 'rgba(255,255,255,0.1)';
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(pad, y); ctx.lineTo(W - pad, y); ctx.stroke();
+    y += 24;
+
+    // Meta rows
+    metaRows.forEach(({ key, val }) => {
+      ctx.fillStyle = '#6b7399';
+      ctx.font = '500 12px system-ui, sans-serif';
+      ctx.fillText(key.toUpperCase(), pad, y);
+      ctx.fillStyle = '#d0d6f0';
+      ctx.font = '500 13px system-ui, sans-serif';
+      ctx.fillText(val, pad + 140, y);
+      y += 28;
+    });
+    y += 8;
+
+    // Divider
+    ctx.strokeStyle = 'rgba(255,255,255,0.1)';
+    ctx.beginPath(); ctx.moveTo(pad, y); ctx.lineTo(W - pad, y); ctx.stroke();
+    y += 24;
+
+    // Signature moment box
+    ctx.fillStyle = 'rgba(255,59,212,0.07)';
+    const sigLines = wrapLines(sigDesc, W - pad * 2 - 32, 15);
+    const sigBoxH = 28 + 28 + sigLines.length * 22 + 24;
+    roundRect(ctx, pad, y, W - pad * 2, sigBoxH, 12);
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(255,59,212,0.25)';
+    ctx.lineWidth = 1;
+    roundRect(ctx, pad, y, W - pad * 2, sigBoxH, 12);
+    ctx.stroke();
+
+    ctx.fillStyle = '#ff3bd4';
+    ctx.font = '700 10px system-ui, sans-serif';
+    ctx.fillText('✦ SIGNATURE MOMENT', pad + 16, y + 20);
+    y += 32;
+
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 15px system-ui, sans-serif';
+    ctx.fillText(sigTitle, pad + 16, y);
+    y += 22;
+
+    ctx.fillStyle = '#a0a8c8';
+    ctx.font = '13px system-ui, sans-serif';
+    sigLines.forEach(line => { ctx.fillText(line, pad + 16, y); y += 22; });
+    y += 20;
+
+    // DJ Rotation
+    ctx.fillStyle = '#6b7399';
+    ctx.font = '700 10px system-ui, sans-serif';
+    ctx.fillText('DJ ROTATION', pad, y);
+    y += 20;
+
+    rotation.forEach(dj => {
+      ctx.fillStyle = '#d0d6f0';
+      ctx.font = '13px system-ui, sans-serif';
+      ctx.fillText('› ' + dj, pad, y);
+      y += 24;
+    });
+    y += 8;
+
+    // Package row
+    ctx.fillStyle = 'rgba(0,231,255,0.08)';
+    roundRect(ctx, pad, y, W - pad * 2, 54, 12);
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(0,231,255,0.2)';
+    ctx.lineWidth = 1;
+    roundRect(ctx, pad, y, W - pad * 2, 54, 12);
+    ctx.stroke();
+
+    ctx.fillStyle = '#6b7399';
+    ctx.font = '700 10px system-ui, sans-serif';
+    ctx.fillText('RECOMMENDED PACKAGE', pad + 16, y + 18);
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 15px system-ui, sans-serif';
+    ctx.fillText(pkg, pad + 16, y + 38);
+    ctx.fillStyle = '#00e7ff';
+    ctx.font = 'bold 22px system-ui, sans-serif';
+    ctx.textAlign = 'right';
+    ctx.fillText(price, W - pad - 16, y + 38);
+    ctx.textAlign = 'left';
+    y += 70;
+
+    // Footer
+    ctx.fillStyle = '#3d4566';
+    ctx.font = '11px system-ui, sans-serif';
+    ctx.fillText('famjamevents.com', pad, y);
+    ctx.textAlign = 'right';
+    ctx.fillText('Thousand Oaks, CA', W - pad, y);
+    ctx.textAlign = 'left';
+
+    canvas.toBlob(blob => {
+      if (!blob) return;
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = name.replace(/[™\s]+/g, '-').replace(/-+$/, '') + '.png';
+      a.click();
+      URL.revokeObjectURL(url);
+    }, 'image/png');
+  }
+
+  function wrapLines(text: string, maxWidth: number, fontSize: number): string[] {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d')!;
+    ctx.font = `${fontSize}px system-ui, sans-serif`;
+    const words = text.split(' ');
+    const lines: string[] = [];
+    let line = '';
+    for (const word of words) {
+      const test = line ? line + ' ' + word : word;
+      if (ctx.measureText(test).width > maxWidth && line) {
+        lines.push(line);
+        line = word;
+      } else {
+        line = test;
+      }
+    }
+    if (line) lines.push(line);
+    return lines;
+  }
+
+  function roundRect(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, r: number | { tl: number; tr: number; bl: number; br: number }) {
+    const tl = typeof r === 'number' ? r : r.tl;
+    const tr = typeof r === 'number' ? r : r.tr;
+    const br = typeof r === 'number' ? r : r.br;
+    const bl = typeof r === 'number' ? r : r.bl;
+    ctx.beginPath();
+    ctx.moveTo(x + tl, y);
+    ctx.lineTo(x + w - tr, y); ctx.arcTo(x + w, y, x + w, y + tr, tr);
+    ctx.lineTo(x + w, y + h - br); ctx.arcTo(x + w, y + h, x + w - br, y + h, br);
+    ctx.lineTo(x + bl, y + h); ctx.arcTo(x, y + h, x, y + h - bl, bl);
+    ctx.lineTo(x, y + tl); ctx.arcTo(x, y, x + tl, y, tl);
+    ctx.closePath();
+  }
 </script>
