@@ -6,12 +6,32 @@ const { currentPage = '/' } = Astro.props;
 ---
 <nav>
   <a href="/" class="nav-logo">Fam<span class="accent">Jam</span> Events</a>
-  <ul class="nav-links">
+  <ul class="nav-links" id="nav-links">
     <li><a href="/services">Services</a></li>
     <li><a href="/collective">The Collective</a></li>
     <li><a href="/booth">Fam Jam Booth</a></li>
     <li><a href="/vibe-lab">Vibe Lab</a></li>
     <li><a href="/services">Pricing</a></li>
+    <li class="nav-mobile-cta"><a href="/book" class="nav-cta">Book Now</a></li>
   </ul>
-  <a href="/book" class="nav-cta">Book Now</a>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+  <a href="/book" class="nav-cta nav-cta-desktop">Book Now</a>
 </nav>
+
+<script>
+  const burger = document.getElementById('nav-hamburger');
+  const links = document.getElementById('nav-links');
+  burger?.addEventListener('click', () => {
+    links?.classList.toggle('open');
+    burger.classList.toggle('open');
+  });
+  // Close menu when a link is clicked
+  links?.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      links.classList.remove('open');
+      burger?.classList.remove('open');
+    });
+  });
+</script>
