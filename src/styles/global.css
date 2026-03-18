@@ -468,6 +468,7 @@ nav {
 .print-thumb:nth-child(2) { background: linear-gradient(145deg,#c05aff,#5a7aff); }
 .print-thumb:nth-child(3) { background: linear-gradient(145deg,#5affee,#5a8aff); }
 .print-thumb:nth-child(4) { background: linear-gradient(145deg,#ffde5a,#ff8c5a); }
+.booth-sample-frame { margin-bottom: 24px; }
 .booth-addon-callout {
   background: rgba(18,22,42,.06); border: 1px solid rgba(18,22,42,.1);
   border-radius: var(--r); padding: 20px 24px; margin-bottom: 8px;
