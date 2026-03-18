@@ -1,0 +1,1 @@
+import"./hoisted.CF1n8usr.js";document.querySelectorAll(".svc-toggle").forEach(e=>{e.addEventListener("click",()=>{const c=e.closest(".svc-collapsible").classList.toggle("is-open");e.setAttribute("aria-expanded",String(c))})});
