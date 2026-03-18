@@ -1,0 +1,75 @@
+---
+---
+<section class="section friday-section" id="friday-live">
+  <div class="section-inner">
+    <div class="centered">
+      <div class="section-label"><span class="pulse-dot"></span>Live Every Week</div>
+      <h2>Friday Fam <span class="accent">Jam</span></h2>
+      <p class="sub">What happens when disco meets family time? We go live every Friday on Twitch, YouTube, and X — high-energy DJ sets, zero seriousness, all good vibes. Catch us live or watch the archives on YouTube.</p>
+
+      <div class="friday-links">
+        <a href="https://www.youtube.com/@famjamevents" target="_blank" rel="noopener noreferrer" class="btn btn-pink friday-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          YouTube
+        </a>
+        <a href="https://www.twitch.tv/famjamcollective" target="_blank" rel="noopener noreferrer" class="btn friday-btn friday-btn-twitch">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
+          Twitch
+        </a>
+        <a href="https://x.com/thesamtan" target="_blank" rel="noopener noreferrer" class="btn btn-outline friday-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          X / Twitter
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .friday-section {
+    background: var(--night);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .pulse-dot {
+    display: inline-block;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--cyan);
+    margin-right: 8px;
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(0,231,255,.6); }
+    50%       { box-shadow: 0 0 0 6px rgba(0,231,255,0); }
+  }
+
+  .friday-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    margin-top: 40px;
+  }
+
+  .friday-btn {
+    width: 220px;
+    justify-content: center;
+  }
+
+  .friday-btn-twitch {
+    background: transparent;
+    color: var(--cyan);
+    border: 1.5px solid var(--cyan);
+    box-shadow: 0 0 20px rgba(0,231,255,.15);
+  }
+  .friday-btn-twitch:hover {
+    background: rgba(0,231,255,.08);
+    transform: translateY(-2px);
+    box-shadow: 0 0 32px rgba(0,231,255,.3);
+  }
+</style>
