@@ -4,11 +4,3 @@
 
 [build.environment]
   NODE_VERSION = "20"
-
-[[redirects]]
-  from = "/*"
-  to = "/oasis/:splat"
-  status = 200
-  force = true
-  [redirects.conditions]
-    Host = ["oasis.famjamevents.com"]
