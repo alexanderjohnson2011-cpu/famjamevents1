@@ -314,6 +314,26 @@ nav {
 .svc-features li::before { content: '✓'; color: var(--cyan); font-weight: 700; font-size: .75rem; flex-shrink: 0; }
 .services-cta { text-align: center; margin-top: 48px; }
 
+/* Desktop: restore original order (DJ | Bundle | Booth) */
+.svc-dj     { order: 1; }
+.svc-bundle { order: 2; }
+.svc-booth  { order: 3; }
+
+/* Toggle button — hidden on desktop, shown on mobile */
+.svc-toggle {
+  display: none;
+  width: 100%; background: none; border: 1px solid var(--border);
+  border-radius: var(--r); padding: 10px 14px; margin-top: 4px;
+  color: var(--muted); font-size: .82rem; cursor: pointer;
+  align-items: center; justify-content: space-between; gap: 8px;
+  transition: border-color .2s, color .2s;
+}
+.svc-toggle:hover { border-color: rgba(255,59,212,.4); color: var(--body); }
+.svc-chevron {
+  font-size: 1.1rem; transition: transform .2s; display: inline-block;
+}
+.svc-collapsible.is-open .svc-chevron { transform: rotate(90deg); }
+
 /* ── DJ CARDS ────────────────────────────────────────── */
 .collective-section { background: var(--night); padding-bottom: 80px; }
 .collective-origin {
@@ -931,6 +951,13 @@ footer {
   .services-grid { grid-template-columns: 1fr; }
   .addon-card { grid-template-columns: 1fr; gap: 12px; }
   .addon-price { text-align: left; }
+  /* Mobile: bundle first, others collapsed */
+  .svc-bundle { order: 1; }
+  .svc-dj     { order: 2; }
+  .svc-booth  { order: 3; }
+  .svc-toggle { display: flex; }
+  .svc-collapsible .svc-body { display: none; }
+  .svc-collapsible.is-open .svc-body { display: block; }
 
   /* DJ Collective */
   .dj-grid { grid-template-columns: 1fr; gap: 20px; }
