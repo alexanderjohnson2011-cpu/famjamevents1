@@ -38,10 +38,10 @@ async function loadGallery() {
     }
 
     grid.innerHTML = images.map(img => {
-      const rawUrl = `https://raw.githubusercontent.com/alexanderjohnson2011-cpu/famjamevents1/main/gallery/${img.name}`;
+      const url = img.download_url;
       return `
-        <div class="gallery-item" onclick="openLightbox('${rawUrl}')">
-          <img src="${rawUrl}" alt="Fam Jam party photo" loading="lazy">
+        <div class="gallery-item" onclick="openLightbox('${url}')">
+          <img src="${url}" alt="Fam Jam party photo" loading="lazy">
         </div>`;
     }).join('');
 
