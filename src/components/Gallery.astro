@@ -1,0 +1,81 @@
+---
+---
+<!-- ══════════════════════════════════ GALLERY -->
+<section class="section" id="gallery" style="background:var(--night); border-top:1px solid var(--border);">
+  <div class="section-inner">
+    <div class="centered">
+      <div class="section-label">From the Parties</div>
+      <h2><span class="grad">The Vibe, IRL</span></h2>
+      <p class="sub" style="margin:0 auto 48px;">Real events. Real crowds. Real fun.</p>
+    </div>
+    <div class="gallery-grid" id="galleryGrid">
+      <div class="gallery-loading">Loading photos...</div>
+    </div>
+  </div>
+</section>
+
+<script>
+/* ── GITHUB GALLERY ──────────────────────────────────── */
+// ⚠️  UPDATE THESE TWO VALUES before deploying:
+const GITHUB_USER = 'alexanderjohnson2011-cpu';
+const GITHUB_REPO = 'famjamevents1';
+// Photos go in a folder called "gallery" at the root of the repo.
+// Supported formats: .jpg .jpeg .png .webp .gif
+
+async function loadGallery() {
+  const grid = document.getElementById('galleryGrid');
+  const apiUrl = `https://api.github.com/repos/alexanderjohnson2011-cpu/famjamevents1/contents/gallery`;
+
+  try {
+    const res = await fetch(apiUrl);
+    if (!res.ok) throw new Error('Could not load gallery');
+    const files = await res.json();
+    const images = files.filter(f => /\.(jpg|jpeg|png|webp|gif)$/i.test(f.name));
+
+    if (images.length === 0) {
+      grid.innerHTML = '<div class="gallery-loading">No photos yet — check back soon.</div>';
+      return;
+    }
+
+    grid.innerHTML = images.map(img => {
+      const rawUrl = `https://raw.githubusercontent.com/alexanderjohnson2011-cpu/famjamevents1/main/gallery/${img.name}`;
+      return `
+        <div class="gallery-item" onclick="openLightbox('${rawUrl}')">
+          <img src="${rawUrl}" alt="Fam Jam party photo" loading="lazy">
+        </div>`;
+    }).join('');
+
+  } catch (err) {
+    console.warn('Gallery load failed:', err);
+    grid.innerHTML = '<div class="gallery-loading">Photos coming soon.</div>';
+  }
+}
+
+// Lightbox
+function openLightbox(src) {
+  let lb = document.getElementById('galleryLightbox');
+  if (!lb) {
+    lb = document.createElement('div');
+    lb.id = 'galleryLightbox';
+    lb.className = 'gallery-lightbox';
+    lb.innerHTML = `<button class="lightbox-close" onclick="closeLightbox()">✕</button><img id="lightboxImg" src="" alt="">`;
+    lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
+    document.body.appendChild(lb);
+  }
+  document.getElementById('lightboxImg').src = src;
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  const lb = document.getElementById('galleryLightbox');
+  if (lb) lb.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// Close lightbox with Escape key
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+// Load on page ready
+loadGallery();
+</script>
