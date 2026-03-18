@@ -1,6 +1,12 @@
 [build]
-  command = "npm run build"
+  command = "npm run build && cp -r oasis dist/oasis"
   publish = "dist"
 
 [build.environment]
   NODE_VERSION = "20"
+
+[[redirects]]
+  from = "/*"
+  to = "/oasis/:splat"
+  status = 200
+  conditions = {Host = ["oasis.famjamevents.com"]}
