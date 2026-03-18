@@ -9,4 +9,5 @@
   from = "/*"
   to = "/oasis/:splat"
   status = 200
+  force = true
   conditions = {Host = ["oasis.famjamevents.com"]}
