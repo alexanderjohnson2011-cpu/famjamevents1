@@ -11,33 +11,8 @@
 
     <div class="services-grid" style="margin-top:48px;">
 
-      <div class="svc-card">
-        <span class="svc-icon">🎛️</span>
-        <div class="svc-price">$600</div>
-        <div class="svc-name">DJ Service</div>
-        <div class="svc-desc">3 hours. Your crowd will be on the floor. Both the grandmas and the toddlers.</div>
-        <ul class="svc-features">
-          <li>Set built around your music preferences</li>
-          <li>Three DJs rotating through the event</li>
-          <li>Fog machine + lights for night events</li>
-          <li>Day-of scripting and mic included</li>
-        </ul>
-      </div>
-
-      <div class="svc-card">
-        <span class="svc-icon">📸</span>
-        <div class="svc-price">$600</div>
-        <div class="svc-name">Photo Booth</div>
-        <div class="svc-desc">3 hours. Walk away with actual prints, not just a shared album link nobody opens.</div>
-        <ul class="svc-features">
-          <li>Real DSLR camera + flattering lighting</li>
-          <li>Custom theme-matched print design</li>
-          <li>Onsite attendant the whole time</li>
-          <li>400+ high-res digital images per event</li>
-        </ul>
-      </div>
-
-      <div class="svc-card featured">
+      <!-- Bundle first in DOM so it appears first on mobile -->
+      <div class="svc-card featured svc-bundle">
         <span class="svc-icon">🎛️📸</span>
         <div class="svc-price">$800</div>
         <div class="svc-name">DJ + Photo Booth Bundle</div>
@@ -48,6 +23,44 @@
           <li>Coordinated setup — we figure out logistics together</li>
           <li>One contact for both, start to finish</li>
         </ul>
+      </div>
+
+      <!-- DJ card — collapsible on mobile -->
+      <div class="svc-card svc-collapsible svc-dj">
+        <span class="svc-icon">🎛️</span>
+        <div class="svc-price">$600</div>
+        <div class="svc-name">DJ Service</div>
+        <button class="svc-toggle" aria-expanded="false">
+          See what's included <span class="svc-chevron">›</span>
+        </button>
+        <div class="svc-body">
+          <div class="svc-desc">3 hours. Your crowd will be on the floor. Both the grandmas and the toddlers.</div>
+          <ul class="svc-features">
+            <li>Set built around your music preferences</li>
+            <li>Three DJs rotating through the event</li>
+            <li>Fog machine + lights for night events</li>
+            <li>Day-of scripting and mic included</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Photo Booth card — collapsible on mobile -->
+      <div class="svc-card svc-collapsible svc-booth">
+        <span class="svc-icon">📸</span>
+        <div class="svc-price">$600</div>
+        <div class="svc-name">Photo Booth</div>
+        <button class="svc-toggle" aria-expanded="false">
+          See what's included <span class="svc-chevron">›</span>
+        </button>
+        <div class="svc-body">
+          <div class="svc-desc">3 hours. Walk away with actual prints, not just a shared album link nobody opens.</div>
+          <ul class="svc-features">
+            <li>Real DSLR camera + flattering lighting</li>
+            <li>Custom theme-matched print design</li>
+            <li>Onsite attendant the whole time</li>
+            <li>400+ high-res digital images per event</li>
+          </ul>
+        </div>
       </div>
 
     </div>
@@ -68,3 +81,13 @@
     </div>
   </div>
 </section>
+
+<script>
+  document.querySelectorAll('.svc-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const card = btn.closest('.svc-collapsible');
+      const isOpen = card.classList.toggle('is-open');
+      btn.setAttribute('aria-expanded', String(isOpen));
+    });
+  });
+</script>
