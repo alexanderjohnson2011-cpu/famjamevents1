@@ -10,4 +10,5 @@
   to = "/oasis/:splat"
   status = 200
   force = true
-  conditions = {Host = ["oasis.famjamevents.com"]}
+  [redirects.conditions]
+    Host = ["oasis.famjamevents.com"]
