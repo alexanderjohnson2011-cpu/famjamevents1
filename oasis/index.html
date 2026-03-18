@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Oasis by Fam Jam Events — Private Pool Venue in Thousand Oaks, CA</title>
+  <meta name="description" content="Book a private pool venue in Thousand Oaks for birthdays, graduations, and private events. Serving Ventura County and the greater Los Angeles area. Up to 100 guests. DJ, food, photo booth, decor — we coordinate it all." />
+  <meta name="keywords" content="private pool venue Thousand Oaks, pool party venue Ventura County, private event space Thousand Oaks, pool rental Los Angeles, backyard venue Thousand Oaks CA, birthday party venue Ventura County, private pool rental Conejo Valley, event venue Thousand Oaks" />
+  <meta property="og:title" content="The Oasis by Fam Jam Events — Private Pool Venue in Thousand Oaks, CA" />
+  <meta property="og:description" content="A gorgeous backyard pool venue in Thousand Oaks — DJ, food, decor, photo booth. Serving Ventura County and greater LA. Up to 100 guests." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ---- RESET & BASE ---- */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:       #0b0f1e;
+      --bg2:      #111827;
+      --bg3:      #1a2035;
+      --pink:     #ff3bd4;
+      --cyan:     #00e7ff;
+      --white:    #ffffff;
+      --muted:    #94a3b8;
+      --border:   rgba(255,255,255,0.08);
+      --radius:   16px;
+      --max:      1200px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+    }
+    img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    a { color: inherit; text-decoration: none; }
+    h1, h2, h3, h4 { font-family: 'Montserrat', sans-serif; line-height: 1.2; }
+
+    /* ---- UTILITY ---- */
+    .container { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 20px; }
+    .section   { padding: 80px 0; }
+    .section--light { background: var(--bg2); }
+    .eyebrow {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--pink);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 900;
+      margin-bottom: 16px;
+    }
+    .section-sub {
+      color: var(--muted);
+      font-size: 17px;
+      max-width: 620px;
+      margin-bottom: 48px;
+    }
+    .btn-primary {
+      display: inline-block;
+      background: var(--pink);
+      color: var(--white);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: 0.04em;
+      padding: 16px 36px;
+      border-radius: 50px;
+      transition: opacity 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.85; }
+    .btn-outline {
+      display: inline-block;
+      border: 2px solid var(--cyan);
+      color: var(--cyan);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      padding: 14px 32px;
+      border-radius: 50px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { background: var(--cyan); color: var(--bg); }
+
+    /* ---- NAV ---- */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(11,15,30,0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .nav-logo {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 17px;
+      line-height: 1.1;
+    }
+    .nav-logo span { display: block; font-size: 10px; font-weight: 400; color: var(--muted); letter-spacing: 0.1em; }
+    .nav-links { display: none; gap: 28px; font-size: 14px; color: var(--muted); }
+    .nav-links a:hover { color: var(--white); }
+    @media (min-width: 768px) { .nav-links { display: flex; } }
+    .nav-cta {
+      background: var(--pink);
+      color: var(--white);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      padding: 10px 22px;
+      border-radius: 50px;
+    }
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* ---- HERO ---- */
+    .hero {
+      position: relative;
+      height: 100svh;
+      min-height: 580px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+    .hero-img {
+      position: absolute;
+      inset: 0;
+    }
+    .hero-img img { object-position: center 60%; }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(11,15,30,0.45) 0%, rgba(11,15,30,0.65) 100%);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 20px;
+    }
+    .hero-eyebrow {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 16px;
+    }
+    .hero h1 {
+      font-size: clamp(38px, 8vw, 80px);
+      font-weight: 900;
+      line-height: 1.05;
+      margin-bottom: 20px;
+    }
+    .hero-sub {
+      font-size: clamp(16px, 2.5vw, 20px);
+      color: rgba(255,255,255,0.85);
+      max-width: 560px;
+      margin: 0 auto 36px;
+    }
+    .hero-tag {
+      display: inline-block;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin-top: 16px;
+    }
+
+    /* ---- PROOF BAR ---- */
+    .proof-bar {
+      background: var(--bg3);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 18px 20px;
+      overflow-x: auto;
+    }
+    .proof-bar-inner {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+      justify-content: center;
+      max-width: var(--max);
+      margin: 0 auto;
+      white-space: nowrap;
+    }
+    .proof-item {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+    .proof-item strong { color: var(--white); }
+    .proof-star { color: #facc15; }
+
+    /* ---- SPACE SECTION ---- */
+    .space-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-bottom: 48px;
+    }
+    @media (min-width: 640px) {
+      .space-grid { grid-template-columns: 1fr 1fr; }
+      .space-grid .space-main { grid-column: 1 / -1; height: 380px; border-radius: var(--radius); overflow: hidden; }
+      .space-grid .space-sub { height: 240px; border-radius: var(--radius); overflow: hidden; }
+    }
+    @media (min-width: 1024px) {
+      .space-grid { grid-template-columns: 2fr 1fr 1fr; grid-template-rows: 380px; }
+      .space-grid .space-main { grid-column: 1; grid-row: 1; border-radius: var(--radius); overflow: hidden; }
+      .space-grid .space-sub { border-radius: var(--radius); overflow: hidden; }
+    }
+    .space-main, .space-sub { border-radius: var(--radius); overflow: hidden; min-height: 220px; }
+
+    .amenities-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    @media (min-width: 640px) { .amenities-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (min-width: 900px) { .amenities-grid { grid-template-columns: repeat(4, 1fr); } }
+    .amenity-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 16px;
+    }
+    .amenity-icon { font-size: 24px; margin-bottom: 8px; }
+    .amenity-name {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .amenity-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+    /* ---- WHY SECTION ---- */
+    .why-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      align-items: center;
+      margin-bottom: 60px;
+    }
+    @media (min-width: 768px) { .why-row { grid-template-columns: 1fr 1fr; } }
+    .why-img { border-radius: var(--radius); overflow: hidden; height: 360px; }
+    .why-points { display: flex; flex-direction: column; gap: 20px; }
+    .why-point { display: flex; gap: 14px; align-items: flex-start; }
+    .why-icon {
+      flex-shrink: 0;
+      width: 36px; height: 36px;
+      background: rgba(255,59,212,0.12);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+    }
+    .why-point h4 {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+    .why-point p { font-size: 14px; color: var(--muted); }
+
+    /* ---- OPTIONS/SERVICES SECTION ---- */
+    .options-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--cyan);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      margin-bottom: 32px;
+      text-align: center;
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    @media (min-width: 540px) { .services-grid { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 900px) { .services-grid { grid-template-columns: repeat(3, 1fr); } }
+    .service-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .service-img { height: 200px; }
+    .service-body { padding: 20px; }
+    .service-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+    .service-desc { font-size: 14px; color: var(--muted); line-height: 1.55; }
+
+    /* ---- FOOD SECTION ---- */
+    .food-tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+    .food-tab {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 10px 20px;
+      border-radius: 50px;
+      border: 2px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .food-tab.active {
+      background: var(--pink);
+      border-color: var(--pink);
+      color: var(--white);
+    }
+    .food-panel { display: none; }
+    .food-panel.active { display: grid; gap: 32px; align-items: start; }
+    @media (min-width: 768px) { .food-panel.active { grid-template-columns: 1fr 1fr; } }
+    .food-panel-imgs {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      grid-template-rows: 260px 180px;
+      gap: 10px;
+    }
+    .food-panel-img-main { grid-row: 1 / 3; border-radius: 12px; overflow: hidden; }
+    .food-panel-img-sub  { border-radius: 12px; overflow: hidden; }
+    .food-panel-copy h3 {
+      font-size: 24px;
+      font-weight: 900;
+      margin-bottom: 10px;
+    }
+    .food-panel-copy p { color: var(--muted); font-size: 15px; margin-bottom: 20px; }
+    .menu-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .menu-list li {
+      font-size: 14px;
+      color: var(--muted);
+      padding-left: 18px;
+      position: relative;
+    }
+    .menu-list li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--pink);
+    }
+    .menu-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 10px;
+    }
+
+    /* ---- GALLERY SECTION ---- */
+    .vibes-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    @media (min-width: 540px) { .vibes-grid { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 900px) { .vibes-grid { grid-template-columns: 2fr 1fr 1fr; } }
+    .vibes-grid > div { border-radius: 12px; overflow: hidden; min-height: 220px; }
+    @media (min-width: 900px) {
+      .vibes-main { height: 460px; }
+      .vibes-grid > div:not(.vibes-main) { height: 220px; }
+    }
+
+    /* ---- DECOR SCROLL ---- */
+    .decor-scroll {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding-bottom: 12px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+    .decor-scroll::-webkit-scrollbar { height: 4px; }
+    .decor-scroll::-webkit-scrollbar-track { background: var(--bg3); }
+    .decor-scroll::-webkit-scrollbar-thumb { background: var(--pink); border-radius: 2px; }
+    @media (min-width: 900px) {
+      .decor-scroll {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        overflow-x: visible;
+      }
+    }
+    .decor-thumb {
+      flex: 0 0 200px;
+      height: 240px;
+      border-radius: 12px;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+    @media (min-width: 900px) { .decor-thumb { flex: none; height: 220px; } }
+
+    /* ---- REVIEWS ---- */
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    @media (min-width: 640px) { .reviews-grid { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 900px) { .reviews-grid { grid-template-columns: repeat(3, 1fr); } }
+    .review-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+    .review-stars { color: #facc15; font-size: 14px; margin-bottom: 10px; }
+    .review-text { font-size: 14px; color: var(--muted); line-height: 1.6; margin-bottom: 16px; }
+    .review-author { font-size: 13px; font-weight: 600; }
+    .review-date { font-size: 12px; color: var(--muted); }
+
+    /* ---- DETAILS ---- */
+    .details-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    @media (min-width: 640px) { .details-grid { grid-template-columns: repeat(3, 1fr); } }
+    .detail-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .detail-icon { font-size: 28px; margin-bottom: 10px; }
+    .detail-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .detail-desc { font-size: 13px; color: var(--muted); line-height: 1.55; }
+
+    /* ---- FAQ ---- */
+    .faq-list { display: flex; flex-direction: column; gap: 4px; max-width: 780px; margin: 0 auto; }
+    .faq-item {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .faq-btn {
+      width: 100%;
+      background: transparent;
+      border: none;
+      color: var(--white);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      text-align: left;
+      padding: 20px 24px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+    .faq-btn .faq-arrow { color: var(--pink); font-size: 18px; flex-shrink: 0; transition: transform 0.2s; }
+    .faq-btn.open .faq-arrow { transform: rotate(45deg); }
+    .faq-body {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.65;
+      padding: 0 24px 20px;
+      display: none;
+    }
+    .faq-body.open { display: block; }
+
+    /* ---- CTA BAND ---- */
+    .cta-band {
+      background: linear-gradient(135deg, rgba(255,59,212,0.15) 0%, rgba(0,231,255,0.08) 100%);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 80px 20px;
+      text-align: center;
+    }
+    .cta-band h2 {
+      font-size: clamp(28px, 5vw, 48px);
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+    .cta-band p { color: var(--muted); font-size: 17px; margin-bottom: 36px; }
+    .cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+    /* ---- CROSSLINK ---- */
+    .crosslink {
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      padding: 28px 20px;
+    }
+    .crosslink-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      text-align: center;
+    }
+    .crosslink p { font-size: 15px; color: var(--muted); }
+    .crosslink a {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--cyan);
+      border: 1px solid var(--cyan);
+      padding: 8px 20px;
+      border-radius: 50px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .crosslink a:hover { background: var(--cyan); color: var(--bg); }
+
+    /* ---- FOOTER ---- */
+    footer {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 32px 20px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    footer strong { color: var(--white); }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="nav-logo">
+        The Oasis
+        <span>by Fam Jam Events</span>
+      </div>
+      <nav class="nav-links">
+        <a href="#space">The Space</a>
+        <a href="#services">Options</a>
+        <a href="#food">Food &amp; Drink</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <a href="https://booking.famjamevents.com/public/69b80f37876c4700305952dd" class="nav-cta">Book Now</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-img">
+      <img src="images/space/pool-dusk.avif" alt="The Oasis pool at golden hour" />
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Private Pool Venue · Thousand Oaks, CA</p>
+      <h1>Your Party.<br />Our Oasis.</h1>
+      <p class="hero-sub">A private backyard pool venue in Thousand Oaks — with the people, food, and energy that make a party worth throwing.</p>
+      <a href="https://booking.famjamevents.com/public/69b80f37876c4700305952dd" class="btn-primary">Check Availability</a>
+      <span class="hero-tag">Up to 100 guests &nbsp;·&nbsp; Pool + Hot Tub &nbsp;·&nbsp; Full event support available</span>
+    </div>
+  </section>
+
+  <!-- PROOF BAR -->
+  <div class="proof-bar">
+    <div class="proof-bar-inner">
+      <div class="proof-item"><span class="proof-star">★</span> <strong>5.0</strong> &nbsp;rating · 50+ hosted events</div>
+      <div class="proof-item">🏆 <strong>Top Swimply Host</strong></div>
+      <div class="proof-item">🔁 <strong>Highly Rebooked</strong> — guests come back every time</div>
+      <div class="proof-item">👥 Up to <strong>100 guests</strong></div>
+      <div class="proof-item">🐾 <strong>Pet &amp; Kid Friendly</strong></div>
+    </div>
+  </div>
+
+  <!-- THE SPACE -->
+  <section class="section" id="space">
+    <div class="container">
+      <p class="eyebrow">The Space</p>
+      <h2 class="section-title">A backyard built for big moments.</h2>
+      <p class="section-sub">19,000 square feet of private outdoor space in Thousand Oaks, CA — serving Ventura County and greater LA. Pool, hot tub, sprawling lawn, sand pits, and room for everyone you love.</p>
+
+      <div class="space-grid">
+        <div class="space-main"><img src="images/space/pool-dusk.avif" alt="Pool at dusk with string lights" /></div>
+        <div class="space-sub"><img src="images/vibes/pool-swim.jpg" alt="Guests swimming in the pool" /></div>
+        <div class="space-sub"><img src="images/space/setup-bounce.avif" alt="Party setup with tables and bounce house" /></div>
+      </div>
+
+      <div class="amenities-grid">
+
+        <div class="amenity-card">
+          <div class="amenity-icon">🏊</div>
+          <div class="amenity-name">Pool + Hot Tub</div>
+          <div class="amenity-desc">Deep end for swimming plus a heated hot tub. Shallow tanning ledge (only 2 ft deep — perfect for toddlers and lounging). Stocked with extensive pool toys.</div>
+        </div>
+
+        <div class="amenity-card">
+          <div class="amenity-icon">⛺</div>
+          <div class="amenity-name">The Setup</div>
+          <div class="amenity-desc">Canopy coverage: one 10×20 and two 10×10 canopies (up to 20×20 shade/rain cover). Six 6-foot tables, 4 cocktail tables, and up to 40 foldable chairs.</div>
+        </div>
+
+        <div class="amenity-card">
+          <div class="amenity-icon">🌿</div>
+          <div class="amenity-name">Grass Lawn</div>
+          <div class="amenity-desc">Expansive lawn with two sand pit areas — cornhole set included. Perfect for lawn games while kids run free.</div>
+        </div>
+
+        <div class="amenity-card">
+          <div class="amenity-icon">🛋️</div>
+          <div class="amenity-name">Cabana &amp; Lounge</div>
+          <div class="amenity-desc">Shaded cabana area for guests who want to relax out of the sun without missing the action.</div>
+        </div>
+
+        <div class="amenity-card">
+          <div class="amenity-icon">💡</div>
+          <div class="amenity-name">String Lighting + Propane Heaters</div>
+          <div class="amenity-desc">Full string light coverage for evening events plus propane heaters to keep the party going when temps drop.</div>
+        </div>
+
+        <div class="amenity-card">
+          <div class="amenity-icon">🚗</div>
+          <div class="amenity-name">Parking</div>
+          <div class="amenity-desc">Extensive street parking available — we've never had an issue, even for events of 80+ people.</div>
+        </div>
+
+        <div class="amenity-card">
+          <div class="amenity-icon">🚾</div>
+          <div class="amenity-name">Restrooms</div>
+          <div class="amenity-desc">Indoor restroom access inside the home throughout your event.</div>
+        </div>
+
+        <div class="amenity-card">
+          <div class="amenity-icon">🐾</div>
+          <div class="amenity-name">Pet &amp; Kid Friendly</div>
+          <div class="amenity-desc">Mesh safety fence keeps kids and dogs safe by the pool. It can be fully removed if you prefer an open layout.</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY THE OASIS -->
+  <section class="section section--light" id="why">
+    <div class="container">
+      <p class="eyebrow">Why The Oasis</p>
+      <h2 class="section-title">Book the space. We handle the rest.</h2>
+      <p class="section-sub">We can make your event completely turnkey — or just fill in the gaps. Bring as much or as little as you want. You call the shots.</p>
+
+      <div class="why-row">
+        <div class="why-img">
+          <img src="images/vibes/party-crowd.jpg" alt="Full party at The Oasis" />
+        </div>
+        <div class="why-points">
+
+          <div class="why-point">
+            <div class="why-icon">📋</div>
+            <div>
+              <h4>Start with the venue, add what you need</h4>
+              <p>Book the space on its own, or add food, a DJ, decor, a photo booth — whatever makes sense for your event and your budget.</p>
+            </div>
+          </div>
+
+          <div class="why-point">
+            <div class="why-icon">🤝</div>
+            <div>
+              <h4>One point of contact, not five vendors</h4>
+              <p>We bring in trusted vendors and coordinate everything on your behalf. You deal with us — not a separate caterer, DJ, and decorator all texting you the week of.</p>
+            </div>
+          </div>
+
+          <div class="why-point">
+            <div class="why-icon">🎉</div>
+            <div>
+              <h4>We know how to throw a party</h4>
+              <p>50+ events at this venue. We know the layout, we know the flow, and we know what actually makes a party land.</p>
+            </div>
+          </div>
+
+          <div class="why-point">
+            <div class="why-icon">📍</div>
+            <div>
+              <h4>Your hosts are on-site</h4>
+              <p>We're there during your event — not dropping off a key and disappearing. Think of us as your on-site crew, not absentee landlords.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- OPTIONS -->
+      <p class="options-label">Available add-ons &amp; services — mix and match what you need</p>
+      <div class="services-grid">
+
+        <div class="service-card">
+          <div class="service-img"><img src="images/decor/table-setting-1.jpg" alt="Event planning and coordination" /></div>
+          <div class="service-body">
+            <p class="service-title">Event Planning</p>
+            <p class="service-desc">Timeline, layout, vendor coordination — we handle as much or as little as you want. Good for people who'd rather show up and enjoy than manage logistics.</p>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-img"><img src="images/decor/balloons.jpg" alt="Custom decor and balloon arches" /></div>
+          <div class="service-body">
+            <p class="service-title">Decor</p>
+            <p class="service-desc">Balloon arches, florals, table settings, themed setups. Our decor team turns the space into whatever you're imagining.</p>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-img"><img src="images/food/grazing-table-2.jpeg" alt="Food options — catering and grazing tables" /></div>
+          <div class="service-body">
+            <p class="service-title">Food Options</p>
+            <p class="service-desc">Grazing tables, gourmet catering, taco bar, bar service — see the full breakdown below and pick what fits your crowd.</p>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-img"><img src="images/dj/dj-action-2.jpg" alt="DJ performing at The Oasis" /></div>
+          <div class="service-body">
+            <p class="service-title">DJ</p>
+            <p class="service-desc">Full DJ setup with wireless mics, sound system, and lighting. Our DJs read the room and keep things moving — no awkward dead air.</p>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-img"><img src="images/photobooth/photobooth-hero.jpg" alt="Photo booth at The Oasis" /></div>
+          <div class="service-body">
+            <p class="service-title">Photo Booth</p>
+            <p class="service-desc">Custom backdrops, instant prints, digital sharing, and props. Guests walk away with a print in hand — and a reason to post.</p>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-img"><img src="images/space/setup-bounce-lawn.avif" alt="Bounce house at The Oasis" /></div>
+          <div class="service-body">
+            <p class="service-title">Bounce House</p>
+            <p class="service-desc">Add-on bounce house available for kids' events and family parties. Keeps the little ones entertained so adults can actually relax.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOD & DRINK -->
+  <section class="section" id="food">
+    <div class="container">
+      <p class="eyebrow">Food &amp; Drink</p>
+      <h2 class="section-title">Something for every kind of celebration.</h2>
+      <p class="section-sub">We work with great local vendors to bring the food and drinks to you. Pick what fits your crowd — a grazing table, a full sit-down spread, a taco bar, or just a great bartender.</p>
+
+      <div class="food-tabs">
+        <button class="food-tab active" onclick="showFood('grazing')">Grazing Table</button>
+        <button class="food-tab" onclick="showFood('gourmet')">Gourmet Catering</button>
+        <button class="food-tab" onclick="showFood('taco')">Taco Bar</button>
+        <button class="food-tab" onclick="showFood('bar')">Bar Service</button>
+      </div>
+
+      <!-- GRAZING TABLE -->
+      <div class="food-panel active" id="food-grazing">
+        <div class="food-panel-imgs">
+          <div class="food-panel-img-main"><img src="images/food/grazing-table-2.jpeg" alt="Grazing table spread" /></div>
+          <div class="food-panel-img-sub"><img src="images/food/grazing-table.jpeg" alt="Grazing table detail" /></div>
+          <div class="food-panel-img-sub"><img src="images/decor/floral-table-1.jpg" alt="Beautiful table setting" /></div>
+        </div>
+        <div class="food-panel-copy">
+          <h3>Grazing Table</h3>
+          <p>A styled spread that doubles as a centerpiece. Guests always end up standing around it. Good for cocktail hours, birthdays, or any event where you want the food to do some of the work.</p>
+          <p class="menu-label">Sample includes</p>
+          <ul class="menu-list">
+            <li>Artisan cheeses, charcuterie &amp; cured meats</li>
+            <li>Seasonal fresh fruits &amp; berries</li>
+            <li>Gourmet crackers, breadsticks &amp; crostini</li>
+            <li>Mixed nuts, olives &amp; pickled items</li>
+            <li>Dips, spreads &amp; jams</li>
+            <li>Chocolate, candies &amp; sweet bites</li>
+            <li>Fresh garnishes and edible florals</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- GOURMET CATERING -->
+      <div class="food-panel" id="food-gourmet">
+        <div class="food-panel-imgs">
+          <div class="food-panel-img-main"><img src="images/food/gourmet-catering.jpg" alt="Gourmet catering spread" /></div>
+          <div class="food-panel-img-sub"><img src="images/food/gourmet-catering-2.jpg" alt="Catering detail" /></div>
+          <div class="food-panel-img-sub"><img src="images/food/catering-spread.jpg" alt="Full catering spread" /></div>
+        </div>
+        <div class="food-panel-copy">
+          <h3>Gourmet Catering</h3>
+          <p>Full catering for a sit-down or buffet meal. Our catering vendor brings professional-level food that feels elevated without being stuffy — great for larger events and milestone celebrations.</p>
+          <p class="menu-label">Sample menu</p>
+          <ul class="menu-list">
+            <li>Mixed greens salad with seasonal toppings</li>
+            <li>Garlic herb roasted chicken or salmon</li>
+            <li>Pasta or grain-based side dish</li>
+            <li>Seasonal roasted vegetables</li>
+            <li>Dinner rolls and butter</li>
+            <li>Dessert display</li>
+            <li>Non-alcoholic beverage station</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- TACO BAR -->
+      <div class="food-panel" id="food-taco">
+        <div class="food-panel-imgs">
+          <div class="food-panel-img-main"><img src="images/food/gourmet.jpg" alt="Taco bar setup" /></div>
+          <div class="food-panel-img-sub"><img src="images/food/catering-spread.jpg" alt="Taco spread" /></div>
+          <div class="food-panel-img-sub"><img src="images/decor/table-setting-2.jpg" alt="Table setup" /></div>
+        </div>
+        <div class="food-panel-copy">
+          <h3>Taco Bar</h3>
+          <p>Always a crowd-pleaser. The taco bar is interactive, fun, and feeds a lot of people without feeling like catering. A favorite for pool parties and birthday cookouts.</p>
+          <p class="menu-label">Sample includes</p>
+          <ul class="menu-list">
+            <li>Seasoned ground beef &amp; shredded chicken</li>
+            <li>Flour &amp; corn tortillas</li>
+            <li>Shredded cheese, sour cream &amp; guacamole</li>
+            <li>Pico de gallo, salsa &amp; jalapeños</li>
+            <li>Shredded lettuce, tomatoes &amp; onion</li>
+            <li>Chips &amp; queso</li>
+            <li>Spanish rice &amp; black beans</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- BAR SERVICE -->
+      <div class="food-panel" id="food-bar">
+        <div class="food-panel-imgs">
+          <div class="food-panel-img-main"><img src="images/food/bartender.avif" alt="Bar service at The Oasis" /></div>
+          <div class="food-panel-img-sub"><img src="images/vibes/custom-glass.jpeg" alt="Custom glassware" /></div>
+          <div class="food-panel-img-sub"><img src="images/decor/balloons.jpg" alt="Bar area decor" /></div>
+        </div>
+        <div class="food-panel-copy">
+          <h3>Bar Service</h3>
+          <p>Professional bartending with a curated drink menu. Whether you want a signature cocktail, a full open bar, or mocktails for a family-friendly event — we set it up and serve it beautifully.</p>
+          <p class="menu-label">Available options</p>
+          <ul class="menu-list">
+            <li>Custom signature cocktails</li>
+            <li>Beer &amp; wine service</li>
+            <li>Full open bar setup</li>
+            <li>Mocktail menu (great for all-ages events)</li>
+            <li>Lemonade &amp; agua fresca stations</li>
+            <li>Branded custom glassware available</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- VIBES GALLERY -->
+  <section class="section section--light" id="gallery">
+    <div class="container">
+      <p class="eyebrow">The Vibe</p>
+      <h2 class="section-title">See it for yourself.</h2>
+      <p class="section-sub">Every party at The Oasis is different. Here's what some of them looked like.</p>
+
+      <div class="vibes-grid">
+        <div class="vibes-main"><img src="images/vibes/party-crowd.jpg" alt="Full party in action at The Oasis" /></div>
+        <div><img src="images/vibes/pool-swim.jpg" alt="Guests in the pool" /></div>
+        <div><img src="images/photobooth/photobooth-4.jpg" alt="Photo booth moments" /></div>
+        <div><img src="images/vibes/vibes-5.jpeg" alt="Party vibes at The Oasis" /></div>
+        <div><img src="images/vibes/vibes-6.jpeg" alt="Celebration at The Oasis" /></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DECOR GALLERY -->
+  <section class="section" id="decor">
+    <div class="container">
+      <p class="eyebrow">Decor &amp; Setup</p>
+      <h2 class="section-title">We make it look the part.</h2>
+      <p class="section-sub">From balloon arches to florals to full table settings — our decor team transforms the space.</p>
+
+      <div class="decor-scroll">
+        <div class="decor-thumb"><img src="images/decor/floral-table-1.jpg" alt="Floral table setting" /></div>
+        <div class="decor-thumb"><img src="images/decor/balloons.jpg" alt="Balloon arch" /></div>
+        <div class="decor-thumb"><img src="images/decor/setup-1.jpg" alt="Event setup" /></div>
+        <div class="decor-thumb"><img src="images/decor/floral-decor.jpg" alt="Floral decor" /></div>
+        <div class="decor-thumb"><img src="images/decor/setup-4.jpg" alt="Table decor" /></div>
+        <div class="decor-thumb"><img src="images/decor/table-setting-1.jpg" alt="Table setting" /></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="section section--light" id="reviews">
+    <div class="container">
+      <p class="eyebrow">Reviews</p>
+      <h2 class="section-title">Don't take our word for it.</h2>
+      <p class="section-sub">5.0 stars across 41 reviews on Swimply. Here are a few.</p>
+
+      <div class="reviews-grid">
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Absolutely amazing. Sara was an incredible host. Helpful with set up, extremely responsive — knocked it out of the park. She was flexible with our set up and it looked amazing! 10/10 recommend."</p>
+          <div class="review-author">Delaney</div>
+          <div class="review-date">Party / celebration</div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Such an awesome place!! Plenty of space — having the chairs, tables, and shade set up was such a help! Trash cans are there, TV, pool, and games! Couldn't have found a better place for our baby shower. Would definitely do it all over again!"</p>
+          <div class="review-author">Cassie</div>
+          <div class="review-date">Baby shower</div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"The hosts were great and very helpful with some of the decor setup. The DJ was very intuitive to our group and respectful of our wishes with certain types of music. They were quick to respond to any requests we had. I would definitely book again."</p>
+          <div class="review-author">Laura</div>
+          <div class="review-date">Party / celebration</div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Amazing property, with every amenity you could want! Hosts went above and beyond to make our event a success. We highly recommend and will definitely return."</p>
+          <div class="review-author">Mark</div>
+          <div class="review-date">Party / celebration</div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"We had the best experience — we even extended our time there. Will 100% be booking again!! The place was beautiful and the hosts were very accommodating. One of the best birthday parties I have had!!"</p>
+          <div class="review-author">Ariana</div>
+          <div class="review-date">Birthday party</div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"We had a birthday party for my husband — about 20 people and some kids. The family was very impressed. There was plenty of room and entertainment for all ages. Don't hesitate to book!"</p>
+          <div class="review-author">Caroline</div>
+          <div class="review-date">Birthday party</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- HONEST DETAILS -->
+  <section class="section" id="details">
+    <div class="container">
+      <p class="eyebrow">Honest Details</p>
+      <h2 class="section-title">What you should know before booking.</h2>
+      <p class="section-sub">We'd rather set expectations right than have surprises on event day.</p>
+
+      <div class="details-grid">
+
+        <div class="detail-card">
+          <div class="detail-icon">☀️</div>
+          <div class="detail-title">Outdoor Venue</div>
+          <div class="detail-desc">This is a beautiful outdoor space. We have canopy coverage for shade and rain, plus propane heaters for cooler evenings — but it's open air. Check the forecast and plan accordingly.</div>
+        </div>
+
+        <div class="detail-card">
+          <div class="detail-icon">🚾</div>
+          <div class="detail-title">Restrooms</div>
+          <div class="detail-desc">Guests use the indoor restrooms inside the home. It works well — just good to know it's not a standalone outdoor facility.</div>
+        </div>
+
+        <div class="detail-card">
+          <div class="detail-icon">👋</div>
+          <div class="detail-title">Hosts On-Site</div>
+          <div class="detail-desc">Your hosts (Sara &amp; fam) are present during your event. We're here to help things run smoothly — think of us as your on-site support team, not background fixtures.</div>
+        </div>
+
+        <div class="detail-card">
+          <div class="detail-icon">🚗</div>
+          <div class="detail-title">Parking</div>
+          <div class="detail-desc">Extensive street parking right outside. We've never had a parking issue — even with 80-person events. Guests can always find a spot close by.</div>
+        </div>
+
+        <div class="detail-card">
+          <div class="detail-icon">👶</div>
+          <div class="detail-title">All Ages Welcome</div>
+          <div class="detail-desc">The tanning ledge (2 ft deep) is perfect for toddlers. Our mesh safety fence keeps kids and dogs safely away from the deep end — and can be fully removed if you prefer an open layout.</div>
+        </div>
+
+        <div class="detail-card">
+          <div class="detail-icon">📍</div>
+          <div class="detail-title">Location</div>
+          <div class="detail-desc">Located in Thousand Oaks, CA — in the heart of Ventura County, 35 miles from downtown LA. Exact address shared after booking confirmation.</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section section--light" id="faq">
+    <div class="container">
+      <p class="eyebrow">FAQ</p>
+      <h2 class="section-title" style="text-align:center; margin-bottom:40px;">Questions? We've got answers.</h2>
+
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <button class="faq-btn" onclick="toggleFaq(this)">
+            Do I have to book all the add-ons, or can I just rent the venue?
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-body">
+            Totally up to you. You can book the venue alone and bring your own everything — or you can layer in any combination of DJ, food, decor, photo booth, or planning. We work around what you need.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn" onclick="toggleFaq(this)">
+            How many people can the venue hold?
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-body">
+            Up to 100 guests. The 19,000 sq ft of outdoor space handles large groups comfortably. Our sweet spot is 30–80 guests for events with food and a DJ, where everyone has room to breathe and the party feels full.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn" onclick="toggleFaq(this)">
+            Is this good for kids' parties?
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-body">
+            Yes — it's one of our most popular use cases. The tanning ledge is only 2 ft deep, ideal for toddlers. We have a mesh safety fence around the deep end that can stay up or come down depending on your group. Add a bounce house for maximum kid chaos (in the best way).
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn" onclick="toggleFaq(this)">
+            What if it rains?
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-body">
+            We have canopy coverage — a 10×20 plus two 10×10 canopies — that can cover a 20×20 area for shade or rain. For most events this is more than enough for the food, seating, and DJ setup. We recommend watching the forecast and planning for it.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn" onclick="toggleFaq(this)">
+            How does parking work?
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-body">
+            There's extensive street parking directly outside. We've hosted events with 80+ guests and have never had a parking issue. Guests typically park within a 1-block walk.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn" onclick="toggleFaq(this)">
+            Are dogs allowed?
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-body">
+            Yes! The Oasis is pet friendly. The mesh safety fence around the pool keeps dogs (and toddlers) safely away from the water unless you'd prefer it removed.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn" onclick="toggleFaq(this)">
+            How do I book?
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-body">
+            Hit the "Book Now" button, fill out your event details, and we'll be in touch within 24 hours to confirm availability and talk through your event. For large or complex events, we recommend reaching out 4–6 weeks in advance.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BAND -->
+  <section class="cta-band" id="book">
+    <h2>Ready to make it happen?</h2>
+    <p>Fill out a quick inquiry and we'll get back to you within 24 hours to confirm your date and talk through your event.</p>
+    <div class="cta-btns">
+      <a href="https://booking.famjamevents.com/public/69b80f37876c4700305952dd" class="btn-primary">Check Availability</a>
+      <a href="mailto:hello@famjamevents.com" class="btn-outline">Ask a Question</a>
+    </div>
+  </section>
+
+  <!-- CROSSLINK TO FAMJAM -->
+  <div class="crosslink">
+    <div class="crosslink-inner">
+      <p>Need event services without a venue? Check out our DJ, photo booth, decor, and more —</p>
+      <a href="https://famjamevents.com">Visit famjamevents.com →</a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p><strong>The Oasis by Fam Jam Events</strong> &nbsp;·&nbsp; Thousand Oaks, CA &nbsp;·&nbsp; Serving Ventura County &amp; Greater LA &nbsp;·&nbsp; <a href="https://famjamevents.com" style="color:var(--cyan)">famjamevents.com</a></p>
+    <p style="margin-top:8px;">© 2025 Fam Jam Events. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function showFood(id) {
+      document.querySelectorAll('.food-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.food-tab').forEach(t => t.classList.remove('active'));
+      document.getElementById('food-' + id).classList.add('active');
+      event.target.classList.add('active');
+    }
+    function toggleFaq(btn) {
+      const body = btn.nextElementSibling;
+      const isOpen = body.classList.contains('open');
+      document.querySelectorAll('.faq-body').forEach(b => b.classList.remove('open'));
+      document.querySelectorAll('.faq-btn').forEach(b => b.classList.remove('open'));
+      if (!isOpen) {
+        body.classList.add('open');
+        btn.classList.add('open');
+      }
+    }
+  </script>
+
+</body>
+</html>
