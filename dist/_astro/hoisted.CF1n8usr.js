@@ -1,0 +1,1 @@
+const e=document.getElementById("nav-hamburger"),t=document.getElementById("nav-links");e?.addEventListener("click",()=>{t?.classList.toggle("open"),e.classList.toggle("open")});t?.querySelectorAll("a").forEach(n=>{n.addEventListener("click",()=>{t.classList.remove("open"),e?.classList.remove("open")})});
