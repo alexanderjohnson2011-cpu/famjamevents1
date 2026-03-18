@@ -21,6 +21,10 @@ import Footer from '../components/Footer.astro';
         <div class="hb-p-699fa037d3e5330007cabd27-2"></div>
         <img height="1" width="1" style="display:none" src="https://www.honeybook.com/p.png?pid=699fa037d3e5330007cabd27" alt="" />
       </div>
+
+      <p class="book-fallback">
+        Having trouble with the form? Email us directly at <a href="mailto:famjamcollective@gmail.com">famjamcollective@gmail.com</a>
+      </p>
     </div>
   </section>
 
@@ -55,6 +59,17 @@ import Footer from '../components/Footer.astro';
   .book-embed {
     margin-top: 56px;
   }
+  .book-fallback {
+    margin-top: 32px;
+    text-align: center;
+    font-size: .85rem;
+    color: var(--muted);
+  }
+  .book-fallback a {
+    color: var(--pink);
+    text-decoration: none;
+  }
+  .book-fallback a:hover { text-decoration: underline; }
   @media (max-width: 768px) {
     .book-section { padding: 64px 24px 80px; }
   }
