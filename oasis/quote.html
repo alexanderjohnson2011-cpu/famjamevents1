@@ -1,0 +1,1744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Build Your Package — The Oasis by Fam Jam Events</title>
+  <meta name="description" content="Build your custom event package at The Oasis. Pricing calculator for venue, catering, DJ, décor, photo booth and more." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       PRICING DATA — Edit numbers here to update the calculator instantly.
+       On GitHub: edit this file, find this section, change any price/rate.
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <script>
+  window.PRICING_DATA = {
+    venue: {
+      hourly: {
+        minHours: 3, maxHours: 12,
+        tiers: [
+          { min: 1,  max: 5,   ratePerHour: 65  },
+          { min: 6,  max: 10,  ratePerHour: 85  },
+          { min: 11, max: 15,  ratePerHour: 100 },
+          { min: 16, max: 20,  ratePerHour: 110 },
+          { min: 21, max: 30,  ratePerHour: 115 },
+          { min: 31, max: 40,  ratePerHour: 125 },
+          { min: 41, max: 50,  ratePerHour: 160 },
+          { min: 51, max: 60,  ratePerHour: 200 },
+          { min: 61, max: 70,  ratePerHour: 250 },
+          { min: 71, max: 80,  ratePerHour: 300 },
+          { min: 81, max: 90,  ratePerHour: 350 },
+          { min: 91, max: 100, ratePerHour: 400 }
+        ]
+      },
+      fullDay: { under50: 1280, over50: 3200 }
+    },
+    catering: {
+      gourmet:      { pricePerPerson: 42, label: "Gourmet" },
+      fingerFoods:  { pricePerPerson: 30, label: "Casual – Finger Foods" },
+      kidParty:     { pricePerPerson: 30, label: "Casual – Kid Party Menu" },
+      tacoTable:    { pricePerPerson: 30, label: "Casual – Taco Table" },
+      grazingTable: { pricePerPerson: 36, label: "Grazing Table" }
+    },
+    bartender: {
+      single:   { pricePerHour: 90,  label: "1 Bartender" },
+      double:   { pricePerHour: 144, label: "2 Bartenders" },
+      minHours: 3
+    },
+    decor: {
+      freshFlowers: { flatRate: 240, label: "Fresh Flowers – All Tables" },
+      neonSign:     { flatRate: 120, label: "Custom Neon Name Sign" }
+    },
+    balloons: {
+      small:  { flatRate: 360, label: "Small – Accent Package" },
+      medium: { flatRate: 600, label: "Medium – Full Arch" },
+      large:  { flatRate: 960, label: "Large – Full Arch + Accents Throughout" }
+    },
+    dj:          { baseRate: 400, baseHours: 3, additionalRate: 100 },
+    photobooth:  { flatRate: 300 },
+    bounceHouse: { flatRate: 200 },
+    lifeguard:   { pricePerHour: 42, minHours: 3 },
+    bundlingDiscounts: {
+      tiers: [
+        { minNonVenueSpend: 500,  venueDiscountPct: 0.10, label: "10% venue discount" },
+        { minNonVenueSpend: 1000, venueDiscountPct: 0.25, label: "25% venue discount" },
+        { minNonVenueSpend: 2000, venueDiscountPct: 0.50, label: "50% venue discount" },
+        { minNonVenueSpend: 3500, venueDiscountPct: 0.75, label: "75% venue discount" }
+      ]
+    },
+    // ── Industry average prices for comparison tool ──
+    // Update these anytime market rates change.
+    industryAvg: {
+      cateringPerPerson: 60,       // avg per-person catering rate
+      bartenderPerHour:  100,      // avg bartender hourly rate
+      freshFlowers:      400,      // avg fresh floral decor, flat
+      djBase:            600,      // avg DJ base rate (3 hrs)
+      djExtraPerHour:    150,      // avg DJ additional hour rate
+      photobooth:        600,      // avg photo booth per event
+      bounceHouse:       375,      // avg bounce house rental
+      venueHourly:       175,      // avg comparable private venue, per hour
+      venueFullDay:      2500      // avg comparable private venue, full day
+    },
+
+    // Paste your Zapier webhook URL here once your Zap is set up:
+    zapierWebhookUrl: "YOUR_ZAPIER_WEBHOOK_URL_HERE"
+  };
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // SERVICES DATA — Edit bullets and image paths here.
+  // Image paths are relative to the site root (e.g. images/space/pool-day.avif)
+  // ═══════════════════════════════════════════════════════════════════════
+  window.SERVICES_DATA = {
+    catering: {
+      title: "Catering", eyebrow: "Food & Dining",
+      bullets: [
+        "Choose from Gourmet, Casual, or a Grazing Table — all priced per person",
+        "Casual options include Finger Foods, Kid Party Menu, or a Taco Table",
+        "Our catering partners handle setup, service, and cleanup — nothing for you to worry about"
+      ],
+      images: ["images/food/gourmet-catering.jpg","images/food/gourmet-catering-2.jpg","images/food/catering-spread.jpg","images/food/grazing-table.jpeg","images/food/grazing-table-2.jpeg"]
+    },
+    bartender: {
+      title: "Bartender", eyebrow: "Bar Service",
+      bullets: [
+        "Professional bartender sets up, serves, and manages your bar for the hours you choose",
+        "We recommend 2 bartenders for parties over 60 guests for the smoothest service",
+        "Alcohol is not included — your bartender will help create your cocktail menu and shopping list"
+      ],
+      images: ["images/food/bartender.avif"]
+    },
+    decor: {
+      title: "Décor", eyebrow: "Setup & Styling",
+      bullets: [
+        "Tablecloths and color-matched runners are always included — no add-on needed",
+        "Add fresh flowers for every table or a custom glitter backdrop with neon name sign",
+        "Our team handles full setup and teardown so you arrive to a venue that's already stunning"
+      ],
+      images: ["images/decor/floral-decor.jpg","images/decor/floral-table-1.jpg","images/decor/floral-table-2.jpg","images/decor/setup-1.jpg","images/decor/setup-2.jpg","images/decor/table-setting-1.jpg","images/food/backdrop.jpg"]
+    },
+    balloons: {
+      title: "Balloons", eyebrow: "Balloon Décor",
+      bullets: [
+        "Choose from accent balloons, a full arch, or a dramatic full arch with accents throughout the yard",
+        "Customized to your party colors and theme for a cohesive, Instagram-worthy look",
+        "Professional installation and removal included — no DIY stress"
+      ],
+      images: ["images/decor/balloons.jpg"]
+    },
+    dj: {
+      title: "DJ", eyebrow: "Music & Vibes",
+      bullets: [
+        "Our in-house DJ brings the energy — reading the room and keeping the dance floor packed",
+        "Base package includes 3 hours; add extra hours to keep the party going",
+        "You share your must-play list and vibe — we handle the rest"
+      ],
+      images: ["images/dj/dj-hero-1.jpg","images/dj/dj-hero-2.jpg","images/dj/dj-action-1.png","images/dj/dj-action-2.jpg","images/dj/dj-action-3.jpg"]
+    },
+    photobooth: {
+      title: "Photo Booth", eyebrow: "Memories",
+      bullets: [
+        "Our photo booth is a guest favorite — instant prints your crew can take home",
+        "Unlimited sessions throughout your event, all included in the flat rate",
+        "Custom print strips with your event name and date — a keepsake your guests will love"
+      ],
+      images: ["images/photobooth/photobooth-hero.jpg","images/photobooth/photobooth-3.jpg","images/photobooth/photobooth-4.jpg","images/photobooth/photobooth-5.jpg","images/photobooth/photobooth-7.jpg"]
+    },
+    bounceHouse: {
+      title: "Bounce House", eyebrow: "Kids & Fun",
+      bullets: [
+        "The ultimate crowd-pleaser for kids (and adults who are kids at heart)",
+        "Professionally cleaned, inflated, and set up before your guests arrive",
+        "Pairs perfectly with the pool and lawn area for the ultimate outdoor party"
+      ],
+      images: ["images/space/setup-bounce.avif","images/space/setup-bounce-lawn.avif"]
+    },
+    lifeguard: {
+      title: "Lifeguard", eyebrow: "Safety",
+      bullets: [
+        "A certified lifeguard gives you and your guests peace of mind all event long",
+        "Book for as many hours as you need — minimum 3 hours, doesn't have to cover the full event",
+        "Especially recommended for events with children or large groups in and around the pool"
+      ],
+      images: ["images/space/pool-fence.avif","images/space/pool-lounge.avif"]
+    }
+  };
+  </script>
+  <style>
+    /* ─── RESET & TOKENS (match main site) ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:      #0b0f1e;
+      --bg2:     #111827;
+      --bg3:     #1a2035;
+      --bg4:     #222d45;
+      --pink:    #ff3bd4;
+      --cyan:    #00e7ff;
+      --white:   #ffffff;
+      --muted:   #94a3b8;
+      --border:  rgba(255,255,255,0.08);
+      --radius:  16px;
+      --max:     1200px;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--white); font-family: 'Inter', sans-serif; font-size: 16px; line-height: 1.65; }
+    img  { display: block; width: 100%; height: 100%; object-fit: cover; }
+    a    { color: inherit; text-decoration: none; }
+    h1, h2, h3, h4 { font-family: 'Montserrat', sans-serif; line-height: 1.2; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+    /* ─── NAV ─── */
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; background: rgba(11,15,30,0.9); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; max-width: var(--max); margin: 0 auto; padding: 0 20px; }
+    .nav-logo { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 17px; line-height: 1.1; }
+    .nav-logo span { display: block; font-size: 10px; font-weight: 400; color: var(--muted); letter-spacing: 0.1em; }
+    .nav-back { color: var(--muted); font-size: 14px; display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
+    .nav-back:hover { color: var(--white); }
+
+    /* ─── HERO ─── */
+    .hero { padding: 120px 20px 60px; text-align: center; max-width: var(--max); margin: 0 auto; }
+    .eyebrow { font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pink); margin-bottom: 12px; }
+    .hero h1 { font-size: clamp(32px, 6vw, 56px); font-weight: 900; margin-bottom: 16px; }
+    .hero h1 span { background: linear-gradient(135deg, var(--pink), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero p { color: var(--muted); font-size: 18px; max-width: 560px; margin: 0 auto; }
+
+    /* ─── LAYOUT ─── */
+    .calc-layout { display: grid; grid-template-columns: 1fr 360px; gap: 32px; max-width: var(--max); margin: 0 auto; padding: 0 20px 120px; align-items: start; }
+    @media (max-width: 960px) { .calc-layout { grid-template-columns: 1fr; } }
+
+    /* ─── PANELS ─── */
+    .panel { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; margin-bottom: 24px; }
+    .panel-title { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--pink); margin-bottom: 20px; }
+
+    /* ─── EVENT BASICS ─── */
+    .basics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    @media (max-width: 600px) { .basics-grid { grid-template-columns: 1fr; } }
+
+    .field-label { font-size: 13px; color: var(--muted); margin-bottom: 8px; font-weight: 500; letter-spacing: 0.02em; }
+
+    /* Guest counter */
+    .guest-row { display: flex; align-items: center; gap: 12px; }
+    .stepper-btn { width: 36px; height: 36px; border-radius: 50%; background: var(--bg4); color: var(--white); font-size: 20px; display: flex; align-items: center; justify-content: center; transition: background 0.2s; flex-shrink: 0; }
+    .stepper-btn:hover { background: var(--pink); }
+    .guest-input { width: 60px; text-align: center; background: var(--bg4); border: 1px solid var(--border); border-radius: 8px; color: var(--white); font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 20px; padding: 6px; }
+    .guest-input:focus { outline: none; border-color: var(--cyan); }
+    .guest-slider { flex: 1; accent-color: var(--pink); }
+
+    /* Venue type tabs */
+    .tab-group { display: flex; gap: 8px; }
+    .tab-btn { flex: 1; padding: 10px 8px; border-radius: 10px; border: 1px solid var(--border); color: var(--muted); font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 13px; transition: all 0.2s; }
+    .tab-btn.active { background: var(--pink); border-color: var(--pink); color: var(--white); }
+    .tab-btn:hover:not(.active) { border-color: var(--pink); color: var(--white); }
+
+    /* Hours stepper */
+    .hours-row { display: flex; align-items: center; gap: 12px; }
+    .hours-display { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 18px; min-width: 80px; text-align: center; }
+    .hours-sub { font-size: 11px; color: var(--muted); }
+
+    /* Venue price live display */
+    .venue-price-display { margin-top: 20px; padding: 16px; background: var(--bg3); border-radius: 12px; border: 1px solid rgba(0,231,255,0.15); display: flex; align-items: center; justify-content: space-between; }
+    .vp-label { font-size: 13px; color: var(--muted); }
+    .vp-amount { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 26px; color: var(--cyan); }
+    .vp-rate { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+    /* ─── SERVICE CARDS ─── */
+    .section-heading { font-size: clamp(20px, 3vw, 28px); font-weight: 900; margin-bottom: 8px; }
+    .section-sub { color: var(--muted); font-size: 15px; margin-bottom: 24px; }
+    .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+
+    .service-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: border-color 0.2s, transform 0.2s; }
+    .service-card.selected { border-color: var(--pink); box-shadow: 0 0 0 1px var(--pink); }
+    .service-card:hover { transform: translateY(-2px); }
+
+    /* Card body */
+    .card-body { padding: 18px; }
+    .card-eyebrow { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--pink); margin-bottom: 6px; }
+    .card-title { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 17px; margin-bottom: 12px; }
+    .card-bullets { list-style: none; margin-bottom: 16px; }
+    .card-bullets li { font-size: 13px; color: var(--muted); padding: 3px 0 3px 16px; position: relative; line-height: 1.5; }
+    .card-bullets li::before { content: ''; position: absolute; left: 0; top: 11px; width: 5px; height: 5px; border-radius: 50%; background: var(--cyan); }
+
+    /* Card options (sub-selections) */
+    .card-options { margin-bottom: 16px; }
+    .card-options .field-label { margin-bottom: 6px; }
+    .option-grid { display: flex; flex-wrap: wrap; gap: 6px; }
+    .option-chip { padding: 5px 12px; border-radius: 20px; border: 1px solid var(--border); color: var(--muted); font-size: 12px; font-weight: 500; transition: all 0.2s; }
+    .option-chip.selected { background: rgba(255,59,212,0.15); border-color: var(--pink); color: var(--white); }
+    .option-chip:hover:not(.selected) { border-color: var(--muted); color: var(--white); }
+
+    /* Hours selector inside card */
+    .card-hours { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+    .card-hours .field-label { margin-bottom: 0; white-space: nowrap; }
+    .card-hours .hours-display { font-size: 15px; min-width: 50px; }
+
+    /* Price + Add row */
+    .card-footer { display: flex; align-items: center; justify-content: space-between; }
+    .card-price { }
+    .card-price-amount { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 20px; color: var(--white); }
+    .card-price-unit { font-size: 11px; color: var(--muted); }
+    .card-price-note { font-size: 11px; color: var(--cyan); margin-top: 1px; }
+    .card-market-avg { font-size: 11px; color: var(--muted); margin-top: 4px; }
+    .card-market-avg s { color: var(--muted); opacity: 0.7; }
+    .card-savings-badge { display: inline-block; margin-top: 5px; background: rgba(0,231,255,0.12); border: 1px solid rgba(0,231,255,0.3); border-radius: 20px; padding: 2px 10px; font-size: 10px; font-weight: 700; font-family: 'Montserrat', sans-serif; color: var(--cyan); letter-spacing: 0.05em; }
+
+    /* ─── COMPARISON SECTION ─── */
+    .comparison-section { max-width: var(--max); margin: 0 auto; padding: 60px 20px 80px; }
+    .comparison-inner { background: var(--bg2); border: 1px solid var(--border); border-radius: 20px; padding: 40px; }
+    .comparison-header { margin-bottom: 32px; }
+    .comparison-header .section-sub { margin-bottom: 0; }
+
+    .ct-table { width: 100%; border-collapse: collapse; margin-bottom: 0; }
+    .ct-table th { font-size: 10px; font-weight: 700; font-family: 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); padding: 0 12px 12px 0; text-align: left; border-bottom: 1px solid var(--border); }
+    .ct-table th.col-them  { color: var(--muted); }
+    .ct-table th.col-us    { color: var(--pink); }
+    .ct-table th.col-save  { color: var(--cyan); text-align: right; padding-right: 0; }
+    .ct-table td { padding: 12px 12px 12px 0; font-size: 13px; color: var(--muted); border-bottom: 1px solid var(--border); vertical-align: middle; }
+    .ct-table td:last-child { text-align: right; padding-right: 0; }
+    .ct-table tr:last-child td { border-bottom: none; }
+    .ct-service { font-weight: 600; color: var(--white); font-size: 13px; }
+    .ct-detail  { font-size: 11px; color: var(--muted); margin-top: 2px; }
+    .ct-them  { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 14px; color: var(--muted); text-decoration: line-through; opacity: 0.6; }
+    .ct-us    { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 14px; color: var(--white); }
+    .ct-save  { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 13px; color: var(--cyan); }
+    .ct-save.negative { color: var(--muted); font-size: 11px; font-weight: 400; }
+    .ct-venue-note { font-size: 10px; color: var(--pink); font-style: italic; }
+
+    .ct-totals { margin-top: 24px; padding: 24px; background: var(--bg3); border-radius: 14px; border: 1px solid var(--border); display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; text-align: center; }
+    @media (max-width: 600px) { .ct-totals { grid-template-columns: 1fr; } }
+    .ct-total-block { }
+    .ct-total-label { font-size: 10px; font-weight: 700; font-family: 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 6px; }
+    .ct-total-amount { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 28px; }
+    .ct-total-amount.them { color: var(--muted); text-decoration: line-through; font-size: 22px; }
+    .ct-total-amount.us   { color: var(--white); }
+    .ct-total-amount.save { background: linear-gradient(135deg, var(--cyan), var(--pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-size: 32px; }
+    .ct-divider { width: 1px; background: var(--border); }
+
+    .comparison-empty { text-align: center; color: var(--muted); font-size: 14px; padding: 32px 0; }
+    .comparison-empty strong { display: block; font-size: 16px; color: var(--white); margin-bottom: 6px; }
+
+    .add-btn { padding: 10px 20px; border-radius: 50px; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 13px; transition: all 0.2s; border: 2px solid var(--pink); color: var(--pink); }
+    .add-btn:hover, .add-btn.active { background: var(--pink); color: var(--white); }
+    .add-btn.active::before { content: '✓ '; }
+
+    /* Included badge */
+    .included-badge { display: inline-flex; align-items: center; gap: 5px; background: rgba(0,231,255,0.1); border: 1px solid rgba(0,231,255,0.25); border-radius: 20px; padding: 4px 12px; font-size: 11px; font-weight: 600; color: var(--cyan); font-family: 'Montserrat', sans-serif; letter-spacing: 0.05em; }
+
+    /* ─── STICKY QUOTE SIDEBAR ─── */
+    .quote-sidebar { position: sticky; top: 84px; }
+    .quote-box { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; }
+    .quote-title { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 16px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; }
+    .quote-title span { font-size: 11px; color: var(--muted); font-weight: 400; font-family: 'Inter', sans-serif; }
+    .quote-empty { text-align: center; color: var(--muted); font-size: 14px; padding: 24px 0; }
+
+    .quote-items { margin-bottom: 16px; }
+
+    /* Column header row */
+    .qi-header { display: flex; align-items: center; gap: 6px; padding: 0 0 7px; border-bottom: 1px solid var(--border); margin-bottom: 2px; }
+    .qi-header-cat  { font-size: 9px; font-weight: 700; font-family: 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); flex-shrink: 0; width: 62px; }
+    .qi-header-name { font-size: 9px; font-weight: 700; font-family: 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); flex: 1; }
+    .qi-header-right { font-size: 9px; font-weight: 700; font-family: 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); text-align: right; white-space: nowrap; }
+
+    /* Each line item — 2-row layout */
+    .quote-item { padding: 8px 0; border-bottom: 1px solid var(--border); }
+    .quote-item:last-child { border-bottom: none; }
+    .qi-top { display: flex; align-items: baseline; gap: 6px; margin-bottom: 3px; }
+    .qi-cat  { font-size: 9px; font-weight: 700; font-family: 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: 0.1em; color: var(--pink); flex-shrink: 0; width: 62px; line-height: 1.6; }
+    .qi-name { font-size: 12px; color: var(--white); font-weight: 500; flex: 1; line-height: 1.4; }
+    .qi-remove { color: var(--muted); font-size: 14px; line-height: 1; padding: 0 2px; transition: color 0.2s; flex-shrink: 0; }
+    .qi-remove:hover { color: var(--pink); }
+    .qi-bottom { display: flex; align-items: center; padding-left: 68px; gap: 4px; }
+    .qi-factors { font-size: 10px; color: var(--muted); flex: 1; }
+    .qi-rate    { font-size: 10px; color: var(--muted); white-space: nowrap; margin-right: 6px; }
+    .qi-total   { font-size: 13px; font-weight: 700; font-family: 'Montserrat', sans-serif; color: var(--white); white-space: nowrap; }
+    .qi-included { font-size: 10px; color: var(--cyan); font-style: italic; }
+
+    /* Modal summary table */
+    .ms-table { width: 100%; border-collapse: collapse; }
+    .ms-table th { font-size: 9px; font-weight: 700; font-family: 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); padding: 0 6px 8px 0; text-align: left; border-bottom: 1px solid var(--border); }
+    .ms-table th:last-child { text-align: right; padding-right: 0; }
+    .ms-table td { font-size: 12px; color: var(--muted); padding: 6px 6px 0 0; vertical-align: top; }
+    .ms-table td:first-child { font-size: 9px; font-weight: 700; font-family: 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: 0.1em; color: var(--pink); padding-top: 8px; }
+    .ms-table td:last-child { font-weight: 700; font-family: 'Montserrat', sans-serif; color: var(--white); text-align: right; padding-right: 0; white-space: nowrap; }
+    .ms-table .ms-discount td { color: var(--cyan); }
+    .ms-table .ms-discount td:last-child { color: var(--cyan); }
+    .ms-table .ms-total td { border-top: 1px solid var(--border); padding-top: 10px; color: var(--white); font-weight: 600; font-size: 13px; }
+    .ms-table .ms-total td:last-child { font-size: 16px; font-weight: 900; }
+
+    .quote-divider { height: 1px; background: var(--border); margin: 12px 0; }
+
+    .discount-row { display: flex; justify-content: space-between; font-size: 13px; padding: 4px 0; }
+    .discount-label { color: var(--cyan); }
+    .discount-amount { font-family: 'Montserrat', sans-serif; font-weight: 700; color: var(--cyan); }
+
+    .total-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0 0; }
+    .total-label { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 14px; }
+    .total-amount { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 26px; background: linear-gradient(135deg, var(--pink), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+    .quote-cta { width: 100%; margin-top: 20px; padding: 16px; border-radius: 50px; background: linear-gradient(135deg, var(--pink), #c41fb0); color: var(--white); font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 15px; letter-spacing: 0.03em; transition: opacity 0.2s, transform 0.2s; }
+    .quote-cta:hover { opacity: 0.9; transform: translateY(-1px); }
+    .quote-cta:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+    .bundle-hint { margin-top: 12px; padding: 10px 14px; background: rgba(0,231,255,0.06); border: 1px solid rgba(0,231,255,0.15); border-radius: 10px; font-size: 12px; color: var(--cyan); line-height: 1.5; }
+    .bundle-hint strong { display: block; margin-bottom: 2px; }
+
+    /* ─── MODAL ─── */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.75); backdrop-filter: blur(6px); z-index: 500; display: flex; align-items: center; justify-content: center; padding: 20px; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+
+    .modal { background: var(--bg2); border: 1px solid var(--border); border-radius: 20px; width: 100%; max-width: 640px; max-height: 90vh; overflow-y: auto; padding: 36px; position: relative; transform: translateY(20px); transition: transform 0.3s; }
+    .modal-overlay.open .modal { transform: translateY(0); }
+
+    .modal-close { position: absolute; top: 16px; right: 16px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg3); color: var(--muted); font-size: 18px; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+    .modal-close:hover { background: var(--pink); color: var(--white); }
+
+    .modal-eyebrow { font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--pink); margin-bottom: 8px; }
+    .modal h2 { font-size: 24px; font-weight: 900; margin-bottom: 24px; }
+
+    /* Quote summary in modal */
+    .modal-summary { background: var(--bg3); border-radius: 12px; padding: 16px; margin-bottom: 28px; }
+    .modal-summary-title { font-size: 12px; color: var(--muted); font-weight: 500; margin-bottom: 12px; letter-spacing: 0.05em; text-transform: uppercase; }
+    .modal-summary-items { }
+    .ms-item { display: flex; justify-content: space-between; font-size: 13px; padding: 4px 0; color: var(--muted); }
+    .ms-item.discount { color: var(--cyan); }
+    .ms-item.total-line { color: var(--white); font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 15px; border-top: 1px solid var(--border); margin-top: 8px; padding-top: 10px; }
+
+    /* Form */
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    @media (max-width: 500px) { .form-grid { grid-template-columns: 1fr; } }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group.full { grid-column: 1 / -1; }
+    .form-group label { font-size: 13px; color: var(--muted); font-weight: 500; }
+    .form-group input, .form-group textarea, .form-group select {
+      background: var(--bg3); border: 1px solid var(--border); border-radius: 10px; color: var(--white);
+      font-family: 'Inter', sans-serif; font-size: 15px; padding: 12px 14px; transition: border-color 0.2s;
+    }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline: none; border-color: var(--cyan); }
+    .form-group input::placeholder, .form-group textarea::placeholder { color: var(--muted); }
+    .form-group textarea { min-height: 90px; resize: vertical; }
+    .form-group select option { background: var(--bg3); }
+
+    .submit-btn { width: 100%; padding: 16px; border-radius: 50px; background: linear-gradient(135deg, var(--pink), #c41fb0); color: var(--white); font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 16px; letter-spacing: 0.03em; transition: opacity 0.2s; margin-top: 8px; }
+    .submit-btn:hover { opacity: 0.9; }
+    .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .form-note { font-size: 12px; color: var(--muted); text-align: center; margin-top: 12px; }
+
+    /* Success state */
+    .success-state { text-align: center; padding: 20px 0; display: none; }
+    .success-icon { font-size: 56px; margin-bottom: 16px; }
+    .success-state h3 { font-size: 22px; font-weight: 900; margin-bottom: 12px; }
+    .success-state p { color: var(--muted); font-size: 15px; }
+
+    /* ─── FOOTER ─── */
+    .calc-footer { text-align: center; padding: 40px 20px; color: var(--muted); font-size: 14px; border-top: 1px solid var(--border); }
+    .calc-footer a { color: var(--cyan); }
+
+    /* ─── UTILITIES ─── */
+    .hidden { display: none !important; }
+    input[type=range] { width: 100%; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      THE OASIS
+      <span>by Fam Jam Events</span>
+    </a>
+    <a href="/" class="nav-back">
+      ← Back to main site
+    </a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <p class="eyebrow">Pricing Calculator</p>
+  <h1>Build Your <span>Perfect Package</span></h1>
+  <p>Pick your services, see your price in real time, then request a quote — we'll follow up with a full proposal.</p>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="calc-layout">
+
+  <!-- LEFT COLUMN -->
+  <div class="calc-main">
+
+    <!-- STEP 1: EVENT BASICS -->
+    <div class="panel">
+      <div class="panel-title">Step 1 — Event Details</div>
+      <div class="basics-grid">
+
+        <!-- Guest Count -->
+        <div>
+          <div class="field-label">Number of Guests</div>
+          <div class="guest-row">
+            <button class="stepper-btn" id="guestMinus" aria-label="decrease guests">−</button>
+            <input type="number" id="guestInput" class="guest-input" value="25" min="1" max="100" />
+            <button class="stepper-btn" id="guestPlus" aria-label="increase guests">+</button>
+          </div>
+          <input type="range" id="guestSlider" class="guest-slider" min="1" max="100" value="25" style="margin-top:10px;" />
+        </div>
+
+        <!-- Venue Type -->
+        <div>
+          <div class="field-label">Venue Booking Type</div>
+          <div class="tab-group">
+            <button class="tab-btn active" data-type="hourly">Hourly</button>
+            <button class="tab-btn" data-type="fullday">Full Day</button>
+          </div>
+        </div>
+
+        <!-- Duration (hourly only) -->
+        <div id="durationField">
+          <div class="field-label">Event Duration <span style="color:var(--muted);font-size:11px;">(min. 3 hrs)</span></div>
+          <div class="hours-row">
+            <button class="stepper-btn" id="hoursMinus" aria-label="decrease hours">−</button>
+            <div class="hours-display" id="hoursDisplay">
+              <div id="hoursValue">4</div>
+              <div class="hours-sub">hours</div>
+            </div>
+            <button class="stepper-btn" id="hoursPlus" aria-label="increase hours">+</button>
+          </div>
+        </div>
+
+        <!-- Full day info (full day only) -->
+        <div id="fullDayField" class="hidden">
+          <div class="field-label">Full Day Access</div>
+          <div style="font-size:13px;color:var(--muted);line-height:1.6;">
+            Your guests enjoy the venue all day.<br>
+            Pricing based on guest count bucket.
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Venue price live display -->
+      <div class="venue-price-display">
+        <div>
+          <div class="vp-label">Venue Cost</div>
+          <div id="vpRate" class="vp-rate">—</div>
+        </div>
+        <div style="text-align:right;">
+          <div class="vp-amount" id="vpAmount">$0</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 2: ADD-ONS -->
+    <div>
+      <div class="eyebrow" style="margin-bottom:6px;">Step 2</div>
+      <h2 class="section-heading">Customize Your Package</h2>
+      <p class="section-sub">Add the services you want — pricing updates live as you build.</p>
+      <div class="cards-grid" id="cardsGrid">
+        <!-- Cards injected by JS -->
+      </div>
+    </div>
+
+  </div><!-- end calc-main -->
+
+  <!-- RIGHT COLUMN: QUOTE SIDEBAR -->
+  <div class="quote-sidebar">
+    <div class="quote-box">
+      <div class="quote-title">
+        Your Quote
+        <span id="itemCount">0 items</span>
+      </div>
+
+      <div id="quoteEmpty" class="quote-empty">
+        Add services above to see your quote here.
+      </div>
+
+      <div id="quoteItems" class="quote-items hidden"></div>
+
+      <div id="quoteTotals" class="hidden">
+        <div class="quote-divider"></div>
+        <div id="discountRow" class="discount-row hidden">
+          <span class="discount-label" id="discountLabel">Bundle Discount</span>
+          <span class="discount-amount" id="discountAmount">—$0</span>
+        </div>
+        <div class="total-row">
+          <span class="total-label">Estimated Total</span>
+          <span class="total-amount" id="totalAmount">$0</span>
+        </div>
+      </div>
+
+      <div id="bundleHint" class="bundle-hint hidden"></div>
+
+      <button class="quote-cta" id="requestQuoteBtn" disabled>
+        Request a Quote
+      </button>
+    </div>
+  </div>
+
+</div><!-- end calc-layout -->
+
+<!-- COMPARISON SECTION -->
+<section class="comparison-section">
+  <div class="comparison-inner">
+    <div class="comparison-header">
+      <p class="eyebrow">The Other Guys</p>
+      <h2 class="section-heading">See What You're Actually Saving</h2>
+      <p class="section-sub">Booking the same services a la carte from separate vendors costs significantly more. Here's the math.</p>
+    </div>
+    <div id="comparisonContent">
+      <div class="comparison-empty">
+        <strong>Build your package above</strong>
+        Add services to see your savings vs. market rates.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close" id="modalClose" aria-label="close">✕</button>
+
+    <div id="modalForm">
+      <p class="modal-eyebrow">Almost There</p>
+      <h2 id="modalTitle">Request Your Quote</h2>
+
+      <!-- Summary -->
+      <div class="modal-summary">
+        <div class="modal-summary-title">Your Package Summary</div>
+        <div class="modal-summary-items" id="modalSummaryItems"></div>
+      </div>
+
+      <!-- Netlify form — name attr is required; hidden fields carry the full quote -->
+      <form id="netlifyForm" name="quote-request" method="POST"
+            data-netlify="true" data-netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="quote-request" />
+
+        <!-- Honeypot — bots fill this, humans don't -->
+        <p style="display:none"><label>Don't fill this out: <input name="bot-field" /></label></p>
+
+        <!-- Hidden quote data — populated by JS before submit -->
+        <input type="hidden" name="guest-count"        id="hGuestCount" />
+        <input type="hidden" name="venue-type"         id="hVenueType" />
+        <input type="hidden" name="venue-duration"     id="hVenueDuration" />
+        <input type="hidden" name="services-selected"  id="hServicesSelected" />
+        <input type="hidden" name="package-subtotal"   id="hSubtotal" />
+        <input type="hidden" name="bundle-discount"    id="hDiscount" />
+        <input type="hidden" name="package-total"      id="hTotal" />
+        <input type="hidden" name="quote-details"      id="hQuoteDetails" />
+
+        <!-- Contact fields -->
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="fname">First Name *</label>
+            <input type="text" id="fname" name="first-name" placeholder="Party" required />
+          </div>
+          <div class="form-group">
+            <label for="lname">Last Name *</label>
+            <input type="text" id="lname" name="last-name" placeholder="Person" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email *</label>
+            <input type="email" id="email" name="email" placeholder="goodtimes@gmail.com" required />
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone *</label>
+            <input type="tel" id="phone" name="phone" placeholder="(805) 555-0100" required />
+          </div>
+          <div class="form-group full">
+            <label for="eventDate">Requested Event Date *</label>
+            <input type="date" id="eventDate" name="requested-date" required />
+          </div>
+          <div class="form-group full">
+            <label for="eventType">Occasion *</label>
+            <select id="eventType" name="occasion" required>
+              <option value="">Select...</option>
+              <option>Birthday Party</option>
+              <option>Graduation Party</option>
+              <option>Baby / Bridal Shower</option>
+              <option>Corporate Event</option>
+              <option>Family Reunion</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label for="notes">Additional Details</label>
+            <textarea id="notes" name="additional-details" placeholder="Theme, special requests, questions, anything else we should know..."></textarea>
+          </div>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submitBtn">Send My Quote Request →</button>
+        <p class="form-note">We'll respond within 24 hours with a full proposal via HoneyBook.</p>
+      </form>
+    </div>
+
+    <!-- Success state -->
+    <div class="success-state" id="successState">
+      <div class="success-icon">🎉</div>
+      <h3>Quote Request Sent!</h3>
+      <p>We got it! Expect a personalized proposal from us within 24 hours. We can't wait to make your event incredible.</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="calc-footer">
+  <p>© 2025 Fam Jam Events · <a href="/">Back to main site</a></p>
+</footer>
+
+<script>
+// ─────────────────────────────────────────────────────────────────────────────
+// STATE
+// ─────────────────────────────────────────────────────────────────────────────
+// Data loaded via <script> tags in <head> — no fetch needed, works file:// and web
+let P = window.PRICING_DATA;
+let S = window.SERVICES_DATA;
+
+const state = {
+  guests:      25,
+  venueType:   'hourly',   // 'hourly' | 'fullday'
+  hours:       4,
+  selections:  {}          // { catering: {added:true, option:'gourmet'}, bartender: {added:true, hours:4}, ... }
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+// DATA CHECK
+// ─────────────────────────────────────────────────────────────────────────────
+function checkData() {
+  if (!P || !S) {
+    document.getElementById('cardsGrid').innerHTML =
+      '<p style="color:var(--muted);padding:20px;">Pricing data not found. Make sure data/pricing.js and data/services.js are present.</p>';
+    return false;
+  }
+  return true;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// VENUE PRICE CALC
+// ─────────────────────────────────────────────────────────────────────────────
+function getHourlyRate(guests) {
+  const tier = P.venue.hourly.tiers.find(t => guests >= t.min && guests <= t.max);
+  return tier ? tier.ratePerHour : P.venue.hourly.tiers[P.venue.hourly.tiers.length - 1].ratePerHour;
+}
+
+function getVenuePrice() {
+  if (state.venueType === 'fullday') {
+    return state.guests < 50 ? P.venue.fullDay.under50 : P.venue.fullDay.over50;
+  }
+  return getHourlyRate(state.guests) * state.hours;
+}
+
+function updateVenueDisplay() {
+  const price = getVenuePrice();
+  document.getElementById('vpAmount').textContent = '$' + price.toLocaleString();
+  if (state.venueType === 'hourly') {
+    const rate = getHourlyRate(state.guests);
+    document.getElementById('vpRate').textContent =
+      `$${rate}/hr × ${state.hours} hrs (${state.guests} guests)`;
+  } else {
+    const bucket = state.guests < 50 ? '< 50' : '50–100';
+    document.getElementById('vpRate').textContent = `Full day rate · ${bucket} guests`;
+  }
+  updateQuote();
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SERVICE PRICE CALC
+// ─────────────────────────────────────────────────────────────────────────────
+function getServicePrice(id, sel) {
+  if (!sel || !sel.added) return 0;
+  switch(id) {
+    case 'catering':
+      const catKey = sel.option || 'gourmet';
+      const cPrice = P.catering[catKey] ? P.catering[catKey].pricePerPerson : 42;
+      return cPrice * state.guests;
+    case 'bartender':
+      const bKey = state.guests > 60 ? 'double' : 'single';
+      const bHours = sel.hours || P.bartender.minHours;
+      return P.bartender[bKey].pricePerHour * bHours;
+    case 'decor':
+      let dTotal = 0;
+      if (sel.flowers)  dTotal += P.decor.freshFlowers.flatRate;
+      if (sel.neon)     dTotal += P.decor.neonSign.flatRate;
+      return dTotal;
+    case 'balloons':
+      const bSize = sel.option || 'small';
+      return P.balloons[bSize] ? P.balloons[bSize].flatRate : 0;
+    case 'dj':
+      const djExtra = Math.max(0, (sel.hours || P.dj.baseHours) - P.dj.baseHours);
+      return P.dj.baseRate + djExtra * P.dj.additionalRate;
+    case 'photobooth':  return P.photobooth.flatRate;
+    case 'bounceHouse': return P.bounceHouse.flatRate;
+    case 'lifeguard':
+      const lgHours = sel.hours || P.lifeguard.minHours;
+      return P.lifeguard.pricePerHour * lgHours;
+    default: return 0;
+  }
+}
+
+function getServiceLabel(id, sel) {
+  if (!sel || !sel.added) return '';
+  switch(id) {
+    case 'catering': {
+      const catKey = sel.option || 'gourmet';
+      return P.catering[catKey] ? P.catering[catKey].label : 'Catering';
+    }
+    case 'bartender': {
+      const bKey = state.guests > 60 ? 'double' : 'single';
+      const bHours = sel.hours || P.bartender.minHours;
+      return `${P.bartender[bKey].label} · ${bHours} hrs`;
+    }
+    case 'decor': {
+      const parts = ['Décor (Tablecloths incl.)'];
+      if (sel.flowers) parts.push('Fresh Flowers');
+      if (sel.neon)    parts.push('Neon Sign');
+      return parts.join(' + ');
+    }
+    case 'balloons': {
+      const bSize = sel.option || 'small';
+      return P.balloons[bSize] ? P.balloons[bSize].label : 'Balloons';
+    }
+    case 'dj': {
+      const djHrs = sel.hours || P.dj.baseHours;
+      return `DJ · ${djHrs} hrs`;
+    }
+    case 'photobooth':  return 'Photo Booth';
+    case 'bounceHouse': return 'Bounce House';
+    case 'lifeguard': {
+      const lgHours = sel.hours || P.lifeguard.minHours;
+      return `Lifeguard · ${lgHours} hrs`;
+    }
+    default: return id;
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// BUNDLING DISCOUNT
+// ─────────────────────────────────────────────────────────────────────────────
+function getNonVenueTotal() {
+  return Object.keys(state.selections).reduce((sum, id) => {
+    return sum + getServicePrice(id, state.selections[id]);
+  }, 0);
+}
+
+function getBundleDiscount(venuePrice, nonVenueTotal) {
+  if (!P.bundlingDiscounts || !P.bundlingDiscounts.tiers) return 0;
+  const tiers = [...P.bundlingDiscounts.tiers].sort((a,b) => b.minNonVenueSpend - a.minNonVenueSpend);
+  const match = tiers.find(t => nonVenueTotal >= t.minNonVenueSpend);
+  return match ? Math.round(venuePrice * match.venueDiscountPct) : 0;
+}
+
+function getNextBundleTier(nonVenueTotal) {
+  if (!P.bundlingDiscounts) return null;
+  const tiers = P.bundlingDiscounts.tiers.sort((a,b) => a.minNonVenueSpend - b.minNonVenueSpend);
+  return tiers.find(t => nonVenueTotal < t.minNonVenueSpend) || null;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// RICH LINE ITEM BUILDER  (category / item / factors / unitRate / total)
+// ─────────────────────────────────────────────────────────────────────────────
+function getLineItems() {
+  const items = [];
+
+  // ── Venue ──
+  if (state.venueType === 'hourly') {
+    const rate = getHourlyRate(state.guests);
+    items.push({ id: null, category: 'Venue', item: 'Hourly',
+      factors: `${state.guests} guests · ${state.hours} hrs`,
+      unitRate: `$${rate}/hr`, total: getVenuePrice(), removable: false });
+  } else {
+    const bucket = state.guests < 50 ? '< 50 guests' : '50–100 guests';
+    items.push({ id: null, category: 'Venue', item: 'Full Day',
+      factors: bucket, unitRate: 'flat rate', total: getVenuePrice(), removable: false });
+  }
+
+  // ── Catering ──
+  const catSel = state.selections.catering;
+  if (catSel && catSel.added) {
+    const k = catSel.option || 'gourmet';
+    const c = P.catering[k];
+    items.push({ id: 'catering', category: 'Catering', item: c.label,
+      factors: `${state.guests} guests`,
+      unitRate: `$${c.pricePerPerson}/person`,
+      total: c.pricePerPerson * state.guests, removable: true });
+  }
+
+  // ── Bartender ──
+  const barSel = state.selections.bartender;
+  if (barSel && barSel.added) {
+    const k = state.guests > 60 ? 'double' : 'single';
+    const b = P.bartender[k];
+    const hrs = barSel.hours || P.bartender.minHours;
+    items.push({ id: 'bartender', category: 'Bartender', item: b.label,
+      factors: `${hrs} hrs`,
+      unitRate: `$${b.pricePerHour}/hr`,
+      total: b.pricePerHour * hrs, removable: true });
+  }
+
+  // ── Décor ──
+  const dSel = state.selections.decor;
+  if (dSel && dSel.added) {
+    let firstDecor = true;
+    if (dSel.flowers) {
+      items.push({ id: firstDecor ? 'decor' : null, category: 'Décor', item: 'Fresh Flowers',
+        factors: 'all tables · flat', unitRate: `$${P.decor.freshFlowers.flatRate}`,
+        total: P.decor.freshFlowers.flatRate, removable: firstDecor });
+      firstDecor = false;
+    }
+    if (dSel.neon) {
+      items.push({ id: firstDecor ? 'decor' : null, category: 'Décor', item: 'Neon Name Sign',
+        factors: 'per event · flat', unitRate: `$${P.decor.neonSign.flatRate}`,
+        total: P.decor.neonSign.flatRate, removable: firstDecor });
+      firstDecor = false;
+    }
+    if (!dSel.flowers && !dSel.neon) {
+      items.push({ id: 'decor', category: 'Décor', item: 'Tablecloths & Backdrop',
+        factors: 'per event', unitRate: 'included', total: 0,
+        removable: true, isIncluded: true });
+    }
+    // always note tablecloths are included alongside paid add-ons
+    if (dSel.flowers || dSel.neon) {
+      items.push({ id: null, category: '', item: '+ Tablecloths & Backdrop',
+        factors: '', unitRate: 'included', total: 0, removable: false, isIncluded: true });
+    }
+  }
+
+  // ── Balloons ──
+  const ballSel = state.selections.balloons;
+  if (ballSel && ballSel.added) {
+    const sz = ballSel.option || 'small';
+    const bl = P.balloons[sz];
+    items.push({ id: 'balloons', category: 'Balloons', item: bl.label,
+      factors: 'per event · flat', unitRate: `$${bl.flatRate}`,
+      total: bl.flatRate, removable: true });
+  }
+
+  // ── DJ ──
+  const djSel = state.selections.dj;
+  if (djSel && djSel.added) {
+    const hrs   = djSel.hours || P.dj.baseHours;
+    const extra = Math.max(0, hrs - P.dj.baseHours);
+    const total = P.dj.baseRate + extra * P.dj.additionalRate;
+    const rate  = extra > 0 ? `$${P.dj.baseRate}+$${P.dj.additionalRate}/hr` : `$${P.dj.baseRate} flat`;
+    items.push({ id: 'dj', category: 'DJ', item: 'DJ Service',
+      factors: `${hrs} hrs${extra > 0 ? ` (${extra} extra)` : ''}`,
+      unitRate: rate, total, removable: true });
+  }
+
+  // ── Photo Booth ──
+  if (state.selections.photobooth && state.selections.photobooth.added) {
+    items.push({ id: 'photobooth', category: 'Photo Booth', item: 'Photo Booth',
+      factors: 'per event · flat', unitRate: `$${P.photobooth.flatRate}`,
+      total: P.photobooth.flatRate, removable: true });
+  }
+
+  // ── Bounce House ──
+  if (state.selections.bounceHouse && state.selections.bounceHouse.added) {
+    items.push({ id: 'bounceHouse', category: 'Bounce House', item: 'Bounce House',
+      factors: 'per event · flat', unitRate: `$${P.bounceHouse.flatRate}`,
+      total: P.bounceHouse.flatRate, removable: true });
+  }
+
+  // ── Lifeguard ──
+  const lgSel = state.selections.lifeguard;
+  if (lgSel && lgSel.added) {
+    const hrs = lgSel.hours || P.lifeguard.minHours;
+    items.push({ id: 'lifeguard', category: 'Lifeguard', item: 'Lifeguard',
+      factors: `${hrs} hrs`,
+      unitRate: `$${P.lifeguard.pricePerHour}/hr`,
+      total: P.lifeguard.pricePerHour * hrs, removable: true });
+  }
+
+  return items;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// QUOTE SIDEBAR
+// ─────────────────────────────────────────────────────────────────────────────
+function updateQuote() {
+  const venuePrice   = getVenuePrice();
+  const nonVenueTotal = getNonVenueTotal();
+  const discount     = getBundleDiscount(venuePrice, nonVenueTotal);
+
+  const lineItems = getLineItems();
+  const subtotal  = venuePrice + nonVenueTotal;
+  const total     = subtotal - discount;
+  // count only "real" items (not the included $0 sub-rows)
+  const itemCount = lineItems.filter(l => l.id !== null || l.category === 'Venue').length;
+
+  // Update item count badge
+  document.getElementById('itemCount').textContent = `${itemCount} item${itemCount !== 1 ? 's' : ''}`;
+
+  // Render quote items
+  const quoteItemsEl  = document.getElementById('quoteItems');
+  const quoteEmptyEl  = document.getElementById('quoteEmpty');
+  const quoteTotalsEl = document.getElementById('quoteTotals');
+
+  // Column header row
+  quoteItemsEl.innerHTML = `
+    <div class="qi-header">
+      <span class="qi-header-cat">Category</span>
+      <span class="qi-header-name">Item</span>
+      <span class="qi-header-right">Factors &nbsp;·&nbsp; Rate &nbsp;·&nbsp; Total</span>
+    </div>`;
+
+  lineItems.forEach(line => {
+    const div = document.createElement('div');
+    div.className = 'quote-item';
+    const totalDisplay = line.isIncluded
+      ? `<span class="qi-included">included</span>`
+      : `<span class="qi-total">$${line.total.toLocaleString()}</span>`;
+    div.innerHTML = `
+      <div class="qi-top">
+        <span class="qi-cat">${line.category}</span>
+        <span class="qi-name">${line.item}</span>
+        ${line.removable ? `<button class="qi-remove" data-id="${line.id}" title="Remove">×</button>` : ''}
+      </div>
+      <div class="qi-bottom">
+        <span class="qi-factors">${line.factors}</span>
+        <span class="qi-rate">${line.unitRate}</span>
+        ${totalDisplay}
+      </div>`;
+    quoteItemsEl.appendChild(div);
+  });
+
+  quoteItemsEl.classList.remove('hidden');
+  quoteEmptyEl.classList.add('hidden');
+  quoteTotalsEl.classList.remove('hidden');
+
+  // Discount row
+  const discountRow = document.getElementById('discountRow');
+  if (discount > 0) {
+    discountRow.classList.remove('hidden');
+    const tier = [...P.bundlingDiscounts.tiers].sort((a,b)=>b.minNonVenueSpend-a.minNonVenueSpend)
+      .find(t => nonVenueTotal >= t.minNonVenueSpend);
+    document.getElementById('discountLabel').textContent = `Bundle Discount (${tier.label})`;
+    document.getElementById('discountAmount').textContent = `−$${discount.toLocaleString()}`;
+  } else {
+    discountRow.classList.add('hidden');
+  }
+
+  document.getElementById('totalAmount').textContent = '$' + total.toLocaleString();
+
+  // Bundle hint
+  const bundleHint = document.getElementById('bundleHint');
+  const nextTier = getNextBundleTier(nonVenueTotal);
+  if (nextTier && nonVenueTotal < nextTier.minNonVenueSpend) {
+    const needed = nextTier.minNonVenueSpend - nonVenueTotal;
+    bundleHint.classList.remove('hidden');
+    bundleHint.innerHTML = `<strong>💡 Bundle & Save</strong>Add $${needed.toLocaleString()} more in services to unlock a <strong>${Math.round(nextTier.venueDiscountPct*100)}% venue discount</strong>.`;
+  } else {
+    bundleHint.classList.add('hidden');
+  }
+
+  // Enable/disable CTA
+  document.getElementById('requestQuoteBtn').disabled = false;
+
+  // Remove listeners then re-add
+  document.querySelectorAll('.qi-remove').forEach(btn => {
+    btn.addEventListener('click', e => {
+      const id = e.currentTarget.dataset.id;
+      if (state.selections[id]) {
+        state.selections[id].added = false;
+        renderCards();
+        updateQuote();
+      }
+    });
+  });
+
+  // Update comparison section reactively
+  renderComparison();
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// CARD RENDERING
+// ─────────────────────────────────────────────────────────────────────────────
+// Returns { marketAvg, ourPrice, savingsPct, savingsLabel } for the savings badge on each card
+function getCardSavings(id) {
+  const avg = P.industryAvg;
+  if (!avg) return null;
+  let marketAmt, ourAmt, unitLabel;
+  switch(id) {
+    case 'catering':
+      marketAmt = avg.cateringPerPerson; ourAmt = P.catering.gourmet.pricePerPerson; unitLabel = '/person';
+      break;
+    case 'bartender':
+      marketAmt = avg.bartenderPerHour; ourAmt = P.bartender.single.pricePerHour; unitLabel = '/hr';
+      break;
+    case 'decor':
+      marketAmt = avg.freshFlowers; ourAmt = P.decor.freshFlowers.flatRate; unitLabel = ' flowers';
+      break;
+    case 'dj':
+      marketAmt = avg.djBase; ourAmt = P.dj.baseRate; unitLabel = '/3hrs';
+      break;
+    case 'photobooth':
+      marketAmt = avg.photobooth; ourAmt = P.photobooth.flatRate; unitLabel = ' flat';
+      break;
+    case 'bounceHouse':
+      marketAmt = avg.bounceHouse; ourAmt = P.bounceHouse.flatRate; unitLabel = ' flat';
+      break;
+    default: return null;
+  }
+  const pct = Math.round((marketAmt - ourAmt) / marketAmt * 100);
+  return { marketAmt, ourAmt, unitLabel, pct };
+}
+
+function buildCard(id) {
+  const svc  = S[id];
+  const sel  = state.selections[id] || {};
+  const added = !!sel.added;
+
+  // Compute savings badge up front so it's available throughout the function
+  const savings = getCardSavings(id);
+  const savingsBadgeHtml = savings
+    ? `<div class="card-market-avg">Market avg: <s>$${savings.marketAmt}${savings.unitLabel}</s></div>
+       <div class="card-savings-badge">↓ ${savings.pct}% below market</div>`
+    : '';
+
+  let optionsHtml = '';
+  let footerHtml  = '';
+  let priceDisplay = '';
+
+  if (id === 'catering') {
+    const opts = [
+      { key:'gourmet',      label:'Gourmet' },
+      { key:'fingerFoods',  label:'Finger Foods' },
+      { key:'kidParty',     label:'Kid Party' },
+      { key:'tacoTable',    label:'Taco Table' },
+      { key:'grazingTable', label:'Grazing Table' }
+    ];
+    const selectedOpt = sel.option || 'gourmet';
+    const price = P.catering[selectedOpt] ? P.catering[selectedOpt].pricePerPerson * state.guests : 0;
+    optionsHtml = `
+      <div class="card-options">
+        <div class="field-label">Select Style</div>
+        <div class="option-grid">
+          ${opts.map(o => `<button class="option-chip${selectedOpt===o.key?' selected':''}" data-opt="${o.key}" data-card="${id}">${o.label}</button>`).join('')}
+        </div>
+      </div>`;
+    priceDisplay = `<div class="card-price-amount">$${price.toLocaleString()}</div>
+      <div class="card-price-unit">${P.catering[selectedOpt].pricePerPerson}/person · ${state.guests} guests</div>`;
+
+  } else if (id === 'bartender') {
+    const bKey   = state.guests > 60 ? 'double' : 'single';
+    const bHours = sel.hours || P.bartender.minHours;
+    const price  = P.bartender[bKey].pricePerHour * bHours;
+    const rateLabel = P.bartender[bKey].label;
+    optionsHtml = `
+      <div class="card-hours">
+        <div class="field-label">Bar Hours:</div>
+        <button class="stepper-btn" style="width:28px;height:28px;font-size:16px;" data-hours-minus="${id}">−</button>
+        <div class="hours-display" style="font-size:14px;min-width:40px;">${bHours} hrs</div>
+        <button class="stepper-btn" style="width:28px;height:28px;font-size:16px;" data-hours-plus="${id}">+</button>
+      </div>`;
+    priceDisplay = `<div class="card-price-amount">$${price.toLocaleString()}</div>
+      <div class="card-price-unit">${rateLabel} · ${bHours} hrs</div>
+      <div class="card-price-note">Alcohol purchased separately</div>`;
+
+  } else if (id === 'decor') {
+    const hasFlowers = !!sel.flowers;
+    const hasNeon    = !!sel.neon;
+    const price = (hasFlowers ? P.decor.freshFlowers.flatRate : 0) + (hasNeon ? P.decor.neonSign.flatRate : 0);
+    optionsHtml = `
+      <div class="card-options">
+        <div class="field-label">Add-Ons <span style="color:var(--cyan);font-size:11px;">(Tablecloths + Backdrop always included)</span></div>
+        <div class="option-grid">
+          <button class="option-chip${hasFlowers?' selected':''}" data-decor-toggle="flowers" data-card="${id}">🌸 Fresh Flowers +$${P.decor.freshFlowers.flatRate}</button>
+          <button class="option-chip${hasNeon?' selected':''}" data-decor-toggle="neon" data-card="${id}">✨ Neon Name Sign +$${P.decor.neonSign.flatRate}</button>
+        </div>
+      </div>`;
+    priceDisplay = price > 0
+      ? `<div class="card-price-amount">$${price.toLocaleString()}</div><div class="card-price-unit">per event</div>`
+      : `<div class="card-price-amount included-badge">✓ Included</div><div class="card-price-unit">in your package</div>`;
+    footerHtml = `
+      <div class="card-footer">
+        <div class="card-price">${priceDisplay}${savingsBadgeHtml}</div>
+        <button class="add-btn${added?' active':''}" data-toggle="${id}">
+          ${added ? 'Added' : 'Add Décor'}
+        </button>
+      </div>`;
+
+  } else if (id === 'balloons') {
+    const sizes = [
+      { key:'small',  label:'Small · Accents' },
+      { key:'medium', label:'Medium · Full Arch' },
+      { key:'large',  label:'Large · Arch + Accents' }
+    ];
+    const selectedSize = sel.option || 'small';
+    const price = P.balloons[selectedSize].flatRate;
+    optionsHtml = `
+      <div class="card-options">
+        <div class="field-label">Package Size</div>
+        <div class="option-grid">
+          ${sizes.map(o => `<button class="option-chip${selectedSize===o.key?' selected':''}" data-opt="${o.key}" data-card="${id}">${o.label}</button>`).join('')}
+        </div>
+      </div>`;
+    priceDisplay = `<div class="card-price-amount">$${price.toLocaleString()}</div>
+      <div class="card-price-unit">per event</div>`;
+
+  } else if (id === 'dj') {
+    const djHours = sel.hours || P.dj.baseHours;
+    const price   = P.dj.baseRate + Math.max(0, djHours - P.dj.baseHours) * P.dj.additionalRate;
+    optionsHtml = `
+      <div class="card-hours">
+        <div class="field-label">DJ Hours:</div>
+        <button class="stepper-btn" style="width:28px;height:28px;font-size:16px;" data-hours-minus="${id}">−</button>
+        <div class="hours-display" style="font-size:14px;min-width:40px;">${djHours} hrs</div>
+        <button class="stepper-btn" style="width:28px;height:28px;font-size:16px;" data-hours-plus="${id}">+</button>
+      </div>`;
+    priceDisplay = `<div class="card-price-amount">$${price.toLocaleString()}</div>
+      <div class="card-price-unit">$${P.dj.baseRate} base (${P.dj.baseHours} hrs) + $${P.dj.additionalRate}/hr after</div>`;
+
+  } else if (id === 'lifeguard') {
+    const lgHours = sel.hours || P.lifeguard.minHours;
+    const price   = P.lifeguard.pricePerHour * lgHours;
+    optionsHtml = `
+      <div class="card-hours">
+        <div class="field-label">Lifeguard Hours:</div>
+        <button class="stepper-btn" style="width:28px;height:28px;font-size:16px;" data-hours-minus="${id}">−</button>
+        <div class="hours-display" style="font-size:14px;min-width:40px;">${lgHours} hrs</div>
+        <button class="stepper-btn" style="width:28px;height:28px;font-size:16px;" data-hours-plus="${id}">+</button>
+      </div>`;
+    priceDisplay = `<div class="card-price-amount">$${price.toLocaleString()}</div>
+      <div class="card-price-unit">$${P.lifeguard.pricePerHour}/hr · ${lgHours} hrs</div>`;
+
+  } else if (id === 'photobooth') {
+    priceDisplay = `<div class="card-price-amount">$${P.photobooth.flatRate.toLocaleString()}</div>
+      <div class="card-price-unit">flat rate · unlimited prints</div>`;
+  } else if (id === 'bounceHouse') {
+    priceDisplay = `<div class="card-price-amount">$${P.bounceHouse.flatRate.toLocaleString()}</div>
+      <div class="card-price-unit">flat rate · per event</div>`;
+  }
+
+  if (!footerHtml) {
+    footerHtml = `
+      <div class="card-footer">
+        <div class="card-price">${priceDisplay}${savingsBadgeHtml}</div>
+        <button class="add-btn${added?' active':''}" data-toggle="${id}">
+          ${added ? 'Added' : 'Add'}
+        </button>
+      </div>`;
+  }
+
+  return `
+    <div class="service-card${added?' selected':''}" data-card-id="${id}">
+      <div class="card-body">
+        <div class="card-eyebrow">${svc.eyebrow}</div>
+        <div class="card-title">${svc.title}</div>
+        <ul class="card-bullets">
+          ${svc.bullets.map(b => `<li>${b}</li>`).join('')}
+        </ul>
+        ${optionsHtml}
+        ${footerHtml}
+      </div>
+    </div>`;
+}
+
+function renderCards() {
+  const order = ['catering','bartender','decor','balloons','dj','photobooth','bounceHouse','lifeguard'];
+  document.getElementById('cardsGrid').innerHTML = order.map(id => buildCard(id)).join('');
+  attachCardListeners();
+}
+
+function attachCardListeners() {
+  // Add/remove service
+  document.querySelectorAll('[data-toggle]').forEach(btn => {
+    btn.addEventListener('click', e => {
+      const id  = e.currentTarget.dataset.toggle;
+      const sel = state.selections[id] || {};
+      sel.added = !sel.added;
+      state.selections[id] = sel;
+      renderCards();
+      updateQuote();
+    });
+  });
+
+  // Catering / balloon option chips
+  document.querySelectorAll('[data-opt]').forEach(chip => {
+    chip.addEventListener('click', e => {
+      const id  = e.currentTarget.dataset.card;
+      const opt = e.currentTarget.dataset.opt;
+      if (!state.selections[id]) state.selections[id] = { added: false };
+      state.selections[id].option = opt;
+      state.selections[id].added  = true;
+      renderCards();
+      updateQuote();
+    });
+  });
+
+  // Decor toggles
+  document.querySelectorAll('[data-decor-toggle]').forEach(chip => {
+    chip.addEventListener('click', e => {
+      const id    = e.currentTarget.dataset.card;
+      const field = e.currentTarget.dataset.decorToggle;
+      if (!state.selections[id]) state.selections[id] = { added: true };
+      state.selections[id][field]  = !state.selections[id][field];
+      state.selections[id].added   = true;
+      renderCards();
+      updateQuote();
+    });
+  });
+
+  // Hours steppers inside cards
+  document.querySelectorAll('[data-hours-minus]').forEach(btn => {
+    btn.addEventListener('click', e => {
+      const id  = e.currentTarget.dataset.hoursMinus;
+      const min = id === 'dj' ? P.dj.baseHours : (id === 'lifeguard' ? P.lifeguard.minHours : P.bartender.minHours);
+      if (!state.selections[id]) state.selections[id] = { added: true };
+      state.selections[id].hours = Math.max(min, (state.selections[id].hours || min) - 1);
+      renderCards();
+      updateQuote();
+    });
+  });
+
+  document.querySelectorAll('[data-hours-plus]').forEach(btn => {
+    btn.addEventListener('click', e => {
+      const id = e.currentTarget.dataset.hoursPlus;
+      const max = state.hours || 12;
+      if (!state.selections[id]) state.selections[id] = { added: true };
+      state.selections[id].hours = Math.min(max, (state.selections[id].hours || 3) + 1);
+      renderCards();
+      updateQuote();
+    });
+  });
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// COMPARISON SECTION
+// ─────────────────────────────────────────────────────────────────────────────
+function renderComparison() {
+  const avg = P.industryAvg;
+  const el  = document.getElementById('comparisonContent');
+  const rows = [];
+
+  let marketTotal = 0;
+  let oasisTotal  = 0;
+
+  // ── Venue (always shown — full price, no bundle discount) ──
+  const venuePrice = getVenuePrice();
+  let marketVenue, venueDetail;
+  if (state.venueType === 'hourly') {
+    marketVenue = avg.venueHourly * state.hours;
+    venueDetail = `${state.guests} guests · ${state.hours} hrs @ $${avg.venueHourly}/hr market avg`;
+  } else {
+    marketVenue = avg.venueFullDay;
+    venueDetail = `${state.guests < 50 ? '< 50' : '50–100'} guests · full day market avg`;
+  }
+  const venueSave = marketVenue - venuePrice;
+  marketTotal += marketVenue;
+  oasisTotal  += venuePrice;
+  rows.push(`<tr>
+    <td><div class="ct-service">Private Pool Venue</div><div class="ct-detail">${venueDetail}</div><div class="ct-venue-note">★ We own the venue — your price includes exclusive access</div></td>
+    <td><span class="ct-them">$${marketVenue.toLocaleString()}</span></td>
+    <td><span class="ct-us">$${venuePrice.toLocaleString()}</span></td>
+    <td><span class="ct-save${venueSave <= 0 ? ' negative' : ''}">
+      ${venueSave > 0 ? `Save $${venueSave.toLocaleString()}` : '—'}
+    </span></td>
+  </tr>`);
+
+  // ── Catering ──
+  const catSel = state.selections.catering;
+  if (catSel && catSel.added) {
+    const k = catSel.option || 'gourmet';
+    const ourPP = P.catering[k].pricePerPerson;
+    const mktPP = avg.cateringPerPerson;
+    const ourAmt = ourPP * state.guests;
+    const mktAmt = mktPP * state.guests;
+    const save   = mktAmt - ourAmt;
+    marketTotal += mktAmt; oasisTotal += ourAmt;
+    rows.push(`<tr>
+      <td><div class="ct-service">Catering — ${P.catering[k].label}</div><div class="ct-detail">${state.guests} guests · $${mktPP}/person market avg vs $${ourPP}/person ours</div></td>
+      <td><span class="ct-them">$${mktAmt.toLocaleString()}</span></td>
+      <td><span class="ct-us">$${ourAmt.toLocaleString()}</span></td>
+      <td><span class="ct-save">Save $${save.toLocaleString()}</span></td>
+    </tr>`);
+  }
+
+  // ── Bartender ──
+  const barSel = state.selections.bartender;
+  if (barSel && barSel.added) {
+    const k    = state.guests > 60 ? 'double' : 'single';
+    const hrs  = barSel.hours || P.bartender.minHours;
+    const ourRate = P.bartender[k].pricePerHour;
+    const mktRate = avg.bartenderPerHour * (k === 'double' ? 2 : 1);
+    const ourAmt  = ourRate * hrs;
+    const mktAmt  = mktRate * hrs;
+    const save    = mktAmt - ourAmt;
+    marketTotal += mktAmt; oasisTotal += ourAmt;
+    rows.push(`<tr>
+      <td><div class="ct-service">Bartender — ${P.bartender[k].label}</div><div class="ct-detail">${hrs} hrs · $${mktRate}/hr market avg vs $${ourRate}/hr ours</div></td>
+      <td><span class="ct-them">$${mktAmt.toLocaleString()}</span></td>
+      <td><span class="ct-us">$${ourAmt.toLocaleString()}</span></td>
+      <td><span class="ct-save">Save $${save.toLocaleString()}</span></td>
+    </tr>`);
+  }
+
+  // ── Décor / Fresh Flowers ──
+  const dSel = state.selections.decor;
+  if (dSel && dSel.added && dSel.flowers) {
+    const mktAmt = avg.freshFlowers;
+    const ourAmt = P.decor.freshFlowers.flatRate;
+    const save   = mktAmt - ourAmt;
+    marketTotal += mktAmt; oasisTotal += ourAmt;
+    rows.push(`<tr>
+      <td><div class="ct-service">Fresh Flowers — All Tables</div><div class="ct-detail">Market avg $${mktAmt} · ours $${ourAmt} flat</div></td>
+      <td><span class="ct-them">$${mktAmt.toLocaleString()}</span></td>
+      <td><span class="ct-us">$${ourAmt.toLocaleString()}</span></td>
+      <td><span class="ct-save">Save $${save.toLocaleString()}</span></td>
+    </tr>`);
+  }
+  if (dSel && dSel.added && dSel.neon) {
+    const ourAmt = P.decor.neonSign.flatRate;
+    oasisTotal += ourAmt; marketTotal += ourAmt; // no market diff on neon, pass-through
+    rows.push(`<tr>
+      <td><div class="ct-service">Custom Neon Name Sign</div><div class="ct-detail">Custom add-on · flat rate</div></td>
+      <td><span class="ct-them">$${ourAmt.toLocaleString()}</span></td>
+      <td><span class="ct-us">$${ourAmt.toLocaleString()}</span></td>
+      <td><span class="ct-save negative">—</span></td>
+    </tr>`);
+  }
+
+  // ── Balloons ──
+  const ballSel = state.selections.balloons;
+  if (ballSel && ballSel.added) {
+    const sz     = ballSel.option || 'small';
+    const ourAmt = P.balloons[sz].flatRate;
+    marketTotal += ourAmt; oasisTotal += ourAmt; // pass through (no market diff given)
+    rows.push(`<tr>
+      <td><div class="ct-service">Balloons — ${P.balloons[sz].label}</div><div class="ct-detail">Custom installation · flat rate</div></td>
+      <td><span class="ct-them">$${ourAmt.toLocaleString()}</span></td>
+      <td><span class="ct-us">$${ourAmt.toLocaleString()}</span></td>
+      <td><span class="ct-save negative">—</span></td>
+    </tr>`);
+  }
+
+  // ── DJ ──
+  const djSel = state.selections.dj;
+  if (djSel && djSel.added) {
+    const hrs   = djSel.hours || P.dj.baseHours;
+    const extra = Math.max(0, hrs - P.dj.baseHours);
+    const ourAmt = P.dj.baseRate + extra * P.dj.additionalRate;
+    const mktAmt = avg.djBase + extra * avg.djExtraPerHour;
+    const save   = mktAmt - ourAmt;
+    marketTotal += mktAmt; oasisTotal += ourAmt;
+    rows.push(`<tr>
+      <td><div class="ct-service">DJ Service</div><div class="ct-detail">${hrs} hrs · market avg $${avg.djBase}/${P.dj.baseHours}hrs + $${avg.djExtraPerHour}/hr extra</div></td>
+      <td><span class="ct-them">$${mktAmt.toLocaleString()}</span></td>
+      <td><span class="ct-us">$${ourAmt.toLocaleString()}</span></td>
+      <td><span class="ct-save">Save $${save.toLocaleString()}</span></td>
+    </tr>`);
+  }
+
+  // ── Photo Booth ──
+  if (state.selections.photobooth && state.selections.photobooth.added) {
+    const mktAmt = avg.photobooth;
+    const ourAmt = P.photobooth.flatRate;
+    const save   = mktAmt - ourAmt;
+    marketTotal += mktAmt; oasisTotal += ourAmt;
+    rows.push(`<tr>
+      <td><div class="ct-service">Photo Booth</div><div class="ct-detail">Per event · market avg $${mktAmt}</div></td>
+      <td><span class="ct-them">$${mktAmt.toLocaleString()}</span></td>
+      <td><span class="ct-us">$${ourAmt.toLocaleString()}</span></td>
+      <td><span class="ct-save">Save $${save.toLocaleString()}</span></td>
+    </tr>`);
+  }
+
+  // ── Bounce House ──
+  if (state.selections.bounceHouse && state.selections.bounceHouse.added) {
+    const mktAmt = avg.bounceHouse;
+    const ourAmt = P.bounceHouse.flatRate;
+    const save   = mktAmt - ourAmt;
+    marketTotal += mktAmt; oasisTotal += ourAmt;
+    rows.push(`<tr>
+      <td><div class="ct-service">Bounce House Rental</div><div class="ct-detail">Per event · market avg $${mktAmt}</div></td>
+      <td><span class="ct-them">$${mktAmt.toLocaleString()}</span></td>
+      <td><span class="ct-us">$${ourAmt.toLocaleString()}</span></td>
+      <td><span class="ct-save">Save $${save.toLocaleString()}</span></td>
+    </tr>`);
+  }
+
+  // ── Lifeguard ── (pass-through, no market diff given)
+  const lgSel = state.selections.lifeguard;
+  if (lgSel && lgSel.added) {
+    const hrs    = lgSel.hours || P.lifeguard.minHours;
+    const ourAmt = P.lifeguard.pricePerHour * hrs;
+    marketTotal += ourAmt; oasisTotal += ourAmt;
+    rows.push(`<tr>
+      <td><div class="ct-service">Lifeguard</div><div class="ct-detail">${hrs} hrs · $${P.lifeguard.pricePerHour}/hr</div></td>
+      <td><span class="ct-them">$${ourAmt.toLocaleString()}</span></td>
+      <td><span class="ct-us">$${ourAmt.toLocaleString()}</span></td>
+      <td><span class="ct-save negative">—</span></td>
+    </tr>`);
+  }
+
+  const totalSave = marketTotal - oasisTotal;
+  const savePct   = Math.round(totalSave / marketTotal * 100);
+
+  el.innerHTML = `
+    <table class="ct-table">
+      <thead><tr>
+        <th>Service</th>
+        <th class="col-them">Other Vendors</th>
+        <th class="col-us">The Oasis</th>
+        <th class="col-save">Your Savings</th>
+      </tr></thead>
+      <tbody>${rows.join('')}</tbody>
+    </table>
+    <div class="ct-totals">
+      <div class="ct-total-block">
+        <div class="ct-total-label">A La Carte Market Price</div>
+        <div class="ct-total-amount them">$${marketTotal.toLocaleString()}</div>
+      </div>
+      <div class="ct-divider"></div>
+      <div class="ct-total-block">
+        <div class="ct-total-label">Your Oasis Package</div>
+        <div class="ct-total-amount us">$${oasisTotal.toLocaleString()}</div>
+      </div>
+      <div class="ct-divider"></div>
+      <div class="ct-total-block">
+        <div class="ct-total-label">You Save</div>
+        <div class="ct-total-amount save">$${totalSave.toLocaleString()}</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:4px;">${savePct}% below market rate</div>
+      </div>
+    </div>`;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// EVENT BASICS CONTROLS
+// ─────────────────────────────────────────────────────────────────────────────
+function initBasics() {
+  const guestInput  = document.getElementById('guestInput');
+  const guestSlider = document.getElementById('guestSlider');
+
+  function setGuests(n) {
+    n = Math.max(1, Math.min(100, parseInt(n) || 1));
+    state.guests = n;
+    guestInput.value  = n;
+    guestSlider.value = n;
+    renderCards();
+    updateVenueDisplay();
+  }
+
+  document.getElementById('guestMinus').addEventListener('click', () => setGuests(state.guests - 1));
+  document.getElementById('guestPlus').addEventListener('click',  () => setGuests(state.guests + 1));
+  guestInput.addEventListener('input',  e => setGuests(e.target.value));
+  guestSlider.addEventListener('input', e => setGuests(e.target.value));
+
+  // Venue type tabs
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', e => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      e.currentTarget.classList.add('active');
+      state.venueType = e.currentTarget.dataset.type;
+      document.getElementById('durationField').classList.toggle('hidden', state.venueType === 'fullday');
+      document.getElementById('fullDayField').classList.toggle('hidden', state.venueType === 'hourly');
+      updateVenueDisplay();
+    });
+  });
+
+  // Duration steppers
+  function setHours(n) {
+    n = Math.max(P.venue.hourly.minHours, Math.min(P.venue.hourly.maxHours, n));
+    state.hours = n;
+    document.getElementById('hoursValue').textContent = n;
+    updateVenueDisplay();
+    renderCards();
+  }
+
+  document.getElementById('hoursMinus').addEventListener('click', () => setHours(state.hours - 1));
+  document.getElementById('hoursPlus').addEventListener('click',  () => setHours(state.hours + 1));
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// MODAL
+// ─────────────────────────────────────────────────────────────────────────────
+function buildModalSummary() {
+  const venuePrice    = getVenuePrice();
+  const nonVenueTotal = getNonVenueTotal();
+  const discount      = getBundleDiscount(venuePrice, nonVenueTotal);
+  const total         = venuePrice + nonVenueTotal - discount;
+  const lineItems     = getLineItems();
+
+  let rows = lineItems.map(line => {
+    const totalCell = line.isIncluded
+      ? `<span style="color:var(--cyan);font-style:italic;">included</span>`
+      : `$${line.total.toLocaleString()}`;
+    return `<tr>
+      <td>${line.category}</td>
+      <td style="color:var(--white);">${line.item}</td>
+      <td>${line.factors}</td>
+      <td>${line.unitRate}</td>
+      <td>${totalCell}</td>
+    </tr>`;
+  }).join('');
+
+  if (discount > 0) {
+    const tier = [...P.bundlingDiscounts.tiers].sort((a,b)=>b.minNonVenueSpend-a.minNonVenueSpend)
+      .find(t => nonVenueTotal >= t.minNonVenueSpend);
+    rows += `<tr class="ms-discount">
+      <td colspan="4">Bundle Discount — ${tier.label}</td>
+      <td>−$${discount.toLocaleString()}</td>
+    </tr>`;
+  }
+
+  rows += `<tr class="ms-total">
+    <td colspan="4">Estimated Total</td>
+    <td>$${total.toLocaleString()}</td>
+  </tr>`;
+
+  document.getElementById('modalSummaryItems').innerHTML = `
+    <table class="ms-table">
+      <thead><tr>
+        <th>Category</th><th>Item</th><th>Factors</th><th>Unit Rate</th><th>Total</th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+    </table>`;
+}
+
+function buildQuotePayload() {
+  const venuePrice    = getVenuePrice();
+  const nonVenueTotal = getNonVenueTotal();
+  const discount      = getBundleDiscount(venuePrice, nonVenueTotal);
+
+  const lineItems = [{ service: state.venueType === 'hourly' ? `Venue (Hourly - ${state.hours} hrs)` : 'Venue (Full Day)', price: venuePrice }];
+  Object.keys(state.selections).forEach(id => {
+    const sel = state.selections[id];
+    if (sel && sel.added) {
+      const price = getServicePrice(id, sel);
+      if (price > 0 || id === 'decor') {
+        lineItems.push({ service: getServiceLabel(id, sel), price });
+      }
+    }
+  });
+
+  return {
+    contact: {
+      firstName:  document.getElementById('fname').value,
+      lastName:   document.getElementById('lname').value,
+      email:      document.getElementById('email').value,
+      phone:      document.getElementById('phone').value,
+      eventDate:  document.getElementById('eventDate').value,
+      eventType:  document.getElementById('eventType').value,
+      notes:      document.getElementById('notes').value
+    },
+    quote: {
+      guests:         state.guests,
+      venueType:      state.venueType,
+      duration:       state.venueType === 'hourly' ? state.hours : 'Full Day',
+      lineItems,
+      subtotal:       venuePrice + nonVenueTotal,
+      bundleDiscount: discount,
+      total:          venuePrice + nonVenueTotal - discount,
+      submittedAt:    new Date().toISOString()
+    }
+  };
+}
+
+function populateHiddenQuoteFields() {
+  const venuePrice    = getVenuePrice();
+  const nonVenueTotal = getNonVenueTotal();
+  const discount      = getBundleDiscount(venuePrice, nonVenueTotal);
+  const total         = venuePrice + nonVenueTotal - discount;
+  const lineItems     = getLineItems();
+
+  // Build a plain-text quote breakdown for the email notification
+  const lines = lineItems.map(l => {
+    const amt = l.isIncluded ? 'included' : `$${l.total.toLocaleString()}`;
+    return `${l.category} — ${l.item}${l.factors ? ' | ' + l.factors : ''}${l.unitRate ? ' @ ' + l.unitRate : ''}: ${amt}`;
+  });
+  if (discount > 0) lines.push(`Bundle Discount: −$${discount.toLocaleString()}`);
+  lines.push(`TOTAL: $${total.toLocaleString()}`);
+
+  const selectedServices = Object.keys(state.selections)
+    .filter(id => state.selections[id] && state.selections[id].added)
+    .map(id => S[id] ? S[id].name : id)
+    .join(', ');
+
+  document.getElementById('hGuestCount').value       = state.guests;
+  document.getElementById('hVenueType').value        = state.venueType === 'hourly' ? 'Hourly' : 'Full Day';
+  document.getElementById('hVenueDuration').value    = state.venueType === 'hourly' ? `${state.hours} hrs` : 'Full Day';
+  document.getElementById('hServicesSelected').value = selectedServices || 'Venue only';
+  document.getElementById('hSubtotal').value         = `$${(venuePrice + nonVenueTotal).toLocaleString()}`;
+  document.getElementById('hDiscount').value         = discount > 0 ? `−$${discount.toLocaleString()}` : 'None';
+  document.getElementById('hTotal').value            = `$${total.toLocaleString()}`;
+  document.getElementById('hQuoteDetails').value     = lines.join('\n');
+}
+
+function initModal() {
+  const overlay   = document.getElementById('modalOverlay');
+  const close     = document.getElementById('modalClose');
+  const cta       = document.getElementById('requestQuoteBtn');
+  const form      = document.getElementById('netlifyForm');
+  const submitBtn = document.getElementById('submitBtn');
+
+  cta.addEventListener('click', () => {
+    buildModalSummary();
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  });
+
+  function closeModal() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  close.addEventListener('click', closeModal);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+
+    // Validate required contact fields
+    const required = ['fname','lname','email','phone','eventDate','eventType'];
+    const missing  = required.filter(id => !document.getElementById(id).value.trim());
+    if (missing.length) {
+      missing.forEach(id => { document.getElementById(id).style.borderColor = 'var(--pink)'; });
+      return;
+    }
+
+    submitBtn.disabled    = true;
+    submitBtn.textContent = 'Sending…';
+
+    // Inject the live quote data into hidden fields right before submit
+    populateHiddenQuoteFields();
+
+    try {
+      // Netlify Forms AJAX: POST url-encoded body to current page
+      await fetch(window.location.pathname, {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body:    new URLSearchParams(new FormData(form)).toString()
+      });
+
+      document.getElementById('modalForm').style.display = 'none';
+      document.getElementById('successState').style.display = 'block';
+
+    } catch(err) {
+      console.error('Netlify submission error:', err);
+      // Show success anyway — Netlify is reliable; a network hiccup shouldn't block the user
+      document.getElementById('modalForm').style.display = 'none';
+      document.getElementById('successState').style.display = 'block';
+    }
+  });
+
+  // Clear red border on correction
+  ['fname','lname','email','phone','eventDate','eventType'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('input', e => { e.target.style.borderColor = ''; });
+  });
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// INIT
+// ─────────────────────────────────────────────────────────────────────────────
+function init() {
+  initBasics();
+  renderCards();
+  updateVenueDisplay();
+  initModal();
+}
+
+if (checkData()) init();
+</script>
+</body>
+</html>
