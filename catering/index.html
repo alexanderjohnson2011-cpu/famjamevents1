@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catering & Bar by Fam Jam Events — Thousand Oaks, CA</title>
+  <meta name="description" content="Custom catering and bar service for private parties in Thousand Oaks and greater LA. El Salvadoran chef with Latin flair, vegan-friendly, kid-friendly menus. Starting at $30/person. Call 818-825-1031." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ---- RESET & BASE ---- */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:     #0b0f1e;
+      --bg2:    #111827;
+      --bg3:    #1a2035;
+      --pink:   #ff3bd4;
+      --cyan:   #00e7ff;
+      --white:  #ffffff;
+      --muted:  #94a3b8;
+      --border: rgba(255,255,255,0.08);
+      --radius: 16px;
+      --max:    1200px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+    }
+    img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    a { color: inherit; text-decoration: none; }
+    h1, h2, h3, h4 { font-family: 'Montserrat', sans-serif; line-height: 1.2; }
+
+    /* ---- UTILITY ---- */
+    .container { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 20px; }
+    .section   { padding: 80px 0; }
+    .section--light { background: var(--bg2); }
+    .eyebrow {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--pink);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 900;
+      margin-bottom: 16px;
+    }
+    .section-sub {
+      color: var(--muted);
+      font-size: 17px;
+      max-width: 640px;
+      margin-bottom: 48px;
+    }
+    .btn-primary {
+      display: inline-block;
+      background: var(--pink);
+      color: var(--white);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: 0.04em;
+      padding: 16px 36px;
+      border-radius: 50px;
+      transition: opacity 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.85; }
+    .btn-outline {
+      display: inline-block;
+      border: 2px solid var(--cyan);
+      color: var(--cyan);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      padding: 14px 32px;
+      border-radius: 50px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { background: var(--cyan); color: var(--bg); }
+
+    /* ---- NAV ---- */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(11,15,30,0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .nav-logo {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 17px;
+      line-height: 1.1;
+    }
+    .nav-logo span { display: block; font-size: 10px; font-weight: 400; color: var(--muted); letter-spacing: 0.1em; }
+    .nav-links { display: none; gap: 28px; font-size: 14px; color: var(--muted); }
+    .nav-links a:hover { color: var(--white); }
+    @media (min-width: 768px) { .nav-links { display: flex; } }
+    .nav-cta {
+      background: var(--pink);
+      color: var(--white);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      padding: 10px 22px;
+      border-radius: 50px;
+      white-space: nowrap;
+    }
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* ---- HERO ---- */
+    .hero {
+      position: relative;
+      height: 62vh;
+      min-height: 480px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+    .hero-img { position: absolute; inset: 0; }
+    .hero-img img { object-position: center 40%; }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(11,15,30,0.5) 0%, rgba(11,15,30,0.72) 100%);
+    }
+    .hero-content { position: relative; z-index: 2; padding: 0 20px; }
+    .hero-eyebrow {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 16px;
+    }
+    .hero h1 {
+      font-size: clamp(36px, 7vw, 72px);
+      font-weight: 900;
+      line-height: 1.05;
+      margin-bottom: 20px;
+    }
+    .hero h1 em { font-style: normal; color: var(--pink); }
+    .hero-sub {
+      font-size: clamp(16px, 2.5vw, 20px);
+      color: rgba(255,255,255,0.85);
+      max-width: 560px;
+      margin: 0 auto 36px;
+    }
+    .hero-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .hero-tag {
+      display: block;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin-top: 20px;
+    }
+
+    /* ---- PROOF BAR ---- */
+    .proof-bar {
+      background: var(--bg3);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 18px 20px;
+      overflow-x: auto;
+    }
+    .proof-bar-inner {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+      justify-content: center;
+      max-width: var(--max);
+      margin: 0 auto;
+      white-space: nowrap;
+    }
+    .proof-item { font-size: 13px; color: var(--muted); font-weight: 500; }
+    .proof-item strong { color: var(--white); }
+
+    /* ---- OVERVIEW ---- */
+    .overview-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+    @media (min-width: 768px) { .overview-grid { grid-template-columns: 1fr 1fr; } }
+    .overview-img { border-radius: var(--radius); overflow: hidden; height: 400px; }
+    .overview-points { display: flex; flex-direction: column; gap: 20px; }
+    .overview-point { display: flex; gap: 14px; align-items: flex-start; }
+    .overview-icon {
+      flex-shrink: 0;
+      width: 38px; height: 38px;
+      background: rgba(255,59,212,0.12);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 17px;
+    }
+    .overview-point h4 { font-size: 15px; font-weight: 700; margin-bottom: 3px; }
+    .overview-point p { font-size: 14px; color: var(--muted); }
+
+    /* ---- MENU TABS ---- */
+    .menu-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; }
+    .menu-tab {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 10px 22px;
+      border-radius: 50px;
+      border: 2px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .menu-tab.active { background: var(--pink); border-color: var(--pink); color: var(--white); }
+    .menu-panel { display: none; }
+    .menu-panel.active { display: grid; gap: 32px; align-items: start; }
+    @media (min-width: 768px) { .menu-panel.active { grid-template-columns: 1fr 1fr; } }
+    .menu-panel-imgs {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      grid-template-rows: 260px 180px;
+      gap: 10px;
+    }
+    .menu-panel-img-main { grid-row: 1 / 3; border-radius: 12px; overflow: hidden; }
+    .menu-panel-img-sub  { border-radius: 12px; overflow: hidden; }
+    .menu-panel-copy h3 { font-size: 26px; font-weight: 900; margin-bottom: 8px; }
+    .menu-desc { color: var(--muted); font-size: 15px; margin-bottom: 20px; line-height: 1.6; }
+    .dish-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 14px;
+    }
+    .dish-list { display: flex; flex-direction: column; gap: 14px; }
+    .dish-item h5 { font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 700; color: var(--white); margin-bottom: 2px; }
+    .dish-item p { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+    /* ---- CHEF ---- */
+    .chef-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+    @media (min-width: 768px) { .chef-grid { grid-template-columns: 1fr 1fr; } }
+    .chef-img-stack {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      grid-template-rows: 260px 180px;
+      gap: 10px;
+    }
+    .chef-img-main { grid-row: 1 / 3; border-radius: var(--radius); overflow: hidden; }
+    .chef-img-sub  { border-radius: var(--radius); overflow: hidden; }
+    .chef-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+    .chef-badge {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6px 16px;
+      border-radius: 50px;
+      border: 1.5px solid var(--cyan);
+      color: var(--cyan);
+    }
+
+    /* ---- GALLERY ---- */
+    .gallery-scroll {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding-bottom: 12px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+    .gallery-scroll::-webkit-scrollbar { height: 4px; }
+    .gallery-scroll::-webkit-scrollbar-track { background: var(--bg3); }
+    .gallery-scroll::-webkit-scrollbar-thumb { background: var(--pink); border-radius: 2px; }
+    @media (min-width: 900px) {
+      .gallery-scroll { display: grid; grid-template-columns: repeat(5, 1fr); overflow-x: visible; }
+    }
+    .gallery-thumb { flex: 0 0 220px; height: 260px; border-radius: 12px; overflow: hidden; scroll-snap-align: start; }
+    @media (min-width: 900px) { .gallery-thumb { flex: none; height: 240px; } }
+
+    /* ---- BAR ---- */
+    .bar-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+    @media (min-width: 768px) { .bar-grid { grid-template-columns: 1fr 1fr; } }
+    .bar-img { border-radius: var(--radius); overflow: hidden; height: 420px; }
+    .pricing-cards { display: flex; flex-direction: column; gap: 16px; }
+    .pricing-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      position: relative;
+    }
+    .pricing-card.featured {
+      border-color: var(--pink);
+      background: linear-gradient(135deg, rgba(255,59,212,0.08) 0%, rgba(11,15,30,1) 100%);
+    }
+    .pricing-badge {
+      position: absolute;
+      top: -10px; left: 24px;
+      background: var(--pink);
+      color: var(--white);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 12px;
+      border-radius: 50px;
+    }
+    .pricing-card h3 { font-size: 20px; font-weight: 800; margin-bottom: 4px; }
+    .pricing-price { font-family: 'Montserrat', sans-serif; font-size: 32px; font-weight: 900; margin-bottom: 4px; }
+    .pricing-price span { font-size: 16px; font-weight: 400; color: var(--muted); }
+    .pricing-note { font-size: 13px; color: var(--muted); margin-bottom: 16px; }
+    .pricing-includes { display: flex; flex-direction: column; gap: 7px; }
+    .pricing-includes li { font-size: 13px; color: var(--muted); padding-left: 18px; position: relative; list-style: none; }
+    .pricing-includes li::before { content: '✓'; position: absolute; left: 0; color: var(--cyan); font-weight: 700; }
+
+    /* ---- COCKTAILS ---- */
+    .cocktail-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    @media (min-width: 640px) { .cocktail-grid { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 900px) { .cocktail-grid { grid-template-columns: repeat(3, 1fr); } }
+    .cocktail-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+    }
+    .cocktail-card.mocktail { border-color: rgba(0,231,255,0.2); }
+    .cocktail-type { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cyan); margin-bottom: 6px; }
+    .cocktail-type.is-mocktail { color: #a78bfa; }
+    .cocktail-name { font-family: 'Montserrat', sans-serif; font-size: 17px; font-weight: 800; margin-bottom: 8px; }
+    .cocktail-desc { font-size: 13px; color: var(--muted); line-height: 1.55; }
+
+    /* ---- STEPS ---- */
+    .steps-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+    @media (min-width: 640px) { .steps-grid { grid-template-columns: repeat(3, 1fr); } }
+    .step-card { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px 24px; text-align: center; }
+    .step-num { font-family: 'Montserrat', sans-serif; font-size: 36px; font-weight: 900; color: var(--pink); opacity: 0.35; line-height: 1; margin-bottom: 12px; }
+    .step-card h4 { font-size: 16px; font-weight: 800; margin-bottom: 8px; }
+    .step-card p { font-size: 14px; color: var(--muted); line-height: 1.55; }
+
+    /* ---- FAQ ---- */
+    .faq-list { display: flex; flex-direction: column; gap: 4px; max-width: 780px; margin: 0 auto; }
+    .faq-item { background: var(--bg3); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+    .faq-btn {
+      width: 100%;
+      background: transparent;
+      border: none;
+      color: var(--white);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      text-align: left;
+      padding: 20px 24px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+    .faq-arrow { color: var(--pink); font-size: 20px; flex-shrink: 0; transition: transform 0.2s; }
+    .faq-btn.open .faq-arrow { transform: rotate(45deg); }
+    .faq-body { font-size: 14px; color: var(--muted); line-height: 1.65; padding: 0 24px 20px; display: none; }
+    .faq-body.open { display: block; }
+
+    /* ---- CTA BAND ---- */
+    .cta-band {
+      background: linear-gradient(135deg, rgba(255,59,212,0.15) 0%, rgba(0,231,255,0.08) 100%);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 90px 20px;
+      text-align: center;
+    }
+    .cta-band h2 { font-size: clamp(28px, 5vw, 52px); font-weight: 900; margin-bottom: 12px; }
+    .cta-band p { color: var(--muted); font-size: 18px; margin-bottom: 40px; }
+    .cta-phone {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--pink);
+      color: var(--white);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 22px;
+      padding: 20px 44px;
+      border-radius: 50px;
+      letter-spacing: 0.02em;
+      transition: opacity 0.2s;
+      margin-bottom: 20px;
+    }
+    .cta-phone:hover { opacity: 0.88; }
+    .cta-sub { font-size: 14px; color: var(--muted); }
+    .swimply-note {
+      background: rgba(0,231,255,0.06);
+      border: 1px solid rgba(0,231,255,0.2);
+      border-radius: 12px;
+      padding: 16px 20px;
+      font-size: 14px;
+      color: var(--muted);
+      max-width: 680px;
+      margin: 0 auto 40px;
+      text-align: center;
+    }
+    .swimply-note strong { color: var(--cyan); }
+
+    /* ---- CROSSLINK ---- */
+    .crosslink { background: var(--bg2); border-bottom: 1px solid var(--border); padding: 28px 20px; }
+    .crosslink-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      text-align: center;
+    }
+    .crosslink p { font-size: 15px; color: var(--muted); }
+    .crosslink a {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--cyan);
+      border: 1px solid var(--cyan);
+      padding: 8px 20px;
+      border-radius: 50px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .crosslink a:hover { background: var(--cyan); color: var(--bg); }
+
+    /* ---- FOOTER ---- */
+    footer { background: var(--bg); border-top: 1px solid var(--border); padding: 32px 20px; text-align: center; font-size: 13px; color: var(--muted); }
+    footer strong { color: var(--white); }
+    footer a { color: var(--pink); }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="nav-logo">
+        Fam Jam Events
+        <span>Catering &amp; Bar · Thousand Oaks, CA</span>
+      </div>
+      <div class="nav-links">
+        <a href="#catering">Catering</a>
+        <a href="#menus">Sample Menus</a>
+        <a href="#bar">Bar Service</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <a href="tel:+18188251031" class="nav-cta">📞 Call to Book</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-img">
+      <img src="images/hero.jpg" alt="Fam Jam Events catering spread — salads, sliders, fruit, and more" />
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Catering &amp; Bar · Thousand Oaks, CA</p>
+      <h1>Food Made with<br /><em>Love &amp; Flavor.</em></h1>
+      <p class="hero-sub">Restaurant-quality cuisine with a thoughtfully home-cooked feel — it feels less like catering and more like being welcomed into someone's home for an incredible meal.</p>
+      <div class="hero-btns">
+        <a href="tel:+18188251031" class="btn-primary">📞 Call Us: 818-825-1031</a>
+        <a href="#menus" class="btn-outline">See Sample Menus</a>
+      </div>
+      <span class="hero-tag">Starting at $30/person &nbsp;·&nbsp; Custom menus &nbsp;·&nbsp; Dietary restrictions welcome</span>
+    </div>
+  </section>
+
+  <!-- PROOF BAR -->
+  <div class="proof-bar">
+    <div class="proof-bar-inner">
+      <div class="proof-item">🍽️ Starting at <strong>$30/person</strong></div>
+      <div class="proof-item">👨‍🍳 <strong>El Salvadoran Chef</strong> — Latin flair &amp; unique twists</div>
+      <div class="proof-item">🌱 <strong>Vegan-Friendly</strong> — dietary restrictions mastered</div>
+      <div class="proof-item">🧒 <strong>Kid-Friendly</strong> menus &amp; themed dishes</div>
+      <div class="proof-item">🏭 <strong>Commercial Kitchen</strong> prep, finalized onsite</div>
+      <div class="proof-item">🍹 <strong>Bar Service</strong> from $250 when bundled</div>
+    </div>
+  </div>
+
+  <!-- CATERING OVERVIEW -->
+  <section class="section" id="catering">
+    <div class="container">
+      <p class="eyebrow">Catering</p>
+      <h2 class="section-title">Custom menus. Real flavor. No shortcuts.</h2>
+      <p class="section-sub">A curated menu of chef-driven dishes designed to feel intimate and homemade — not like catering. Refined, restaurant-level cuisine presented with a personal, at-home touch, built around your party vibe, your guests, and your tastes.</p>
+
+      <div class="overview-grid">
+        <div class="overview-img">
+          <img src="images/gourmetcatering.jpg" alt="Gourmet catering spread by Fam Jam Events" />
+        </div>
+        <div class="overview-points">
+          <div class="overview-point">
+            <div class="overview-icon">👨‍🍳</div>
+            <div>
+              <h4>El Salvadoran Chef with a Unique Flair</h4>
+              <p>Deep Latin roots with bold, vibrant flavors — and creative twists on Italian-American and Hispanic dishes that guests don't expect but absolutely love.</p>
+            </div>
+          </div>
+          <div class="overview-point">
+            <div class="overview-icon">🏭</div>
+            <div>
+              <h4>Commercial Kitchen Quality, Finished Onsite</h4>
+              <p>Everything is prepped in a professional commercial kitchen and finished fresh at your event. The result is elevated dishes that feel as personal and comforting as a meal made by the host — never like something that came out of a catering van.</p>
+            </div>
+          </div>
+          <div class="overview-point">
+            <div class="overview-icon">🌱</div>
+            <div>
+              <h4>Vegan &amp; Dietary Restrictions? Easy.</h4>
+              <p>Our chef is vegan and genuinely excels at food that meets restrictions without sacrificing flavor. Nobody gets a sad, afterthought plate at our events.</p>
+            </div>
+          </div>
+          <div class="overview-point">
+            <div class="overview-icon">🫙</div>
+            <div>
+              <h4>Homemade From Scratch</h4>
+              <p>Tortilla chips made in-house. Salsas and dips crafted fresh. The kind of details that make guests ask "wait, who catered this?" — then ask for the number.</p>
+            </div>
+          </div>
+          <div class="overview-point">
+            <div class="overview-icon">🎈</div>
+            <div>
+              <h4>Kid-Friendly &amp; Theme-Matchable</h4>
+              <p>Tell us the party theme and we'll match the menu to it — whether that's a tropical pool party or a princess birthday spread. Kids and adults both leave happy.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SAMPLE MENUS -->
+  <section class="section section--light" id="menus">
+    <div class="container">
+      <p class="eyebrow">Sample Menus</p>
+      <h2 class="section-title">A taste of what we can do.</h2>
+      <p class="section-sub">Every menu is custom — these samples show the range and creativity you can expect. Each dish is crafted to feel personal, familiar, and deeply comforting, while still impressing the table. Your event gets its own menu, built around your preferences and your guests.</p>
+
+      <div class="menu-tabs">
+        <button class="menu-tab active" onclick="showMenu(event, 'elevated')">Elevated Menu</button>
+        <button class="menu-tab" onclick="showMenu(event, 'fingerfood')">Finger Foods &amp; Bites</button>
+        <button class="menu-tab" onclick="showMenu(event, 'kid')">Kid-Friendly</button>
+      </div>
+
+      <!-- ELEVATED -->
+      <div class="menu-panel active" id="menu-elevated">
+        <div class="menu-panel-imgs">
+          <div class="menu-panel-img-main"><img src="images/empanadas.jpg" alt="Golden baked empanadas" /></div>
+          <div class="menu-panel-img-sub"><img src="images/stuffed-mushrooms.jpg" alt="Cheese-stuffed mushrooms with herb glaze" /></div>
+          <div class="menu-panel-img-sub"><img src="images/bruschetta.jpg" alt="Crostini bites with fresh toppings" /></div>
+        </div>
+        <div class="menu-panel-copy">
+          <h3>An Elevated Spread</h3>
+          <p class="menu-desc">Refined, restaurant-level cuisine with a personal, at-home touch. The kind of food that feels special without feeling stuffy — where every dish is intentionally crafted to feel familiar and deeply comforting, even when it's technically impressive. Perfect for milestone birthdays, graduations, and celebrations where the food is part of the statement.</p>
+          <p class="dish-label">Sample Dishes</p>
+          <div class="dish-list">
+            <div class="dish-item">
+              <h5>Shredded Beef Sliders</h5>
+              <p>Slow-cooked, pull-apart shredded beef on toasted Hawaiian rolls with a bright, fresh jicama mango slaw — sweet, savory, and impossible to eat just one.</p>
+            </div>
+            <div class="dish-item">
+              <h5>Baked Empanadas</h5>
+              <p>Golden, flaky empanada shells stuffed with warmly seasoned ground meat, plump raisins, and briny olives — a traditional El Salvadoran touch with deep, layered flavor.</p>
+            </div>
+            <div class="dish-item">
+              <h5>Savory Caprese Cheesecake</h5>
+              <p>A showstopper: Parmesan breadcrumb crust with a silky ricotta pesto filling, topped with fire-roasted cherry tomatoes. It sounds surprising — it tastes incredible.</p>
+            </div>
+            <div class="dish-item">
+              <h5>Lasagna Rolls</h5>
+              <p>Pasta sheets stuffed with herb ricotta and bathed in a white wine cheese sauce, topped with roasted butternut squash, kale, and spicy sausage over wilted spinach.</p>
+            </div>
+            <div class="dish-item">
+              <h5>Baked Pears</h5>
+              <p>Oven-baked pears filled with tangy feta, fresh blueberries, toasted nuts, and cranberries — finished with honey and fresh thyme. Effortlessly elegant.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FINGER FOODS -->
+      <div class="menu-panel" id="menu-fingerfood">
+        <div class="menu-panel-imgs">
+          <div class="menu-panel-img-main"><img src="images/fruit-board.jpg" alt="Artisan fruit and cracker board with house-made dips" /></div>
+          <div class="menu-panel-img-sub"><img src="images/stuffed-mushrooms.jpg" alt="Stuffed mushroom bites" /></div>
+          <div class="menu-panel-img-sub"><img src="images/bruschetta.jpg" alt="Crostini bar setup" /></div>
+        </div>
+        <div class="menu-panel-copy">
+          <h3>Casual Bites &amp; Finger Foods</h3>
+          <p class="menu-desc">Low-fuss, high-flavor. Great for pool parties, cocktail hours, and events where guests want to eat with one hand and keep mingling with the other.</p>
+          <p class="dish-label">Sample Dishes</p>
+          <div class="dish-list">
+            <div class="dish-item">
+              <h5>Artisan Fruit &amp; Cracker Board</h5>
+              <p>Fresh seasonal berries, grapes, and stone fruit with house-made dips and premium crackers — beautiful enough to be a centerpiece, delicious enough to disappear fast.</p>
+            </div>
+            <div class="dish-item">
+              <h5>Cheese-Stuffed Mushrooms</h5>
+              <p>Earthy portobello caps filled with a creamy cheese blend, finished with a hot honey glaze and fresh chives. Rich, buttery, and gone within minutes.</p>
+            </div>
+            <div class="dish-item">
+              <h5>Crostini Bar</h5>
+              <p>Toasted crostini piled with fresh toppings — herb spreads, roasted peppers, shaved parmesan. Pairs beautifully with our scratch-made salsas and dips.</p>
+            </div>
+            <div class="dish-item">
+              <h5>Turkey Meatballs</h5>
+              <p>Herb-seasoned turkey meatballs over wilted spinach, smothered in a velvety mushroom gravy. Comfort food that feels a little fancy.</p>
+            </div>
+            <div class="dish-item">
+              <h5>Hot Honey Roasted Carrots</h5>
+              <p>Roasted to caramelized perfection, served over whipped citrus ricotta, finished with hot honey. A vegetable dish guests actually talk about.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- KID FRIENDLY -->
+      <div class="menu-panel" id="menu-kid">
+        <div class="menu-panel-imgs">
+          <div class="menu-panel-img-main"><img src="images/berry-tarts.jpg" alt="Berry tarts and pastries for a kid party spread" /></div>
+          <div class="menu-panel-img-sub"><img src="images/fruit-board.jpg" alt="Fresh fruit board for kids" /></div>
+          <div class="menu-panel-img-sub"><img src="images/gourmet.jpg" alt="Kids' party catering setup" /></div>
+        </div>
+        <div class="menu-panel-copy">
+          <h3>Kid-Friendly Menus</h3>
+          <p class="menu-desc">Our chef knows kids. Familiar flavors, fun presentations, and zero compromise on quality. Tell us the party theme and the food matches it — from tropical to princess to superhero.</p>
+          <p class="dish-label">Sample Dishes</p>
+          <div class="dish-list">
+            <div class="dish-item">
+              <h5>Mini Sliders</h5>
+              <p>Kid-sized sliders on soft rolls with crowd-pleasing fillings — classic beef, chicken, or a fun seasonal variation. Easy to eat, easy to love.</p>
+            </div>
+            <div class="dish-item">
+              <h5>Fresh Fruit Boards</h5>
+              <p>Colorful fruit arrangements styled to your party's color palette — strawberries, grapes, watermelon, and berries that double as décor.</p>
+            </div>
+            <div class="dish-item">
+              <h5>Berry Tarts &amp; Sweet Bites</h5>
+              <p>Buttery pastry shells filled with cream and loaded with fresh berries — the kind of dessert that looks as good as it tastes and has kids lining up for seconds.</p>
+            </div>
+            <div class="dish-item">
+              <h5>Homemade Tortilla Chips &amp; Salsas</h5>
+              <p>Chips and salsa made entirely from scratch — a notch above anything from a bag, and something both kids and adults reach for all afternoon.</p>
+            </div>
+            <div class="dish-item">
+              <h5>Theme-Matched Dishes</h5>
+              <p>Food that's part of the party, not just fuel for it. Share the theme and we'll build the whole menu around it — colors, flavors, and presentation included.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CHEF STORY -->
+  <section class="section" id="chef">
+    <div class="container">
+      <p class="eyebrow">The Chef</p>
+      <h2 class="section-title">Latin roots. Creative soul. Food made with love.</h2>
+      <p class="section-sub">This isn't corporate catering. It's chef-crafted food with the warmth and intent of home cooking — deeply flavored, rooted in tradition, and designed to make every guest feel like they've been welcomed into someone's home for the meal of their life.</p>
+
+      <div class="chef-grid">
+        <div class="chef-img-stack">
+          <div class="chef-img-main"><img src="images/gourmetcatering.jpg" alt="Elegant catering spread with attention to detail" /></div>
+          <div class="chef-img-sub"><img src="images/empanadas.jpg" alt="Handmade empanadas" /></div>
+          <div class="chef-img-sub"><img src="images/stuffed-mushrooms.jpg" alt="Artisan stuffed mushrooms" /></div>
+        </div>
+        <div>
+          <p style="color:var(--muted);font-size:16px;line-height:1.75;margin-bottom:20px;">Our chef's El Salvadoran heritage shows up in every menu — vibrant Latin flavors, bold spice profiles, and a deep respect for scratch cooking. Expect inspired takes on Italian-American classics, playful riffs on Hispanic street food, and dishes that don't fit neatly into any category. They just taste great. The goal with every event is the same: guests should feel less like they're being catered to and more like they've been welcomed into someone's home for an incredible meal.</p>
+          <p style="color:var(--muted);font-size:16px;line-height:1.75;margin-bottom:20px;">As a vegan chef, she's mastered the art of cooking food that's genuinely delicious whether or not it contains meat or dairy. Guests with restrictions feel celebrated, not accommodated. And if you eat everything? You'll be equally wowed.</p>
+          <p style="color:var(--muted);font-size:16px;line-height:1.75;margin-bottom:28px;">Everything from tortilla chips to salsas to dips is made from scratch. Every dish is intentionally crafted to feel personal, familiar, and deeply comforting — restaurant technique with a homemade warmth that guests notice immediately. They always ask who the caterer was.</p>
+          <div class="chef-badges">
+            <span class="chef-badge">El Salvadoran Heritage</span>
+            <span class="chef-badge">Vegan Chef</span>
+            <span class="chef-badge">Scratch Cooking</span>
+            <span class="chef-badge">Latin Flair</span>
+            <span class="chef-badge">Dietary Restrictions</span>
+            <span class="chef-badge">Kid-Friendly</span>
+            <span class="chef-badge">Custom Menus</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOD GALLERY -->
+  <section class="section section--light" id="gallery">
+    <div class="container">
+      <p class="eyebrow">The Food</p>
+      <h2 class="section-title">See what lands on the table.</h2>
+      <p class="section-sub">Shots from past events — each one a custom menu, each one a party people still talk about.</p>
+      <div class="gallery-scroll">
+        <div class="gallery-thumb"><img src="images/empanadas.jpg" alt="Golden handmade empanadas" /></div>
+        <div class="gallery-thumb"><img src="images/stuffed-mushrooms.jpg" alt="Cheese-stuffed mushrooms with herb glaze" /></div>
+        <div class="gallery-thumb"><img src="images/fruit-board.jpg" alt="Artisan fruit and cracker board" /></div>
+        <div class="gallery-thumb"><img src="images/bruschetta.jpg" alt="Crostini bites with sangria" /></div>
+        <div class="gallery-thumb"><img src="images/berry-tarts.jpg" alt="Fresh berry tarts and pastries" /></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BAR SERVICE -->
+  <section class="section" id="bar">
+    <div class="container">
+      <p class="eyebrow">Bar Service</p>
+      <h2 class="section-title">Cocktails designed for your crowd.</h2>
+      <p class="section-sub">A solo bartending experience built around your party vibe — custom cocktails, mocktails, and a drink menu your guests will actually remember. You supply the alcohol, we handle everything else.</p>
+
+      <div class="bar-grid">
+        <div class="bar-img">
+          <img src="images/bartender.avif" alt="Professional bartender at Fam Jam Events" />
+        </div>
+        <div>
+          <div class="pricing-cards">
+            <div class="pricing-card featured">
+              <div class="pricing-badge">Best Value</div>
+              <h3>Bar + Catering Bundle</h3>
+              <div class="pricing-price">$250 <span>+ cost of alcohol</span></div>
+              <p class="pricing-note">3-hour bartending experience when booked with catering</p>
+              <ul class="pricing-includes">
+                <li>Custom cocktail &amp; mocktail menu designed for your event</li>
+                <li>Professional solo bartender for 3 hours</li>
+                <li>Personalized shopping list — you buy the alcohol, guests keep what's left</li>
+                <li>Bar setup and breakdown included</li>
+                <li>Pairs with any catering tier</li>
+              </ul>
+            </div>
+            <div class="pricing-card">
+              <h3>Bar Service Only</h3>
+              <div class="pricing-price">$300 <span>+ cost of alcohol</span></div>
+              <p class="pricing-note">3-hour bartending experience, standalone</p>
+              <ul class="pricing-includes">
+                <li>Custom cocktail &amp; mocktail menu for your event vibe</li>
+                <li>Professional solo bartender for 3 hours</li>
+                <li>Shopping list provided — guests keep leftover alcohol</li>
+                <li>Full setup and breakdown</li>
+              </ul>
+            </div>
+          </div>
+          <div style="margin-top:20px;padding:18px 20px;background:var(--bg3);border:1px solid var(--border);border-radius:12px;">
+            <p style="font-size:14px;color:var(--muted);line-height:1.6;"><strong style="color:var(--white);">How the alcohol works:</strong> We create your full cocktail menu, then hand you a precise shopping list so you know exactly what to buy and how much. You purchase it — anything unused goes home with you or your guests. No waste, no mystery charges.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SAMPLE COCKTAILS -->
+  <section class="section section--light" id="cocktails">
+    <div class="container">
+      <p class="eyebrow">Sample Bar Menu</p>
+      <h2 class="section-title">Custom cocktails that fit your party.</h2>
+      <p class="section-sub">Every bar menu is designed fresh for your event. Here's one example from a past party — creative names, elevated ingredients, mocktails built in so everyone can participate.</p>
+
+      <div class="cocktail-grid">
+        <div class="cocktail-card">
+          <p class="cocktail-type">Signature Cocktail</p>
+          <h4 class="cocktail-name">Funky Town Fresh</h4>
+          <p class="cocktail-desc">Muddled strawberries, vodka, fresh lemon juice, basil, and a splash of St. Germaine elderflower liqueur. Bright, floral, and dangerously refreshing.</p>
+        </div>
+        <div class="cocktail-card">
+          <p class="cocktail-type">Signature Cocktail</p>
+          <h4 class="cocktail-name">Boogie Fever</h4>
+          <p class="cocktail-desc">Aperol, fresh grapefruit juice, and champagne. Bubbly, bittersweet, and impossible not to like. A crowd favorite that disappears fast.</p>
+        </div>
+        <div class="cocktail-card">
+          <p class="cocktail-type">Signature Cocktail</p>
+          <h4 class="cocktail-name">Electric Slide</h4>
+          <p class="cocktail-desc">Tequila, agave, lime juice, muddled mixed berries, and a hint of fresh sage. Bold Latin flavor with a wild berry kick.</p>
+        </div>
+        <div class="cocktail-card">
+          <p class="cocktail-type">Signature Cocktail</p>
+          <h4 class="cocktail-name">Stayin' Alive</h4>
+          <p class="cocktail-desc">Bourbon, orange juice, aromatic bitters, and brown sugar syrup. A sophisticated whiskey classic — warm, complex, and perfect for sipping.</p>
+        </div>
+        <div class="cocktail-card mocktail">
+          <p class="cocktail-type is-mocktail">Mocktail</p>
+          <h4 class="cocktail-name">Studio 54 Spritz</h4>
+          <p class="cocktail-desc">Sparkling water, cranberry juice, and fresh lime. Clean, crisp, and surprisingly elegant. Nobody misses the alcohol.</p>
+        </div>
+        <div class="cocktail-card mocktail">
+          <p class="cocktail-type is-mocktail">Mocktail</p>
+          <h4 class="cocktail-name">Retro Cooler</h4>
+          <p class="cocktail-desc">Fresh strawberries, basil, grapefruit, and club soda. Vibrant and herbaceous — a mocktail that actually gets people excited.</p>
+        </div>
+      </div>
+
+      <p style="text-align:center;font-size:14px;color:var(--muted);margin-top:32px;">Your menu will be completely different — designed around your theme, flavor preferences, and guest mix. These are just one example.</p>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section" id="how">
+    <div class="container">
+      <p class="eyebrow">How It Works</p>
+      <h2 class="section-title">Simple from start to finish.</h2>
+      <p class="section-sub">We keep the process easy so you can focus on actually enjoying your party.</p>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-num">01</div>
+          <h4>Call Us</h4>
+          <p>Reach out at 818-825-1031 and tell us about your event — the date, guest count, vibe, and any dietary needs. The more you share, the better we can design for you.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">02</div>
+          <h4>We Design Your Menu</h4>
+          <p>Our chef creates a custom menu around your event. You'll know exactly what's being served, and we work with you until it feels right. Bar clients also get a full cocktail menu and shopping list.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">03</div>
+          <h4>Show Up &amp; Enjoy</h4>
+          <p>Food is prepped in our commercial kitchen and finalized onsite. No catering chaos, no mess. We handle it — you host, guests eat well, everyone wins.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section section--light" id="faq">
+    <div class="container">
+      <p class="eyebrow">Questions</p>
+      <h2 class="section-title" style="text-align:center;">Frequently asked.</h2>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-btn" onclick="toggleFaq(this)">
+            What's included in the per-person catering price?
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-body">Pricing starts at $30/person and covers the custom menu, all food prep, onsite finishing, serving setup, and cleanup. More elaborate multi-course menus are priced accordingly — we'll quote you clearly before anything is confirmed.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-btn" onclick="toggleFaq(this)">
+            Can you accommodate dietary restrictions — vegan, gluten-free, allergies?
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-body">Absolutely — and this is genuinely a strength. Our chef is vegan herself, so plant-based cooking isn't an accommodation, it's a specialty. Gluten-free, nut-free, dairy-free, halal — just tell us upfront and we build the menu around it. Nobody gets a sad afterthought plate at our events.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-btn" onclick="toggleFaq(this)">
+            What's the minimum guest count?
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-body">Call us and we'll talk through what makes sense for your specific event. We work with a range of party sizes and are happy to find a setup that fits your headcount and budget.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-btn" onclick="toggleFaq(this)">
+            Do I need to provide anything for the catering?
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-body">Generally, no — we bring what's needed to serve and finish the food onsite. We'll ask about your space and setup in advance so we can plan accordingly. If you have specific serving ware or theme preferences, we love coordinating on those details.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-btn" onclick="toggleFaq(this)">
+            How does the bar service work — do I need to buy alcohol?
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-body">Yes — the bartender price covers skill, time, and service. Alcohol is purchased by you separately. We make it easy with a precise shopping list tailored to your cocktail menu. You know exactly what to buy, and anything left over goes home with you or your guests.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-btn" onclick="toggleFaq(this)">
+            Can you cater events outside of The Oasis venue?
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-body">Yes! Catering and bar aren't exclusive to The Oasis. We serve the greater Thousand Oaks, Ventura County, and Los Angeles area. Call us to discuss your location and event details.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-btn" onclick="toggleFaq(this)">
+            How far in advance should I book?
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-body">The sooner the better, especially for weekend dates. Custom menus take care and thought to design well — we want to give your event the attention it deserves. Call as early as possible to lock in your date and start the menu conversation.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BAND -->
+  <div class="cta-band">
+    <div class="swimply-note">
+      <strong>Found us on Swimply?</strong> We can't process catering bookings through the platform directly — but we'd love to set it up. Give us a call and we'll handle everything.
+    </div>
+    <h2>Ready to make your party<br />unforgettable?</h2>
+    <p>Call us to talk through your event, menu, and vibe. We'll take it from there.</p>
+    <div>
+      <a href="tel:+18188251031" class="cta-phone">📞 818-825-1031</a>
+      <p class="cta-sub">We're real people. Call or text — we respond fast.</p>
+    </div>
+  </div>
+
+  <!-- CROSSLINK -->
+  <div class="crosslink">
+    <div class="crosslink-inner">
+      <p>Hosting at The Oasis? Check out our full private pool venue experience.</p>
+      <a href="https://famjamevents.com" target="_blank">Visit famjamevents.com →</a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p><strong>Fam Jam Events — Catering &amp; Bar</strong></p>
+    <p style="margin-top:6px;">Thousand Oaks, CA · Serving Ventura County &amp; greater Los Angeles</p>
+    <p style="margin-top:6px;">📞 <a href="tel:+18188251031">818-825-1031</a> &nbsp;·&nbsp; <a href="https://famjamevents.com">famjamevents.com</a></p>
+    <p style="margin-top:16px;">© 2026 Fam Jam Events. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function showMenu(e, id) {
+      document.querySelectorAll('.menu-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
+      document.getElementById('menu-' + id).classList.add('active');
+      e.currentTarget.classList.add('active');
+    }
+    function toggleFaq(btn) {
+      const body = btn.nextElementSibling;
+      const isOpen = btn.classList.contains('open');
+      document.querySelectorAll('.faq-btn').forEach(b => b.classList.remove('open'));
+      document.querySelectorAll('.faq-body').forEach(b => b.classList.remove('open'));
+      if (!isOpen) { btn.classList.add('open'); body.classList.add('open'); }
+    }
+  </script>
+
+</body>
+</html>
