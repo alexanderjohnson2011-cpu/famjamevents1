@@ -126,18 +126,19 @@
     }
     .nav-cta:hover { opacity: 0.85; }
     @media (max-width: 600px) {
-      .nav-inner { height: 56px; }
-      .nav-logo { font-size: 15px; }
-      .nav-logo span { display: none; }
-      .nav-cta { font-size: 12px; padding: 8px 16px; }
-      .hero { padding-top: 56px; }
+      .nav-inner { height: 60px; }
+      .nav-logo { font-size: 13px; }
+      .nav-logo span { display: block; }
+      .nav-logo-loc { display: none; }
+      .nav-cta { font-size: 12px; padding: 8px 14px; }
+      .hero { padding-top: 60px; min-height: 540px; }
     }
 
     /* ---- HERO ---- */
     .hero {
       position: relative;
       height: 62vh;
-      min-height: 480px;
+      min-height: 550px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -486,7 +487,7 @@
     <div class="nav-inner">
       <div class="nav-logo">
         Fam Jam Events
-        <span>Catering &amp; Bar · Thousand Oaks, CA</span>
+        <span>Catering &amp; Bar<span class="nav-logo-loc"> &middot; Thousand Oaks, CA</span></span>
       </div>
       <div class="nav-links">
         <a href="#catering">Catering</a>
