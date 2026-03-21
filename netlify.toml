@@ -5,14 +5,4 @@
 [build.environment]
   NODE_VERSION = "20"
 
-[[redirects]]
-  from = "https://oasis.famjamevents.com/*"
-  to = "https://famjamevents.com/oasis/:splat"
-  status = 301
-  force = true
 
-[[redirects]]
-  from = "https://catering.famjamevents.com/*"
-  to = "https://famjamevents.com/catering/:splat"
-  status = 301
-  force = true
