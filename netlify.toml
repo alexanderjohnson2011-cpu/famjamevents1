@@ -1,6 +1,18 @@
 [build]
-  command = "npm run build && cp -r oasis dist/oasis"
+  command = "npm run build && cp -r oasis dist/oasis && cp -r catering dist/catering"
   publish = "dist"
 
 [build.environment]
   NODE_VERSION = "20"
+
+[[redirects]]
+  from = "https://oasis.famjamevents.com/*"
+  to = "/oasis/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "https://catering.famjamevents.com/*"
+  to = "/catering/:splat"
+  status = 200
+  force = true
