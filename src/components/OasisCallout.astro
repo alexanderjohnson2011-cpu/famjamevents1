@@ -1,0 +1,186 @@
+---
+---
+<section class="oasis-callout" id="oasis">
+  <div class="oasis-callout-inner">
+    <div class="oasis-text">
+      <div class="section-label" style="color:var(--cyan);margin-bottom:14px;">Need a Venue?</div>
+      <h2>Take the Party to <span class="grad">The Oasis</span></h2>
+      <p class="sub">
+        Need more than music and a photo booth? The Oasis is Fam Jam's private venue — a stunning backyard space in Thousand Oaks with a pool, outdoor kitchen, and room for your whole crew. Perfect for birthdays, pool parties, and milestone celebrations.
+      </p>
+      <ul class="oasis-features">
+        <li>Private pool venue for up to 50 guests</li>
+        <li>Outdoor kitchen & covered lounge areas</li>
+        <li>Add-on DJ, photo booth & catering available</li>
+        <li>Full-service party hosting — just show up and celebrate</li>
+      </ul>
+      <a href="https://oasis.famjamevents.com" class="btn btn-cyan" target="_blank" rel="noopener">
+        Explore The Oasis ✦
+      </a>
+    </div>
+    <div class="oasis-visual">
+      <div class="oasis-card">
+        <div class="oasis-card-badge">PRIVATE VENUE</div>
+        <div class="oasis-icon">🏊</div>
+        <div class="oasis-card-title">The Oasis</div>
+        <div class="oasis-card-sub">oasis.famjamevents.com</div>
+        <div class="oasis-card-divider"></div>
+        <ul class="oasis-card-list">
+          <li>Pool + Outdoor Space</li>
+          <li>Up to 50 Guests</li>
+          <li>DJ · Booth · Catering</li>
+          <li>Thousand Oaks, CA</li>
+        </ul>
+        <a href="https://oasis.famjamevents.com" class="oasis-card-link" target="_blank" rel="noopener">
+          View The Venue →
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .oasis-callout {
+    background: var(--night);
+    border-top: 1px solid var(--border);
+    padding: 100px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  .oasis-callout::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 80% 50%, rgba(0,231,255,.12) 0%, transparent 50%),
+      radial-gradient(ellipse at 10% 70%, rgba(124,92,255,.15) 0%, transparent 45%);
+    pointer-events: none;
+  }
+  .oasis-callout-inner {
+    max-width: 1160px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 72px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+  .oasis-features {
+    list-style: none;
+    margin: 24px 0 36px;
+  }
+  .oasis-features li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: .88rem;
+    color: rgba(245,247,250,.75);
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .oasis-features li:last-child { border-bottom: none; }
+  .oasis-features li::before {
+    content: '✓';
+    color: var(--cyan);
+    font-weight: 700;
+    font-size: .75rem;
+    flex-shrink: 0;
+  }
+
+  /* Card */
+  .oasis-card {
+    background: rgba(0,231,255,.05);
+    border: 1px solid rgba(0,231,255,.2);
+    border-radius: 20px;
+    padding: 36px 32px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 0 60px rgba(0,231,255,.08);
+  }
+  .oasis-card-badge {
+    font-size: .62rem;
+    font-weight: 800;
+    letter-spacing: .12em;
+    color: var(--cyan);
+    background: rgba(0,231,255,.1);
+    border: 1px solid rgba(0,231,255,.25);
+    padding: 4px 14px;
+    border-radius: 100px;
+    display: inline-block;
+    margin-bottom: 20px;
+  }
+  .oasis-icon {
+    font-size: 2.8rem;
+    margin-bottom: 12px;
+    display: block;
+  }
+  .oasis-card-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 1.6rem;
+    color: var(--body);
+    margin-bottom: 4px;
+  }
+  .oasis-card-sub {
+    font-size: .78rem;
+    color: var(--cyan);
+    margin-bottom: 20px;
+    font-weight: 500;
+  }
+  .oasis-card-divider {
+    height: 1px;
+    background: rgba(0,231,255,.15);
+    margin-bottom: 20px;
+  }
+  .oasis-card-list {
+    list-style: none;
+    margin-bottom: 28px;
+  }
+  .oasis-card-list li {
+    font-size: .85rem;
+    color: rgba(245,247,250,.7);
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-align: left;
+  }
+  .oasis-card-list li:last-child { border-bottom: none; }
+  .oasis-card-list li::before {
+    content: '→';
+    color: var(--cyan);
+    font-size: .75rem;
+    flex-shrink: 0;
+  }
+  .oasis-card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--cyan);
+    color: #0b0f1e;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: .85rem;
+    padding: 11px 24px;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: filter .2s, transform .15s;
+    box-shadow: 0 0 24px rgba(0,231,255,.3);
+  }
+  .oasis-card-link:hover {
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+    box-shadow: 0 0 36px rgba(0,231,255,.45);
+  }
+
+  @media (max-width: 860px) {
+    .oasis-callout { padding: 72px 20px; }
+    .oasis-callout-inner {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+    .oasis-visual { order: -1; }
+    .oasis-card { max-width: 360px; margin: 0 auto; }
+  }
+</style>

@@ -13,6 +13,7 @@ const { currentPage = '/' } = Astro.props;
     <li><a href="/#gallery">Gallery</a></li>
     <li><a href="/#collective">The Collective</a></li>
     <li><a href="/#vibe-lab">Vibe Lab</a></li>
+    <li><a href="https://oasis.famjamevents.com" target="_blank" rel="noopener" class="nav-oasis">The Oasis ✦</a></li>
     <li class="nav-mobile-cta"><a href="/book" class="nav-cta">Book Now</a></li>
   </ul>
   <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu">
@@ -36,3 +37,15 @@ const { currentPage = '/' } = Astro.props;
     });
   });
 </script>
+
+<style>
+  .nav-oasis {
+    color: var(--cyan) !important;
+    border-bottom-color: transparent !important;
+  }
+  .nav-oasis:hover {
+    color: var(--cyan) !important;
+    border-bottom-color: var(--cyan) !important;
+    opacity: .85;
+  }
+</style>
