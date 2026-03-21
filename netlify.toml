@@ -7,12 +7,12 @@
 
 [[redirects]]
   from = "https://oasis.famjamevents.com/*"
-  to = "/oasis/:splat"
-  status = 200
+  to = "https://famjamevents.com/oasis/:splat"
+  status = 301
   force = true
 
 [[redirects]]
   from = "https://catering.famjamevents.com/*"
-  to = "/catering/:splat"
-  status = 200
+  to = "https://famjamevents.com/catering/:splat"
+  status = 301
   force = true
