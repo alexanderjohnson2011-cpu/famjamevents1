@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -18,29 +18,29 @@
       hourly: {
         minHours: 3, maxHours: 12,
         tiers: [
-          { min: 1,  max: 5,   ratePerHour: 65  },
-          { min: 6,  max: 10,  ratePerHour: 85  },
-          { min: 11, max: 15,  ratePerHour: 100 },
-          { min: 16, max: 20,  ratePerHour: 110 },
-          { min: 21, max: 30,  ratePerHour: 115 },
-          { min: 31, max: 40,  ratePerHour: 125 },
-          { min: 41, max: 50,  ratePerHour: 160 },
-          { min: 51, max: 60,  ratePerHour: 200 },
-          { min: 61, max: 70,  ratePerHour: 250 },
-          { min: 71, max: 80,  ratePerHour: 300 },
-          { min: 81, max: 90,  ratePerHour: 350 },
-          { min: 91, max: 100, ratePerHour: 400 }
+          { min: 1,  max: 5,   ratePerHour: 59  },
+          { min: 6,  max: 10,  ratePerHour: 77  },
+          { min: 11, max: 15,  ratePerHour: 90  },
+          { min: 16, max: 20,  ratePerHour: 99  },
+          { min: 21, max: 30,  ratePerHour: 104 },
+          { min: 31, max: 40,  ratePerHour: 113 },
+          { min: 41, max: 50,  ratePerHour: 144 },
+          { min: 51, max: 60,  ratePerHour: 180 },
+          { min: 61, max: 70,  ratePerHour: 225 },
+          { min: 71, max: 80,  ratePerHour: 270 },
+          { min: 81, max: 90,  ratePerHour: 315 },
+          { min: 91, max: 100, ratePerHour: 360 }
         ]
       },
-      fullDay: { under50: 1280, over50: 3200 }
+      fullDay: { under50: 1152, over50: 2880 }
     },
     catering: {
-      gourmet:      { pricePerPerson: 42, label: "Gourmet" },
-      fingerFoods:  { pricePerPerson: 30, label: "Casual – Finger Foods" },
-      kidParty:     { pricePerPerson: 30, label: "Casual – Kid Party Menu" },
-      tacoTable:    { pricePerPerson: 30, label: "Casual – Taco Table" },
-      grazingTable: { pricePerPerson: 36, label: "Grazing Table" }
+      gourmet:     { pricePerPerson: 40, label: "Gourmet" },
+      fingerFoods: { pricePerPerson: 30, label: "Casual – Finger Foods" },
+      kidParty:    { pricePerPerson: 30, label: "Casual – Kid Party Menu" },
+      tacoTable:   { pricePerPerson: 30, label: "Casual – Taco Table" }
     },
+    grazingTable: { pricePerPerson: 30, label: "Grazing Table" },
     bartender: {
       single:   { pricePerHour: 90,  label: "1 Bartender" },
       double:   { pricePerHour: 144, label: "2 Bartenders" },
@@ -93,11 +93,20 @@
     catering: {
       title: "Catering", eyebrow: "Food & Dining",
       bullets: [
-        "Choose from Gourmet, Casual, or a Grazing Table — all priced per person",
+        "Choose from Gourmet or Casual styles — all priced per person",
         "Casual options include Finger Foods, Kid Party Menu, or a Taco Table",
         "Our catering partners handle setup, service, and cleanup — nothing for you to worry about"
       ],
-      images: ["images/food/gourmet-catering.jpg","images/food/gourmet-catering-2.jpg","images/food/catering-spread.jpg","images/food/grazing-table.jpeg","images/food/grazing-table-2.jpeg"]
+      images: ["images/food/gourmet-catering.jpg","images/food/gourmet-catering-2.jpg","images/food/catering-spread.jpg"]
+    },
+    grazingTable: {
+      title: "Grazing Table", eyebrow: "Food & Styling",
+      bullets: [
+        "A beautifully styled spread that doubles as a centerpiece — guests always gather around it",
+        "Priced per person and scales with your guest count",
+        "Fully set up and styled by our team — nothing for you to manage"
+      ],
+      images: ["images/food/grazing-table.jpeg","images/food/grazing-table-2.jpeg"]
     },
     bartender: {
       title: "Bartender", eyebrow: "Bar Service",
@@ -525,6 +534,13 @@
           <div class="vp-amount" id="vpAmount">$0</div>
         </div>
       </div>
+
+      <!-- Full-day upgrade callout (shown when hourly total exceeds full-day price) -->
+      <div id="fullDayCallout" class="hidden" style="margin-top:12px;padding:12px 16px;background:rgba(255,59,212,0.1);border:1px solid var(--pink);border-radius:10px;font-size:13px;line-height:1.6;">
+        <strong style="color:var(--pink);">💡 Full Day is a better deal</strong><br>
+        <span id="fullDayCalloutText" style="color:var(--muted);"></span><br>
+        <button onclick="switchToFullDay()" style="margin-top:8px;background:var(--pink);color:#fff;border:none;border-radius:20px;padding:6px 18px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;">Switch to Full Day →</button>
+      </div>
     </div>
 
     <!-- STEP 2: ADD-ONS -->
@@ -738,7 +754,29 @@ function updateVenueDisplay() {
     const bucket = state.guests < 50 ? '< 50' : '50–100';
     document.getElementById('vpRate').textContent = `Full day rate · ${bucket} guests`;
   }
+  // Show full-day callout when hourly cost exceeds full-day price
+  const fullDayPrice = state.guests < 50 ? P.venue.fullDay.under50 : P.venue.fullDay.over50;
+  const callout = document.getElementById('fullDayCallout');
+  if (callout) {
+    if (state.venueType === 'hourly' && price > fullDayPrice) {
+      const savings = price - fullDayPrice;
+      document.getElementById('fullDayCalloutText').textContent =
+        `At ${state.hours} hrs, full day access is $${fullDayPrice.toLocaleString()} — you'd save $${savings.toLocaleString()}.`;
+      callout.classList.remove('hidden');
+    } else {
+      callout.classList.add('hidden');
+    }
+  }
+
   updateQuote();
+}
+
+function switchToFullDay() {
+  state.venueType = 'fullday';
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.type === 'fullday'));
+  document.getElementById('durationField').classList.add('hidden');
+  document.getElementById('fullDayField').classList.remove('hidden');
+  updateVenueDisplay();
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -749,8 +787,10 @@ function getServicePrice(id, sel) {
   switch(id) {
     case 'catering':
       const catKey = sel.option || 'gourmet';
-      const cPrice = P.catering[catKey] ? P.catering[catKey].pricePerPerson : 42;
+      const cPrice = P.catering[catKey] ? P.catering[catKey].pricePerPerson : 40;
       return cPrice * state.guests;
+    case 'grazingTable':
+      return P.grazingTable.pricePerPerson * state.guests;
     case 'bartender':
       const bKey = state.guests > 60 ? 'double' : 'single';
       const bHours = sel.hours || P.bartender.minHours;
@@ -782,6 +822,8 @@ function getServiceLabel(id, sel) {
       const catKey = sel.option || 'gourmet';
       return P.catering[catKey] ? P.catering[catKey].label : 'Catering';
     }
+    case 'grazingTable':
+      return P.grazingTable.label;
     case 'bartender': {
       const bKey = state.guests > 60 ? 'double' : 'single';
       const bHours = sel.hours || P.bartender.minHours;
@@ -860,6 +902,15 @@ function getLineItems() {
       factors: `${state.guests} guests`,
       unitRate: `$${c.pricePerPerson}/person`,
       total: c.pricePerPerson * state.guests, removable: true });
+  }
+
+  // Grazing Table
+  const grazSel = state.selections.grazingTable;
+  if (grazSel && grazSel.added) {
+    items.push({ id: 'grazingTable', category: 'Grazing Table', item: P.grazingTable.label,
+      factors: `${state.guests} guests`,
+      unitRate: `$${P.grazingTable.pricePerPerson}/person`,
+      total: P.grazingTable.pricePerPerson * state.guests, removable: true });
   }
 
   // ── Bartender ──
@@ -1103,8 +1154,7 @@ function buildCard(id) {
       { key:'gourmet',      label:'Gourmet' },
       { key:'fingerFoods',  label:'Finger Foods' },
       { key:'kidParty',     label:'Kid Party' },
-      { key:'tacoTable',    label:'Taco Table' },
-      { key:'grazingTable', label:'Grazing Table' }
+      { key:'tacoTable',    label:'Taco Table' }
     ];
     const selectedOpt = sel.option || 'gourmet';
     const price = P.catering[selectedOpt] ? P.catering[selectedOpt].pricePerPerson * state.guests : 0;
@@ -1117,6 +1167,11 @@ function buildCard(id) {
       </div>`;
     priceDisplay = `<div class="card-price-amount">$${price.toLocaleString()}</div>
       <div class="card-price-unit">${P.catering[selectedOpt].pricePerPerson}/person · ${state.guests} guests</div>`;
+
+  } else if (id === 'grazingTable') {
+    const price = P.grazingTable.pricePerPerson * state.guests;
+    priceDisplay = `<div class="card-price-amount">$${price.toLocaleString()}</div>
+      <div class="card-price-unit">$${P.grazingTable.pricePerPerson}/person × ${state.guests} guests</div>`;
 
   } else if (id === 'bartender') {
     const bKey   = state.guests > 60 ? 'double' : 'single';
@@ -1234,7 +1289,7 @@ function buildCard(id) {
 }
 
 function renderCards() {
-  const order = ['catering','bartender','decor','balloons','dj','photobooth','bounceHouse','lifeguard'];
+  const order = ['catering','grazingTable','bartender','decor','balloons','dj','photobooth','bounceHouse','lifeguard'];
   document.getElementById('cardsGrid').innerHTML = order.map(id => buildCard(id)).join('');
   attachCardListeners();
 }
@@ -1354,7 +1409,24 @@ function renderComparison() {
   }
 
   // ── Bartender ──
-  const barSel = state.selections.bartender;
+  // Grazing Table comparison
+  const grazingSelCT = state.selections.grazingTable;
+  if (grazingSelCT && grazingSelCT.added) {
+    const gPP = P.grazingTable.pricePerPerson;
+    const gMktPP = avg.cateringPerPerson;
+    const gOurAmt = gPP * state.guests;
+    const gMktAmt = gMktPP * state.guests;
+    const gSave   = gMktAmt - gOurAmt;
+    marketTotal += gMktAmt; oasisTotal += gOurAmt;
+    rows.push(<tr>
+      <td><div class="ct-service">Grazing Table</div><div class="ct-detail">${state.guests} guests at $${gPP}/person ours vs $${gMktPP}/person market avg</div></td>
+      <td><span class="ct-them">$${gMktAmt.toLocaleString()}</span></td>
+      <td><span class="ct-us">$${gOurAmt.toLocaleString()}</span></td>
+      <td><span class="ct-save">Save $${gSave.toLocaleString()}</span></td>
+    </tr>);
+  }
+
+  // const barSel = state.selections.bartender;
   if (barSel && barSel.added) {
     const k    = state.guests > 60 ? 'double' : 'single';
     const hrs  = barSel.hours || P.bartender.minHours;

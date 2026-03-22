@@ -1,4 +1,4 @@
-// ─────────────────────────────────────────────────────────────────────────────
+﻿// ─────────────────────────────────────────────────────────────────────────────
 // PRICING DATA — Edit this file in GitHub to update the calculator instantly.
 // All prices shown are client-facing (markup already applied).
 // ─────────────────────────────────────────────────────────────────────────────
@@ -25,18 +25,19 @@ window.PRICING_DATA = {
     },
     fullDay: {
       // Pricing based on 8-hr rate for each guest bucket
-      under50: 1280,   // 41-50 guest tier × 8 hrs
-      over50:  3200    // 91-100 guest tier × 8 hrs
+      under50: 1152,   // was 1280 (10% off)
+      over50:  2880    // was 3200 (10% off)
     }
   },
 
   catering: {
-    gourmet:      { pricePerPerson: 42, label: "Gourmet" },
-    fingerFoods:  { pricePerPerson: 30, label: "Casual – Finger Foods" },
-    kidParty:     { pricePerPerson: 30, label: "Casual – Kid Party Menu" },
-    tacoTable:    { pricePerPerson: 30, label: "Casual – Taco Table" },
-    grazingTable: { pricePerPerson: 36, label: "Grazing Table" }
+    gourmet:     { pricePerPerson: 40, label: "Gourmet" },
+    fingerFoods: { pricePerPerson: 30, label: "Casual – Finger Foods" },
+    kidParty:    { pricePerPerson: 30, label: "Casual – Kid Party Menu" },
+    tacoTable:   { pricePerPerson: 30, label: "Casual – Taco Table" }
   },
+
+  grazingTable: { pricePerPerson: 30, label: "Grazing Table" },
 
   bartender: {
     single:   { pricePerHour: 90,  label: "1 Bartender",  recommendedMaxGuests: 60 },
