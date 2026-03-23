@@ -1418,15 +1418,15 @@ function renderComparison() {
     const gMktAmt = gMktPP * state.guests;
     const gSave   = gMktAmt - gOurAmt;
     marketTotal += gMktAmt; oasisTotal += gOurAmt;
-    rows.push(<tr>
+    rows.push(`<tr>
       <td><div class="ct-service">Grazing Table</div><div class="ct-detail">${state.guests} guests at $${gPP}/person ours vs $${gMktPP}/person market avg</div></td>
       <td><span class="ct-them">$${gMktAmt.toLocaleString()}</span></td>
       <td><span class="ct-us">$${gOurAmt.toLocaleString()}</span></td>
       <td><span class="ct-save">Save $${gSave.toLocaleString()}</span></td>
-    </tr>);
+    </tr>`);
   }
 
-  // const barSel = state.selections.bartender;
+  const barSel = state.selections.bartender;
   if (barSel && barSel.added) {
     const k    = state.guests > 60 ? 'double' : 'single';
     const hrs  = barSel.hours || P.bartender.minHours;
