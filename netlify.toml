@@ -1,5 +1,5 @@
 [build]
-  command = "npm run build && cp -r oasis dist/oasis && cp -r catering dist/catering"
+  command = "npm run build && cp -r oasis dist/oasis && cp -r catering dist/catering && cp -r links dist/links"
   publish = "dist"
 
 [build.environment]
