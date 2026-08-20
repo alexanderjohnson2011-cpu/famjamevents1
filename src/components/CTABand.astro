@@ -1,14 +1,41 @@
 ---
+const swimplyUrl = 'https://swimply.com/pooldetails/81440?lfl=qDDrfv5K';
 ---
-<section class="cta-band" id="cta">
+<section class="cta-band cta-band-craft" id="cta" aria-labelledby="cta-title">
   <div class="section-label" style="display:flex;justify-content:center;margin-bottom:14px;">
-    Ready When You Are
+    Next Step
   </div>
-  <h2>Lock In Your Date.</h2>
-  <p class="sub">Weekends fill up fast in the 805. Let's make sure your party is on the calendar.</p>
-  <div class="cta-group">
-    <a href="/book" class="btn btn-pink">Book Now ✦</a>
-    <a href="tel:3124149698" class="phone-txt">or text <span>312-414-9698</span></a>
+  <h2 id="cta-title">Tell Us What You Are Planning.</h2>
+  <p class="sub">
+    The space and the services book through two different paths. The Oasis goes through
+    Swimply for insurance and liability. DJ, photo booth, vendor planning, and day-of
+    experience help start with the Fam Jam intake.
+  </p>
+
+  <div class="cta-choice-grid">
+    <div class="cta-choice cta-choice-space">
+      <span class="cta-kicker">The Space</span>
+      <h3>Book The Oasis through Swimply.</h3>
+      <p>
+        For insurance and liability purposes, all space reservations are scheduled through
+        Swimply. Pick your date and time there first.
+      </p>
+      <a href={swimplyUrl} class="btn btn-cyan" target="_blank" rel="noopener noreferrer">
+        Schedule On Swimply
+        <span class="visually-hidden"> (opens in a new tab)</span>
+      </a>
+    </div>
+
+    <div class="cta-choice cta-choice-services">
+      <span class="cta-kicker">DJ + Booth + Planning</span>
+      <h3>Send the party details.</h3>
+      <p>
+        Use the intake for DJ, photo booth, vendor planning, and experience help. Tell us the
+        date, crowd, hours, and what you want the party to feel like.
+      </p>
+      <a href="/book" class="btn btn-pink">Fill Out Intake Form</a>
+    </div>
   </div>
-  <p class="serving">Serving Thousand Oaks · Simi Valley · Calabasas · Westlake Village · Moorpark · Agoura Hills · Woodland Hills &amp; beyond</p>
+
+  <p class="serving">Serving Thousand Oaks &middot; Simi Valley &middot; Calabasas &middot; Westlake Village &middot; Moorpark &middot; Agoura Hills &middot; Woodland Hills &amp; beyond</p>
 </section>

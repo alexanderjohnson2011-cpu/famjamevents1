@@ -79,7 +79,7 @@
             <strong>Your vibe card will appear here</strong>
             <p>
               Fill in your party details and hit Generate to get your personalized vibe profile,
-              DJ rotation, and package recommendation.
+              DJ rotation, and setup recommendation.
             </p>
           </div>
 
@@ -103,7 +103,7 @@
               </div>
               <div class="vc-pkg">
                 <div>
-                  <div class="vc-pkg-label">Recommended Package</div>
+                  <div class="vc-pkg-label">Recommended Setup</div>
                   <div class="vc-pkg-name" id="vcPkg">—</div>
                 </div>
                 <div class="vc-pkg-price" id="vcPrice">—</div>
@@ -144,8 +144,8 @@
     musicDNA: string;
     signatureMoment: { title: string; description: string };
     rotation: string[];
-    package: string;
-    price: string;
+    setup: string;
+    nextStep: string;
     tags: [string, string][];
   }> = {
     sunsetThrowback: {
@@ -162,8 +162,8 @@
         'The Mixtress — 90s/2000s crossover build',
         'King Daddy Disco — nostalgic peak',
       ],
-      package: 'DJ + Photo Booth Bundle',
-      price: '$800',
+      setup: 'DJ + Photo Booth',
+      nextStep: 'Start with the intake',
       tags: [['Nostalgic','pill-gold'],['Mixed Ages','pill-purple'],['Singalong','pill-pink']],
     },
     backyardDiscoRevival: {
@@ -180,8 +180,8 @@
         'Samplur — house momentum',
         'The Mixtress — crossover + requests',
       ],
-      package: 'DJ + Photo Booth Bundle',
-      price: '$800',
+      setup: 'DJ + Photo Booth',
+      nextStep: 'Start with the intake',
       tags: [['Disco House','pill-gold'],['Most Popular','pill-pink'],['All Ages','pill-purple']],
     },
     afterDarkBackyard: {
@@ -199,8 +199,8 @@
         'Samplur — tempo escalation',
         'The Mixtress — polished close',
       ],
-      package: 'DJ Only',
-      price: '$600',
+      setup: 'DJ Service',
+      nextStep: 'Start with the intake',
       tags: [['Tech House','pill-cyan'],['High Energy','pill-pink'],['Adults','pill-purple']],
     },
     cleanClubEnergy: {
@@ -217,8 +217,8 @@
         'Samplur — clean hip hop flow',
         'King Daddy Disco — remix throwback pop-in',
       ],
-      package: 'DJ + Photo Booth Bundle',
-      price: '$800',
+      setup: 'DJ + Photo Booth',
+      nextStep: 'Start with the intake',
       tags: [['Clean Mode','pill-green'],['Modern Hits','pill-cyan'],['All Ages','pill-purple']],
     },
   };
@@ -276,8 +276,8 @@
     (document.getElementById('vcRotation') as HTMLElement).innerHTML =
       v.rotation.map(r => `<div class="vc-rot-dj">${r}</div>`).join('');
 
-    (document.getElementById('vcPkg')   as HTMLElement).textContent = v.package;
-    (document.getElementById('vcPrice') as HTMLElement).textContent = v.price;
+    (document.getElementById('vcPkg')   as HTMLElement).textContent = v.setup;
+    (document.getElementById('vcPrice') as HTMLElement).textContent = v.nextStep;
 
     const placeholder = document.getElementById('outputPlaceholder') as HTMLElement;
     const card        = document.getElementById('vibeCard')          as HTMLElement;
@@ -311,8 +311,8 @@
     const stars     = (document.getElementById('vcStars')    as HTMLElement).textContent || '';
     const sigTitle  = (document.getElementById('vcSigTitle') as HTMLElement).textContent || '';
     const sigDesc   = (document.getElementById('vcSigDesc')  as HTMLElement).textContent || '';
-    const pkg       = (document.getElementById('vcPkg')      as HTMLElement).textContent || '';
-    const price     = (document.getElementById('vcPrice')    as HTMLElement).textContent || '';
+    const setup     = (document.getElementById('vcPkg')      as HTMLElement).textContent || '';
+    const nextStep  = (document.getElementById('vcPrice')    as HTMLElement).textContent || '';
     const tags      = Array.from((document.getElementById('vcTags') as HTMLElement).querySelectorAll('.type-pill')).map(el => el.textContent || '');
     const metaRows  = Array.from((document.getElementById('vcMeta') as HTMLElement).querySelectorAll('.vc-meta-row')).map(row => ({
       key: (row.querySelector('.vc-meta-key') as HTMLElement)?.textContent || '',
@@ -455,14 +455,14 @@
 
     ctx.fillStyle = '#6b7399';
     ctx.font = '700 10px system-ui, sans-serif';
-    ctx.fillText('RECOMMENDED PACKAGE', pad + 16, y + 18);
+    ctx.fillText('RECOMMENDED SETUP', pad + 16, y + 18);
     ctx.fillStyle = '#ffffff';
     ctx.font = 'bold 15px system-ui, sans-serif';
-    ctx.fillText(pkg, pad + 16, y + 38);
+    ctx.fillText(setup, pad + 16, y + 38);
     ctx.fillStyle = '#00e7ff';
     ctx.font = 'bold 22px system-ui, sans-serif';
     ctx.textAlign = 'right';
-    ctx.fillText(price, W - pad - 16, y + 38);
+    ctx.fillText(nextStep, W - pad - 16, y + 38);
     ctx.textAlign = 'left';
     y += 70;
 

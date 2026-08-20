@@ -24,6 +24,10 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# local Codex/browser artifacts
+.codex-run/
+.astro/settings.json
+
 # local env files
 .env
 .env*.local

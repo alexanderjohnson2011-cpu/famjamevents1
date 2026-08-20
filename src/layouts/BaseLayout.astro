@@ -4,8 +4,8 @@ export interface Props {
   description?: string;
 }
 const {
-  title = 'Fam Jam Events — DJ + DSLR Photo Booth · Thousand Oaks, Ventura County & LA',
-  description = 'DJ + DSLR Photo Booth for birthdays, pool parties, and milestones. Serving Thousand Oaks, Simi Valley, Moorpark, Camarillo, Calabasas, Westlake Village, Agoura Hills, Woodland Hills, and all of Ventura County & the San Fernando Valley.',
+  title = 'Fam Jam Events - Family Parties Done Right',
+  description = 'Family parties done right in Thousand Oaks: private backyard venue, DJ, DSLR photo booth, and party support for birthdays, pool parties, and milestones.',
 } = Astro.props;
 ---
 <!DOCTYPE html>
@@ -15,14 +15,43 @@ const {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{title}</title>
   <meta name="description" content={description} />
+  <link rel="icon" href="data:," />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@400;500;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@600;700&family=Courier+Prime:wght@400;700&family=Inter:wght@400;500;600&family=Luckiest+Guy&family=Montserrat:wght@400;600;700;800;900&family=Permanent+Marker&family=Special+Elite&display=swap"
     rel="stylesheet"
   />
 </head>
 <body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <filter id="tear1" x="-6%" y="-6%" width="112%" height="112%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency="0.021 0.042" numOctaves="4" seed="11" result="n" />
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="13" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+      <filter id="tear2" x="-6%" y="-6%" width="112%" height="112%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency="0.021 0.042" numOctaves="4" seed="27" result="n" />
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="13" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+      <filter id="tear3" x="-6%" y="-6%" width="112%" height="112%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency="0.021 0.042" numOctaves="4" seed="43" result="n" />
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="13" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+      <filter id="tear4" x="-6%" y="-6%" width="112%" height="112%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency="0.021 0.042" numOctaves="4" seed="61" result="n" />
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="13" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+      <filter id="tear5" x="-6%" y="-6%" width="112%" height="112%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency="0.021 0.042" numOctaves="4" seed="88" result="n" />
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="13" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+      <filter id="tear6" x="-6%" y="-6%" width="112%" height="112%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency="0.021 0.042" numOctaves="4" seed="104" result="n" />
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="13" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+    </defs>
+  </svg>
   <slot />
 </body>
 </html>

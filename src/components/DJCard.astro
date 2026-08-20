@@ -26,53 +26,64 @@ const {
 } = Astro.props;
 
 const rarityClass = rarity === 'LEGENDARY' ? 'rarity-legendary' : 'rarity-epic';
+const sheetClass = cardClass === 'card-kdd' ? 'sheet-4' : cardClass === 'card-mixtress' ? 'sheet-5' : 'sheet-6';
 ---
 
-<div class={`dj-card ${cardClass}`}>
-  <div class="card-header">
-    <div class="card-name" set:html={name} />
-  </div>
+<article class={`dj-card ${cardClass} sheet ${sheetClass}`}>
+  <span class="paper-under" aria-hidden="true"></span>
+  <span class="paper-top" aria-hidden="true"></span>
+  <span class="feature-tape" aria-hidden="true"></span>
 
-  <div class={`card-image ${imgClass}`}>
-    <img src={`/images/${image}`} alt={imageAlt} />
-  </div>
-
-  <div class="card-body">
-    <div class="card-types">
-      {types.map((t) => (
-        <span class={`type-pill ${t.pill}`}>{t.label}</span>
-      ))}
-    </div>
-
-    <div class="card-stats">
-      <div class="stat">
-        <div class="stat-header">
-          <span class="stat-label">Energy</span>
-          <span class="stat-stars" style={`color:${starColor}`}>{energyStars}</span>
-        </div>
-        <div class="stat-bar"><div class={`stat-fill ${energyFill}`}></div></div>
-      </div>
-      <div class="stat">
-        <div class="stat-header">
-          <span class="stat-label">Kid-Friendly</span>
-          <span class="stat-stars" style={`color:${starColor}`}>{kidsStars}</span>
-        </div>
-        <div class="stat-bar"><div class={`stat-fill ${kidsFill}`}></div></div>
+  <div class="dj-card-content">
+    <div class="card-header">
+      <div>
+        <span class={`rarity-badge ${rarityClass}`}>{rarity}</span>
+        <div class="card-name" set:html={name} />
       </div>
     </div>
 
-    <ul class="card-skills">
-      {skills.map((s) => <li>{s}</li>)}
-    </ul>
+    <div class={`card-image ${imgClass}`}>
+      <span class="dj-media-frame" aria-hidden="true"></span>
+      <img src={`/images/${image}`} alt={imageAlt} loading="lazy" decoding="async" />
+    </div>
 
-    <div class="sig-moment">
-      <div class="sig-label">{sigLabel}</div>
-      <div class="sig-title">{sigTitle}</div>
-      <div class="sig-desc">{sigDesc}</div>
+    <div class="card-body">
+      <div class="card-types">
+        {types.map((t) => (
+          <span class={`type-pill ${t.pill}`}>{t.label}</span>
+        ))}
+      </div>
+
+      <div class="card-stats">
+        <div class="stat">
+          <div class="stat-header">
+            <span class="stat-label">Energy</span>
+            <span class="stat-stars" style={`color:${starColor}`}>{energyStars}</span>
+          </div>
+          <div class="stat-bar"><div class={`stat-fill ${energyFill}`}></div></div>
+        </div>
+        <div class="stat">
+          <div class="stat-header">
+            <span class="stat-label">Kid-Friendly</span>
+            <span class="stat-stars" style={`color:${starColor}`}>{kidsStars}</span>
+          </div>
+          <div class="stat-bar"><div class={`stat-fill ${kidsFill}`}></div></div>
+        </div>
+      </div>
+
+      <ul class="card-skills">
+        {skills.map((s) => <li>{s}</li>)}
+      </ul>
+
+      <div class="sig-moment">
+        <div class="sig-label">{sigLabel}</div>
+        <div class="sig-title">{sigTitle}</div>
+        <div class="sig-desc">{sigDesc}</div>
+      </div>
+    </div>
+
+    <div class="card-footer">
+      {tags.map((t) => <span class="set-tag">{t}</span>)}
     </div>
   </div>
-
-  <div class="card-footer">
-    {tags.map((t) => <span class="set-tag">{t}</span>)}
-  </div>
-</div>
+</article>

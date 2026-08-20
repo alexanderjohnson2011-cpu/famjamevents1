@@ -1,0 +1,108 @@
+---
+import { Image } from 'astro:assets';
+import poolDusk from '../assets/images/pool-dusk.avif';
+import djAction from '../assets/images/dj.webp';
+import boothImg from '../assets/images/booth.webp';
+
+const cards = [
+  {
+    slug: 'space',
+    label: 'The Space',
+    source: 'Backyard venue',
+    title: 'A backyard built for big moments.',
+    desc: 'The Oasis is the private Thousand Oaks backyard: pool, hot tub, lawn, sand pits, and room for everyone you love.',
+    href: 'https://oasis.famjamevents.com',
+    target: '_blank',
+    cta: 'Open The Space',
+    image: poolDusk,
+    imageAlt: 'The Oasis pool venue at dusk',
+  },
+  {
+    slug: 'music',
+    label: 'The Music',
+    source: 'DJ service',
+    title: 'Not a playlist. An actual DJ set built around your party.',
+    desc: 'Tell us the must-plays, the do-not-plays, and the moments that matter. We read the room from there.',
+    href: '/music',
+    target: '',
+    cta: 'Open The Music',
+    image: djAction,
+    imageAlt: 'Fam Jam DJs performing at a party',
+  },
+  {
+    slug: 'booth',
+    label: 'The Photo Booth',
+    source: 'DSLR photo booth',
+    title: 'This is how your family actually gets a real photo together.',
+    desc: 'Flattering light, custom prints, digital gallery, and photos people actually keep after the party.',
+    href: '/booth',
+    target: '',
+    cta: 'Open The Booth',
+    image: boothImg,
+    imageAlt: 'Fam Jam photo booth print strip',
+  },
+];
+---
+
+<section class="feature-board-section" id="party-board" aria-labelledby="party-board-title">
+  <div class="feature-board-inner">
+    <div class="feature-board" aria-label="Fam Jam party pillars">
+      <span class="board-surface" aria-hidden="true"></span>
+      <div class="feature-board-grid">
+        <div class="board-note board-note-intro sheet sheet-3">
+          <span class="paper-under" aria-hidden="true"></span>
+          <span class="paper-top" aria-hidden="true"></span>
+          <span class="feature-tape" aria-hidden="true"></span>
+          <div class="sheet-body">
+            <div class="section-label">Start Here</div>
+            <h2 id="party-board-title">Three Ways To Build The Party</h2>
+            <p>
+              Pick one piece, pair two together, or bring the whole Fam Jam. The difference is that
+              this is built around your crowd, not a generic event package.
+            </p>
+          </div>
+        </div>
+
+        {cards.map((card, i) => (
+          <a
+            class={`board-note pillar-note pillar-note-${card.slug} sheet sheet-${i + 4}`}
+            href={card.href}
+            target={card.target || undefined}
+            rel={card.target ? 'noopener noreferrer' : undefined}
+          >
+            <span class="paper-under" aria-hidden="true"></span>
+            <span class="paper-top" aria-hidden="true"></span>
+            <span class="feature-tape" aria-hidden="true"></span>
+
+            <div class="sheet-body pillar-sheet-body">
+              <div class="pillar-media">
+                <span class="media-frame" aria-hidden="true"></span>
+                <Image
+                  src={card.image}
+                  alt={card.imageAlt}
+                  widths={[300, 600, 900]}
+                  sizes="(max-width: 640px) 92vw, (max-width: 980px) 46vw, 300px"
+                  format="avif"
+                  quality={72}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+
+              <div class="pillar-copy">
+                <span class="feature-source">{card.source}</span>
+                <span class="feature-label">{card.label}</span>
+                <h3>{card.title}</h3>
+                <p>{card.desc}</p>
+                <span class="feature-link">
+                  {card.cta}
+                  {card.target && <span class="visually-hidden"> (opens in a new tab)</span>}
+                </span>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

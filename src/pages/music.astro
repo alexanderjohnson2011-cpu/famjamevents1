@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import DJService from '../components/DJService.astro';
+import Collective from '../components/Collective.astro';
+import ServicesGrid from '../components/ServicesGrid.astro';
+import CTABand from '../components/CTABand.astro';
+import Footer from '../components/Footer.astro';
+---
+<BaseLayout
+  title="The Music - Fam Jam Events"
+  description="Real DJ sets built around your party, your crowd, and the moments that matter. Serving Thousand Oaks, Ventura County, and the San Fernando Valley."
+>
+  <Nav currentPage="/music" />
+  <DJService />
+  <Collective />
+  <ServicesGrid />
+  <CTABand />
+  <Footer />
+</BaseLayout>

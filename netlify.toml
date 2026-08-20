@@ -1,8 +1,7 @@
 [build]
-  command = "npm run build && cp -r oasis dist/oasis && cp -r catering dist/catering && cp -r links dist/links"
+  command = "npm run build && cp -r oasis dist/oasis && cp -r links dist/links"
   publish = "dist"
 
 [build.environment]
   NODE_VERSION = "20"
-
 

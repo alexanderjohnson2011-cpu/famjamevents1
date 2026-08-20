@@ -1,119 +1,45 @@
 ---
-const slides = [
-  {
-    img: '/images/photobooth-6.jpg',
-    alt: 'Fam Jam party group photo',
-    caption: 'Festival-Level Fun',
-    sub: 'Mixed ages, zero awkward pauses',
-    cls: 'slide-1',
-  },
-  {
-    img: '/images/photobooth-3.jpg',
-    alt: 'Photo booth fun at Fam Jam',
-    caption: 'The Fam Jam Booth',
-    sub: 'Real DSLR · custom prints · digital gallery',
-    cls: 'slide-2',
-  },
-  {
-    img: '/images/dj-action-2.jpg',
-    alt: 'Fam Jam DJs at the decks',
-    caption: 'Fam Jam Collective',
-    sub: '3 DJs · rotating styles · kid-appropriate cool',
-    cls: 'slide-3',
-  },
-  {
-    img: '/images/photobooth-7.jpg',
-    alt: 'Party crowd at Fam Jam event',
-    caption: '"The ABBA Lift"',
-    sub: 'When the whole backyard sings together',
-    cls: 'slide-4',
-  },
-];
+import { Image } from 'astro:assets';
+import logo from '../assets/images/logo.webp';
 ---
 
-<section class="hero" id="home">
-  <!-- LEFT: Copy -->
+<section class="hero home-hero" id="home">
   <div class="hero-left">
-    <div class="hero-eyebrow">✦ Thousand Oaks · Ventura County · San Fernando Valley</div>
-    <h1>Family Parties.<br/><em>Done Right.</em></h1>
-    <p class="hero-sub">DJ + DSLR Photo Booth for birthdays, pool parties, milestones, and everything in between.</p>
-    <div class="manifesto">
-      <p>The best family parties are a little chaotic — and that's exactly the point. There are kids running around. Parents catching up. Someone jumping in the pool. Someone discovering they still know every word to a 2000s anthem. That's the party we're here for.</p>
-    </div>
-    <div class="hero-actions">
-      <a href="/vibe-lab" class="btn btn-pink">Build Your Vibe ✦</a>
-      <a href="/book" class="btn btn-outline">Book Your Date →</a>
-    </div>
-  </div>
-
-  <!-- RIGHT: Carousel -->
-  <div class="hero-right">
-    <div class="carousel" id="heroCarousel">
-      <div class="carousel-track" id="carouselTrack">
-        {slides.map((slide) => (
-          <div class={`carousel-slide ${slide.cls}`}>
-            <img
-              src={slide.img}
-              alt={slide.alt}
-              style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;"
-            />
-            <div class="slide-caption">
-              <strong>{slide.caption}</strong>
-              <span>{slide.sub}</span>
-            </div>
-          </div>
-        ))}
+    <div class="hero-logo-note sheet sheet-1">
+      <span class="paper-under" aria-hidden="true"></span>
+      <span class="paper-top" aria-hidden="true"></span>
+      <div class="sheet-body">
+        <Image
+          src={logo}
+          alt="Fam Jam Events"
+          widths={[360, 540, 720, 1050]}
+          sizes="(max-width: 640px) 320px, (max-width: 980px) 510px, 540px"
+          format="avif"
+          quality={76}
+          loading="eager"
+          decoding="async"
+          fetchpriority="high"
+        />
       </div>
-
-      <button class="carousel-arrow carousel-prev" id="carouselPrev" aria-label="Previous slide">&#8592;</button>
-      <button class="carousel-arrow carousel-next" id="carouselNext" aria-label="Next slide">&#8594;</button>
-      <div class="carousel-dots" id="carouselDots"></div>
+    </div>
+    <div class="hero-copy-stack">
+      <h1 class="hero-paper-headline sheet sheet-2">
+        <span class="paper-under" aria-hidden="true"></span>
+        <span class="paper-top" aria-hidden="true"></span>
+        <span class="sheet-body headline-stack">
+          <span class="headline-word headline-family">Family</span>
+          <span class="headline-word headline-parties">Parties</span>
+          <span class="headline-word headline-done">Done Right</span>
+        </span>
+      </h1>
+      <p class="hero-sub">
+        A backyard venue, real DJ sets, and a DSLR photo booth for parties that feel personal,
+        relaxed, and actually fun.
+      </p>
+      <div class="hero-actions">
+        <a href="#party-board" class="btn btn-outline">Pick Your Piece</a>
+        <a href="/book" class="btn btn-pink">Start The Intake</a>
+      </div>
     </div>
   </div>
 </section>
-
-<script>
-  let carouselIndex = 0;
-  const carouselTotal = 4;
-  let carouselTimer: ReturnType<typeof setInterval>;
-
-  function carouselRender() {
-    const track = document.getElementById('carouselTrack') as HTMLElement;
-    track.style.transform = `translateX(-${carouselIndex * 100}%)`;
-    document.querySelectorAll('.dot').forEach((d, i) =>
-      d.classList.toggle('active', i === carouselIndex)
-    );
-  }
-
-  function carouselMove(dir: number) {
-    carouselIndex = (carouselIndex + dir + carouselTotal) % carouselTotal;
-    carouselRender();
-    resetCarouselTimer();
-  }
-
-  function carouselGoTo(i: number) {
-    carouselIndex = i;
-    carouselRender();
-    resetCarouselTimer();
-  }
-
-  function resetCarouselTimer() {
-    clearInterval(carouselTimer);
-    carouselTimer = setInterval(() => carouselMove(1), 4500);
-  }
-
-  // Build dots + wire up arrows
-  const dotsEl = document.getElementById('carouselDots') as HTMLElement;
-  for (let i = 0; i < carouselTotal; i++) {
-    const d = document.createElement('button');
-    d.className = 'dot' + (i === 0 ? ' active' : '');
-    d.setAttribute('aria-label', `Go to slide ${i + 1}`);
-    d.addEventListener('click', () => carouselGoTo(i));
-    dotsEl.appendChild(d);
-  }
-
-  document.getElementById('carouselPrev')?.addEventListener('click', () => carouselMove(-1));
-  document.getElementById('carouselNext')?.addEventListener('click', () => carouselMove(1));
-
-  resetCarouselTimer();
-</script>

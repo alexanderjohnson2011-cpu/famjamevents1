@@ -7,19 +7,17 @@ const { currentPage = '/' } = Astro.props;
 <nav>
   <a href="/" class="nav-logo">Fam<span class="accent">Jam</span> Events</a>
   <ul class="nav-links" id="nav-links">
-    <li><a href="/#dj-service">DJ</a></li>
-    <li><a href="/#memory-lab">Photo Booth</a></li>
-    <li><a href="/#pricing">Pricing</a></li>
-    <li><a href="/#gallery">Gallery</a></li>
-    <li><a href="/#collective">The Collective</a></li>
-    <li><a href="/#vibe-lab">Vibe Lab</a></li>
-    <li><a href="https://oasis.famjamevents.com" target="_blank" rel="noopener" class="nav-oasis">The Oasis ✦</a></li>
-    <li class="nav-mobile-cta"><a href="/book" class="nav-cta">Book Now</a></li>
+    <li><a href="/#party-board">Start Here</a></li>
+    <li><a href="https://oasis.famjamevents.com" target="_blank" rel="noopener noreferrer" class="nav-oasis">The Space<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+    <li><a href="/music">The Music</a></li>
+    <li><a href="/booth">The Photo Booth</a></li>
+    <li><a href="/services">Services</a></li>
+    <li class="nav-mobile-cta"><a href="/book" class="nav-cta">Intake</a></li>
   </ul>
   <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu">
     <span></span><span></span><span></span>
   </button>
-  <a href="/book" class="nav-cta nav-cta-desktop">Book Now</a>
+  <a href="/book" class="nav-cta nav-cta-desktop">Intake</a>
 </nav>
 
 <script>
@@ -40,12 +38,12 @@ const { currentPage = '/' } = Astro.props;
 
 <style>
   .nav-oasis {
-    color: var(--cyan) !important;
+    color: var(--craft-teal-dark) !important;
     border-bottom-color: transparent !important;
   }
   .nav-oasis:hover {
-    color: var(--cyan) !important;
-    border-bottom-color: var(--cyan) !important;
+    color: var(--craft-teal-dark) !important;
+    border-bottom-color: var(--craft-pink) !important;
     opacity: .85;
   }
 </style>
